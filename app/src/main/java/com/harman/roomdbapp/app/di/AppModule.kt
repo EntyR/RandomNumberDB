@@ -2,11 +2,14 @@ package com.harman.roomdbapp.app.di
 
 import androidx.room.Room
 import com.harman.roomdbapp.app.other.DATABASE_NAME
+import com.harman.roomdbapp.app.ui.viewmodel.NumberListViewModel
 import com.harman.roomdbapp.data.db.RandomNumberDataBase
 import com.harman.roomdbapp.data.repository.RandomNumberRepository
 import com.harman.roomdbapp.domain.repository.IRandomNumberRepository
 import com.harman.roomdbapp.domain.use_cases.RandomNumberUseCase
+import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
@@ -21,6 +24,10 @@ val appModule = module {
 
     factory {
         RandomNumberUseCase(get())
+    }
+
+    viewModel {
+        NumberListViewModel(androidApplication())
     }
 
 }
