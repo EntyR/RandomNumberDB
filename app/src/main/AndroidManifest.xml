@@ -11,7 +11,7 @@
         android:name=".RandomNumberApplication"
         android:theme="@style/Theme.RoomDb">
         <activity
-            android:name=".MainActivity"
+            android:name=".app.ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

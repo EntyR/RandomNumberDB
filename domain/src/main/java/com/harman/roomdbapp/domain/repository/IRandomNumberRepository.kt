@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import com.harman.roomdbapp.domain.model.RandomNumber
 import kotlinx.coroutines.flow.Flow
 
-interface RandomNumberRepository {
+interface IRandomNumberRepository {
 
     suspend fun addNumber(number: RandomNumber)
 
-    suspend fun getNumbers(): Flow<List<RandomNumber>>
+    fun getNumbers(): Flow<List<RandomNumber>>
 
 }

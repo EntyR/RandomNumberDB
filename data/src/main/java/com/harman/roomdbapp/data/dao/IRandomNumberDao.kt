@@ -7,12 +7,12 @@ import com.harman.roomdbapp.data.enity.RandomNumberEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface RandomNumberDao {
+interface IRandomNumberDao {
 
     @Insert
     suspend fun addNumber(number: RandomNumberEntity)
 
     @Query("SELECT * from RandomNumberEntity")
-    suspend fun getAllNumbers(): Flow<List<RandomNumberEntity>>
+    fun getAllNumbers(): Flow<List<RandomNumberEntity>>
 
 }
