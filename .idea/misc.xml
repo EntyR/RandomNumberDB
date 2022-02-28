@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/andrzakharov/AndroidStudioProjects/RandomNumberDB/app/src/main/res/drawable/button.xml" value="0.2985" />
+        <entry key="..\:/Users/andrzakharov/AndroidStudioProjects/RandomNumberDB/app/src/main/res/drawable/ic_plus.xml" value="0.203" />
+        <entry key="..\:/Users/andrzakharov/AndroidStudioProjects/RandomNumberDB/app/src/main/res/drawable/rounded_button_shape.xml" value="0.2985" />
+        <entry key="..\:/Users/andrzakharov/AndroidStudioProjects/RandomNumberDB/app/src/main/res/drawable/rounded_button_text_color_selector.xml" value="0.203" />
+        <entry key="..\:/Users/andrzakharov/AndroidStudioProjects/RandomNumberDB/app/src/main/res/layout/fragment_random_numbers_list.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/andrzakharov/AndroidStudioProjects/RandomNumberDB/app/src/main/res/layout/random_number_list_item.xml" value="0.358695652173913" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
