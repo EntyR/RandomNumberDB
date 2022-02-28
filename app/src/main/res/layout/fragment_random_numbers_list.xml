@@ -4,11 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/pale_yellow"
     tools:context=".app.ui.fragments.RandomNumbersList">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvNumberList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -16,19 +19,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/fabNewItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="82dp"
         android:clickable="true"
+        android:contentDescription="@string/add_new_random_number"
+        android:focusable="true"
         android:src="@drawable/ic_plus"
         app:backgroundTint="@color/teal_200"
         app:fabCustomSize="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:maxImageSize="40dp"
-        app:tint="@color/white"
-        android:contentDescription="@string/add_new_random_number"
-        android:focusable="true" />
+        app:tint="@color/white" />
 </androidx.constraintlayout.widget.ConstraintLayout>
