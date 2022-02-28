@@ -1,7 +1,7 @@
-package com.harman.roomdbapp
+package com.harman.roomdbapp.data
 
 import com.harman.roomdbapp.domain.model.RandomNumber
-import com.harman.roomdbapp.enity.RandomNumberEntity
+import com.harman.roomdbapp.data.enity.RandomNumberEntity
 
 fun RandomNumber.convertToEntity(): RandomNumberEntity {
     return RandomNumberEntity(

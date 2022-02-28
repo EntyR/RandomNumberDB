@@ -1,10 +1,10 @@
-package com.harman.roomdbapp.dao
+package com.harman.roomdbapp.data.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.harman.roomdbapp.enity.RandomNumberEntity
+import com.harman.roomdbapp.data.enity.RandomNumberEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface RandomNumberDao {
@@ -13,6 +13,6 @@ interface RandomNumberDao {
     suspend fun addNumber(number: RandomNumberEntity)
 
     @Query("SELECT * from RandomNumberEntity")
-    suspend fun getAllNumbers(): LiveData<List<RandomNumberEntity>>
+    suspend fun getAllNumbers(): Flow<List<RandomNumberEntity>>
 
 }

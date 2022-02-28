@@ -1,7 +1,7 @@
-package com.harman.roomdbapp
+package com.harman.roomdbapp.app
 
 import android.app.Application
-import com.harman.roomdbapp.di.appModule
+import com.harman.roomdbapp.app.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
