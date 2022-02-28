@@ -1,7 +1,8 @@
-package com.harman.roomdbapp
+package com.harman.roomdbapp.app.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.harman.roomdbapp.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
