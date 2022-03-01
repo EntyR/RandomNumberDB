@@ -1,10 +1,12 @@
 package com.harman.roomdbapp.app.ui.fragments
 
+import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.harman.roomdbapp.R
 import com.harman.roomdbapp.app.adapters.NumberListAdapter
@@ -38,7 +40,16 @@ class RandomNumbersList : Fragment() {
         binding.rvNumberList.layoutManager = LinearLayoutManager(requireContext())
 
 
-        viewModel.getNumbers().observeForever {
+        viewModel.getNumbers().observe(viewLifecycleOwner) {
+            // make empty list text notification visible if list if empty
+            if(it != null){
+                binding.textView.visibility = View.VISIBLE
+                binding.rvNumberList.visibility = View.INVISIBLE
+            } else {
+                binding.textView.visibility = View.INVISIBLE
+                binding.rvNumberList.visibility = View.VISIBLE
+            }
+
             adapter.submitList(it)
         }
 
