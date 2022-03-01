@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.harman.roomdbapp.databinding.RandomNumberListItemBinding
 import com.harman.roomdbapp.domain.model.RandomNumber
 
-class NumberListAdapter: ListAdapter<RandomNumber, NumberListAdapter.RandomNumberViewHolder>(Companion) {
+class NumberListAdapter(private val itemPressedCallback: (number: Int)->Unit): ListAdapter<RandomNumber, NumberListAdapter.RandomNumberViewHolder>(Companion) {
 
     class RandomNumberViewHolder(val binding: RandomNumberListItemBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -33,6 +33,9 @@ class NumberListAdapter: ListAdapter<RandomNumber, NumberListAdapter.RandomNumbe
     override fun onBindViewHolder(holder: RandomNumberViewHolder, position: Int) {
 
         holder.binding.btItemValue.text = currentList[position].number.toString()
+        holder.binding.btItemValue.setOnClickListener {
+            itemPressedCallback(currentList[position].number)
+        }
 
     }
 

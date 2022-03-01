@@ -25,8 +25,11 @@ class RandomNumbersList : Fragment() {
 
         binding = FragmentRandomNumbersListBinding.inflate(inflater, container, false)
 
+
         //Setting up adapter and layout manager
-        val adapter = NumberListAdapter()
+        val adapter = NumberListAdapter(){
+
+        }
         binding.rvNumberList.adapter = adapter
         binding.rvNumberList.layoutManager = LinearLayoutManager(requireContext())
 
