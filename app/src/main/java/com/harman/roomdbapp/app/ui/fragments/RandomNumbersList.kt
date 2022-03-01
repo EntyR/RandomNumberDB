@@ -28,11 +28,14 @@ class RandomNumbersList : Fragment() {
 
         //Setting up adapter and layout manager
         val adapter = NumberListAdapter(){
-
+            val fragment = RandomNumberDescription.newInstance(it)
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragmentContainerView, fragment)
+            transaction.addToBackStack("go_to_description")
+            transaction.commit()
         }
         binding.rvNumberList.adapter = adapter
         binding.rvNumberList.layoutManager = LinearLayoutManager(requireContext())
-
 
 
         viewModel.getNumbers().observeForever {
@@ -41,6 +44,19 @@ class RandomNumbersList : Fragment() {
 
         return binding.root
     }
+
+    companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @return A new instance of fragment RandomNumberDescription.
+         */
+
+        @JvmStatic
+        fun newInstance() = RandomNumbersList()
+    }
+
 
 
 }

@@ -44,5 +44,23 @@ class RandomNumberDescription : Fragment() {
         return binding.root
     }
 
+    companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param numValue number to be displayed.
+         * @return A new instance of fragment RandomNumberDescription.
+         */
+
+        @JvmStatic
+        fun newInstance(numValue: Int) =
+            RandomNumberDescription().apply {
+                arguments = Bundle().apply {
+                    putInt(NUMBER_VALUE, numValue)
+                }
+            }
+    }
+
 
 }
