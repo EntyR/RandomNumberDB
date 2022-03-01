@@ -7,6 +7,7 @@ import com.harman.roomdbapp.data.db.RandomNumberDataBase
 import com.harman.roomdbapp.data.repository.RandomNumberRepository
 import com.harman.roomdbapp.domain.repository.IRandomNumberRepository
 import com.harman.roomdbapp.domain.use_cases.RandomNumberUseCase
+import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -26,8 +27,12 @@ val appModule = module {
         RandomNumberUseCase(get())
     }
 
+    single {
+        Dispatchers.Default
+    }
+
     viewModel {
-        NumberListViewModel(androidApplication())
+        NumberListViewModel(get(), get())
     }
 
 }

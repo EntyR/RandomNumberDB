@@ -6,27 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.harman.roomdbapp.R
+import com.harman.roomdbapp.app.other.MathUtils
+import com.harman.roomdbapp.databinding.FragmentRandomNumberDescriptionBinding
+import com.harman.roomdbapp.databinding.FragmentRandomNumbersListBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [RandomNumberDescription.newInstance] factory method to
- * create an instance of this fragment.
- */
+private const val NUMBER_VALUE = "random_number_value"
+
+
 class RandomNumberDescription : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private var numberValue: Int = 0
+
+    private lateinit var binding: FragmentRandomNumberDescriptionBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            numberValue = it.getInt(NUMBER_VALUE)
         }
     }
 
@@ -34,8 +31,17 @@ class RandomNumberDescription : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_random_number_description, container, false)
+        binding = FragmentRandomNumberDescriptionBinding.inflate(inflater, container, false)
+
+        val numberIsEven = MathUtils.isNumberEven(numberValue)
+
+        binding.tvNumberValue.text = numberValue.toString()
+        binding.tvNumberDescription.text =
+            if (numberIsEven)
+                resources.getString(R.string.number_is_even)
+            else resources.getString(R.string.number_not_even)
+
+        return binding.root
     }
 
     companion object {
@@ -47,13 +53,12 @@ class RandomNumberDescription : Fragment() {
          * @param param2 Parameter 2.
          * @return A new instance of fragment RandomNumberDescription.
          */
-        // TODO: Rename and change types and number of parameters
+
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(numValue: Int) =
             RandomNumberDescription().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putInt(NUMBER_VALUE, numValue)
                 }
             }
     }
