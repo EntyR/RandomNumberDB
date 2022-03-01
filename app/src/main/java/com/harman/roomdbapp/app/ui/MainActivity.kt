@@ -1,10 +1,10 @@
 package com.harman.roomdbapp.app.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.harman.roomdbapp.R
+import androidx.appcompat.app.AppCompatActivity
+import com.harman.roomdbapp.app.R
+import com.harman.roomdbapp.app.databinding.ActivityMainBinding
 import com.harman.roomdbapp.app.ui.fragments.RandomNumbersList
-import com.harman.roomdbapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,11 +15,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
 
 
-        if (savedInstanceState == null){
+        if (savedInstanceState == null) {
             val fragment = RandomNumbersList.newInstance()
             val transaction = supportFragmentManager.beginTransaction()
             transaction.replace(R.id.fragmentContainerView, fragment)
         }
+
+
 
 
 

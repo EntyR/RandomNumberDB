@@ -1,14 +1,13 @@
 package com.harman.roomdbapp.app.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.harman.roomdbapp.R
+import androidx.fragment.app.Fragment
+import com.harman.roomdbapp.app.R
+import com.harman.roomdbapp.app.databinding.FragmentRandomNumberDescriptionBinding
 import com.harman.roomdbapp.app.other.MathUtils
-import com.harman.roomdbapp.databinding.FragmentRandomNumberDescriptionBinding
-import com.harman.roomdbapp.databinding.FragmentRandomNumbersListBinding
 
 
 private const val NUMBER_VALUE = "random_number_value"

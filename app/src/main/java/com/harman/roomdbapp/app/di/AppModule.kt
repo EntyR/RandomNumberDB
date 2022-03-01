@@ -1,5 +1,6 @@
 package com.harman.roomdbapp.app.di
 
+import android.app.Application
 import androidx.room.Room
 import com.harman.roomdbapp.app.other.DATABASE_NAME
 import com.harman.roomdbapp.app.ui.viewmodel.NumberListViewModel
@@ -8,10 +9,14 @@ import com.harman.roomdbapp.data.repository.RandomNumberRepository
 import com.harman.roomdbapp.domain.repository.IRandomNumberRepository
 import com.harman.roomdbapp.domain.use_cases.RandomNumberUseCase
 import kotlinx.coroutines.Dispatchers
-import org.koin.android.ext.koin.androidApplication
-import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+
+
+fun providesDatabase(application: Application): RandomNumberDataBase =
+    Room.databaseBuilder(application, RandomNumberDataBase::class.java, DATABASE_NAME)
+        .build()
+
 
 val appModule = module {
     single<IRandomNumberRepository> {
@@ -19,9 +24,9 @@ val appModule = module {
     }
 
     single {
-        Room.databaseBuilder(androidContext(), RandomNumberDataBase::class.java, DATABASE_NAME)
-            .build()
+        providesDatabase(get())
     }
+
 
     factory {
         RandomNumberUseCase(get())

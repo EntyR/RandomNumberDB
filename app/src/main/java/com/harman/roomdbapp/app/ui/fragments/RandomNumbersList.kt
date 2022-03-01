@@ -1,17 +1,15 @@
 package com.harman.roomdbapp.app.ui.fragments
 
-import android.opengl.Visibility
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isInvisible
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.harman.roomdbapp.R
+import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.adapters.NumberListAdapter
+import com.harman.roomdbapp.app.databinding.FragmentRandomNumbersListBinding
 import com.harman.roomdbapp.app.ui.viewmodel.NumberListViewModel
-import com.harman.roomdbapp.databinding.FragmentRandomNumbersListBinding
 import org.koin.android.ext.android.inject
 
 class RandomNumbersList : Fragment() {
@@ -29,7 +27,7 @@ class RandomNumbersList : Fragment() {
 
 
         //Setting up adapter and layout manager
-        val adapter = NumberListAdapter(){
+        val adapter = NumberListAdapter {
             val fragment = RandomNumberDescription.newInstance(it)
             val transaction = parentFragmentManager.beginTransaction()
             transaction.replace(R.id.fragmentContainerView, fragment)
@@ -42,7 +40,7 @@ class RandomNumbersList : Fragment() {
 
         viewModel.getNumbers().observe(viewLifecycleOwner) {
             // make empty list text notification visible if list if empty
-            if(it != null){
+            if (it != null) {
                 binding.textView.visibility = View.VISIBLE
                 binding.rvNumberList.visibility = View.INVISIBLE
             } else {
@@ -67,7 +65,6 @@ class RandomNumbersList : Fragment() {
         @JvmStatic
         fun newInstance() = RandomNumbersList()
     }
-
 
 
 }

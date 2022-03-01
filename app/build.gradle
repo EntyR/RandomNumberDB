@@ -1,7 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+
 }
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdk 32
@@ -52,8 +54,8 @@ dependencies {
 
     //Room
     implementation "androidx.room:room-runtime:2.4.2"
-
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+    kapt "android.arch.persistence.room:compiler:1.1.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
 
 
     implementation project(":data")
