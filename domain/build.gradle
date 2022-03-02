@@ -1,29 +1,23 @@
 plugins {
-    id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
+    id 'kotlin'
+    id 'java-library'
+    id 'kotlin-kapt'
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
 
-
-android {
-    compileSdk 32
-    defaultConfig {
-        minSdk 24
-        targetSdk 32
-
+tasks {
+    compileKotlin {
+        kotlinOptions {
+            jvmTarget = JavaVersion.VERSION_1_8.toString()
+        }
     }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-
 }
 
 dependencies {
-    // LiveData
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.0-alpha03"
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1")
+    implementation("io.insert-koin:koin-core:3.1.2")
 }

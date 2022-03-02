@@ -9,8 +9,8 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
 class NumberListViewModel(
-    val numberUseCase: RandomNumberUseCase,
-    val dispatcher: CoroutineDispatcher
+    private val numberUseCase: RandomNumberUseCase,
+    private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     fun getNumbers() = numberUseCase.getNumbers().asLiveData()

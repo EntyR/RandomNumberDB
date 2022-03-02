@@ -1,9 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-
+    id 'kotlin-kapt'
 }
-apply plugin: 'kotlin-kapt'
 
 android {
     compileSdk 32
@@ -50,13 +49,15 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     //Koin
-    implementation "io.insert-koin:koin-android:3.2.0-beta-1"
+    implementation("io.insert-koin:koin-android:3.1.2")
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
 
     //Room
-    implementation "androidx.room:room-runtime:2.4.2"
-    kapt "android.arch.persistence.room:compiler:1.1.1"
+//    implementation "androidx.room:room-runtime:2.4.2"
+//    kapt "android.arch.persistence.room:compiler:1.1.1"
+    implementation "androidx.room:room-ktx:2.4.2"
+    kapt "androidx.room:room-compiler:2.4.2"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
-
 
     implementation project(":data")
     implementation project(":domain")
