@@ -10,13 +10,13 @@ import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.adapters.NumberListAdapter
 import com.harman.roomdbapp.app.databinding.FragmentRandomNumbersListBinding
 import com.harman.roomdbapp.app.ui.viewmodel.NumberListViewModel
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RandomNumbersList : Fragment() {
 
     private lateinit var binding: FragmentRandomNumbersListBinding
 
-    private val viewModel: NumberListViewModel by inject()
+    private val viewModel: NumberListViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
