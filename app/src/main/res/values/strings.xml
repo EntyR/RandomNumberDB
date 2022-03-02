@@ -5,4 +5,5 @@
     <string name="number_is_even">Number is even</string>
     <string name="number_not_even">Number is odd</string>
     <string name="no_numbers">no numbers</string>
+    <string name="number">Number %1$d</string>
 </resources>

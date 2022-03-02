@@ -33,7 +33,7 @@ class RandomNumbersList : Fragment() {
 
 
         //Setting up adapter and layout manager
-        val adapter = NumberListAdapter {
+        val adapter = NumberListAdapter(requireContext()) {
             val fragment = RandomNumberDescription.newInstance(it)
             val transaction = parentFragmentManager.beginTransaction()
             transaction.replace(R.id.fragmentContainerView, fragment)
@@ -56,11 +56,6 @@ class RandomNumbersList : Fragment() {
 
             adapter.submitList(it)
         }
-
-
-
-
-
 
         return binding.root
     }
