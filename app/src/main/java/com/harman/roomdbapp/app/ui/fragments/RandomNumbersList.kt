@@ -31,7 +31,6 @@ class RandomNumbersList : Fragment() {
 
         binding = FragmentRandomNumbersListBinding.inflate(inflater, container, false)
 
-
         //Setting up adapter and layout manager
         val adapter = NumberListAdapter(requireContext()) {
             val fragment = RandomNumberDescription.newInstance(it)

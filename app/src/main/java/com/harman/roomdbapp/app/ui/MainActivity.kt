@@ -14,16 +14,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
 
-
         if (savedInstanceState == null) {
             val fragment = RandomNumbersList.newInstance()
             val transaction = supportFragmentManager.beginTransaction()
             transaction.replace(R.id.fragmentContainerView, fragment)
         }
-
-
-
-
 
         setContentView(binding.root)
     }

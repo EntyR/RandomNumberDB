@@ -22,6 +22,5 @@ class RandomNumberRepository(private val randomNumberDao: IRandomNumberDao): IRa
                 number.convertToRNumber()
             }
         }
-
     }
 }
