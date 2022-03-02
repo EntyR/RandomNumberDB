@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:name=".RandomNumberApplication"
-        android:theme="@style/Theme.RoomDb">
+        android:theme="@style/Theme.RoomDb.Starting">
         <activity
             android:name=".ui.MainActivity"
             android:exported="true">
