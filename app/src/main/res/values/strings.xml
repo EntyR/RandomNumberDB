@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">RoomDb</string>
+    <string name="add_new_random_number">Add new random number</string>
+    <string name="back">Back</string>
+    <string name="number_is_even">Number is even</string>
+    <string name="number_not_even">Number is odd</string>
+    <string name="no_numbers">no numbers</string>
+    <string name="number">Number %1$d</string>
 </resources>

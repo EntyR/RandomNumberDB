@@ -1,19 +1,25 @@
 package com.harman.roomdbapp.app
 
 import android.app.Application
-import com.harman.roomdbapp.app.di.appModule
+import com.harman.roomdbapp.app.di.dataBaseModule
+import com.harman.roomdbapp.app.di.dataModule
+import com.harman.roomdbapp.app.di.useCaseModule
+import com.harman.roomdbapp.app.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 
-class RandomNumberApplication: Application() {
+class RandomNumberApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        startKoin{
-            androidLogger()
+        startKoin {
             androidContext(this@RandomNumberApplication)
-            modules(appModule)
+            modules(
+                dataBaseModule,
+                dataModule,
+                useCaseModule,
+                viewModelModule
+            )
         }
     }
 }

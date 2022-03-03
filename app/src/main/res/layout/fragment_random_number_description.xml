@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/pale_yellow"
+    tools:context=".app.ui.fragments.RandomNumberDescription">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/linear_layout_margins_horizontal"
+        android:layout_marginTop="@dimen/linear_layout_margins_horizontal"
+        android:layout_marginEnd="@dimen/linear_layout_margins_horizontal"
+        android:layout_marginBottom="@dimen/linear_layout_margins_bottom"
+        android:background="@drawable/fullscreen_item_shape"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btBack">
+
+        <TextView
+            android:id="@+id/tvNumberValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/title_description_margins"
+            android:layout_marginTop="@dimen/title_description_margins"
+            android:layout_marginRight="@dimen/title_description_margins"
+            tools:text="TextView"
+            android:textSize="@dimen/title_description_text_size" />
+
+        <TextView
+            android:id="@+id/tvNumberDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/sub_description_margins_vertical"
+            android:layout_marginTop="@dimen/sub_description_margins_horizontal"
+            android:layout_marginRight="@dimen/sub_description_margins_vertical"
+            tools:text="TextView"
+            android:textSize="@dimen/sub_description_text_size" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btBack"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/back_button_margins_vertical"
+        android:layout_marginTop="@dimen/back_button_margins_horizontal"
+        android:text="@string/back"
+        android:textColor="@color/black"
+        app:icon="@drawable/ic_back_arraow"
+        app:iconTint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

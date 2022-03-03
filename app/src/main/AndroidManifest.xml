@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.harman.roomdbapp">
+    package="com.harman.roomdbapp.app">
 
     <application
         android:allowBackup="true"
@@ -9,9 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:name=".RandomNumberApplication"
-        android:theme="@style/Theme.RoomDb">
+        android:theme="@style/Theme.RoomDb.Starting">
         <activity
-            android:name=".app.ui.MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
