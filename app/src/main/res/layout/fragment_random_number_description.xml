@@ -10,10 +10,10 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="200dp"
+        android:layout_marginStart="@dimen/linear_layout_margins_horizontal"
+        android:layout_marginTop="@dimen/linear_layout_margins_horizontal"
+        android:layout_marginEnd="@dimen/linear_layout_margins_horizontal"
+        android:layout_marginBottom="@dimen/linear_layout_margins_bottom"
         android:background="@drawable/fullscreen_item_shape"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,21 +26,21 @@
             android:id="@+id/tvNumberValue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginRight="24dp"
+            android:layout_marginLeft="@dimen/title_description_margins"
+            android:layout_marginTop="@dimen/title_description_margins"
+            android:layout_marginRight="@dimen/title_description_margins"
             tools:text="TextView"
-            android:textSize="34sp" />
+            android:textSize="@dimen/title_description_text_size" />
 
         <TextView
             android:id="@+id/tvNumberDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="24dp"
+            android:layout_marginLeft="@dimen/sub_description_margins_vertical"
+            android:layout_marginTop="@dimen/sub_description_margins_horizontal"
+            android:layout_marginRight="@dimen/sub_description_margins_vertical"
             tools:text="TextView"
-            android:textSize="16sp" />
+            android:textSize="@dimen/sub_description_text_size" />
     </LinearLayout>
 
     <Button
@@ -49,8 +49,8 @@
         android:layout_width="wrap_content"
 
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="@dimen/back_button_margins_vertical"
+        android:layout_marginTop="@dimen/back_button_margins_horizontal"
         android:text="@string/back"
         android:textColor="@color/black"
         app:icon="@drawable/ic_back_arraow"

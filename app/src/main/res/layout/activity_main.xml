@@ -9,8 +9,8 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
         android:name="com.harman.roomdbapp.app.ui.fragments.RandomNumbersList"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/activity_layout_size"
+        android:layout_height="@dimen/activity_layout_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
