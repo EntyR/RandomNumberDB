@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     tools:background="#EAEAEA">
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btItemValue"
         android:layout_width="@dimen/list_item_width"
         android:layout_height="@dimen/list_item_height"
@@ -19,10 +19,8 @@
         android:letterSpacing="@integer/list_item_letter_spacing"
         android:textAllCaps="false"
         android:textColor="@drawable/rounded_button_text_color_selector"
-
         android:textSize="@dimen/list_item_text_size"
         android:textStyle="bold"
-        app:backgroundTint="@drawable/button_pressed_color_selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
