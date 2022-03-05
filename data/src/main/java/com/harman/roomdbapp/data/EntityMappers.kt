@@ -5,7 +5,7 @@ import com.harman.roomdbapp.domain.model.RandomNumber
 
 fun RandomNumber.convertToEntity(): RandomNumberEntity {
     return RandomNumberEntity(
-        0, this.number
+        number = this.number
     )
 }
 

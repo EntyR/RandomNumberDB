@@ -13,17 +13,18 @@ internal class EntityMappersTest {
     fun `Verify conversion to Entity was right`() {
 
         val expected = RandomNumberEntity(0, 1)
-        val initial = RandomNumber(1)
+        val initial = RandomNumber(1).convertToEntity()
 
-        Truth.assertThat(initial.convertToEntity()).isEqualTo(expected)
+        Truth.assertThat(initial.id).isEqualTo(expected.id)
+        Truth.assertThat(initial.number).isEqualTo(expected.number)
 
     }
 
     @Test
     fun `Verify conversion to Number was right`() {
-        val initial = RandomNumberEntity(0, 1)
+        val initial = RandomNumberEntity(0, 1).convertToRNumber()
         val expected = RandomNumber(1)
 
-        Truth.assertThat(initial.convertToRNumber()).isEqualTo(expected)
+        Truth.assertThat(initial.number).isEqualTo(expected.number)
     }
 }
