@@ -29,10 +29,7 @@ class KoinModulesTest : KoinTest {
                 ApplicationProvider.getApplicationContext()
             )
             checkModules {
-                modules(viewModelModule)
-                modules(useCaseModule)
-                modules(dataModule)
-                modules(dataBaseModule)
+                modules(viewModelModule, useCaseModule, dataModule, dataBaseModule)
             }
         }
 
