@@ -39,5 +39,5 @@ val useCaseModule = module{
 
 val viewModelModule = module{
     single { Dispatchers.Default }
-    viewModel { NumberListViewModel(get(), get()) }
+    viewModel { NumberListViewModel(get()) }
 }
