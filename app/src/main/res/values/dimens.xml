@@ -17,12 +17,12 @@
     <dimen name="recycler_padding_bottom">50dp</dimen>
 
 
-    <dimen name="title_description_margins">24dp</dimen>
+    <dimen name="title_description_margins">30dp</dimen>
     <dimen name="title_description_text_size">34sp</dimen>
 
 
-    <dimen name="sub_description_margins_vertical">24dp</dimen>
-    <dimen name="sub_description_margins_horizontal">8dp</dimen>
+    <dimen name="sub_description_margins_vertical">30dp</dimen>
+    <dimen name="sub_description_margins_horizontal">0dp</dimen>
     <dimen name="sub_description_text_size">14sp</dimen>
 
 

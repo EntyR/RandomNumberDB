@@ -10,10 +10,10 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/linear_layout_margins_horizontal"
-        android:layout_marginTop="@dimen/linear_layout_margins_horizontal"
-        android:layout_marginEnd="@dimen/linear_layout_margins_horizontal"
-        android:layout_marginBottom="@dimen/linear_layout_margins_bottom"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="150dp"
         android:background="@drawable/fullscreen_item_shape"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -29,8 +29,10 @@
             android:layout_marginLeft="@dimen/title_description_margins"
             android:layout_marginTop="@dimen/title_description_margins"
             android:layout_marginRight="@dimen/title_description_margins"
-            tools:text="TextView"
-            android:textSize="@dimen/title_description_text_size" />
+            android:fontFamily="@font/roboto_bold"
+            android:textColor="#000000"
+            android:textSize="@dimen/title_description_text_size"
+            tools:text="TextView" />
 
         <TextView
             android:id="@+id/tvNumberDescription"
@@ -39,21 +41,43 @@
             android:layout_marginLeft="@dimen/sub_description_margins_vertical"
             android:layout_marginTop="@dimen/sub_description_margins_horizontal"
             android:layout_marginRight="@dimen/sub_description_margins_vertical"
-            tools:text="TextView"
-            android:textSize="@dimen/sub_description_text_size" />
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="@dimen/sub_description_text_size"
+            tools:text="TextView" />
     </LinearLayout>
 
-    <Button
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/btBack"
-        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/back_button_margins_vertical"
-        android:layout_marginTop="@dimen/back_button_margins_horizontal"
-        android:text="@string/back"
-        android:textColor="@color/black"
-        app:icon="@drawable/ic_back_arraow"
-        app:iconTint="@color/black"
+        android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="4dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_back_arraow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvBackText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:padding="0dp"
+            android:text="@string/back"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

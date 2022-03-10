@@ -33,7 +33,7 @@ class RandomNumberDescription : Fragment() {
 
         val numberIsEven = MathUtils.isNumberEven(numberValue)
 
-        binding.tvNumberValue.text = numberValue.toString()
+        binding.tvNumberValue.text = resources.getString(R.string.number, numberValue)
         binding.tvNumberDescription.text =
             if (numberIsEven)
                 resources.getString(R.string.number_is_even)
