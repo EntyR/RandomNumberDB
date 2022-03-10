@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/pale_yellow"
+    tools:context=".ui.fragments.RandomNumberAddItem">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/back_button_margins_vertical"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingTop="@dimen/back_button_padding_vertical"
+        android:paddingBottom="@dimen/back_button_padding_vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/back_image_view_height"
+            android:layout_marginStart="@dimen/back_image_view_margin_start"
+            android:layout_marginTop="@dimen/back_image_view_margin_top"
+            android:layout_marginBottom="@dimen/back_image_view_margin_bottom"
+            android:layout_weight="@integer/back_image_view_weight"
+            android:contentDescription="@string/return_back_button"
+            android:src="@drawable/ic_back_arraow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvBackText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/back_text_view_margin_end"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/back"
+            android:textColor="@color/black"
+            android:textSize="@dimen/back_text_view_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/number_description_container_height"
+        android:layout_marginStart="@dimen/number_description_container_margin_start"
+        android:layout_marginTop="@dimen/number_description_container_margin_top"
+        android:layout_marginEnd="@dimen/number_description_container_margin_end"
+        android:layout_marginBottom="@dimen/number_description_container_margin_bottom"
+        android:background="@drawable/fullscreen_item_shape"
+        android:digits="0,1,2,3,4,5,6,7,8,9,\n"
+        android:gravity="start|top"
+        android:inputType="phone|textMultiLine"
+        android:maxLength="400"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btBack"
+        app:shapeAppearance="@drawable/fullscreen_item_shape" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:background="@drawable/add_new_number_shape"
+        android:minHeight="34dp"
+        android:paddingLeft="14dp"
+        android:paddingTop="0dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="3dp"
+        android:text="@string/add_random"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="or"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintTop_toTopOf="@+id/button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

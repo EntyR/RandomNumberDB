@@ -38,6 +38,14 @@ class RandomNumbersList : Fragment() {
         binding.rvNumberList.adapter = adapter
         binding.rvNumberList.layoutManager = LinearLayoutManager(requireContext())
 
+        binding.fabNewItem.setOnClickListener {
+            val fragment = RandomNumberAddItem.newInstance()
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragmentContainerView, fragment)
+            transaction.addToBackStack("go_to_description")
+            transaction.commit()
+        }
+
         viewModel.getNumbers().observe(viewLifecycleOwner) {
             // make empty list text notification visible if list if empty
             if (it.isNullOrEmpty()) {
