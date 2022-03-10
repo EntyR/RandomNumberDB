@@ -2,18 +2,18 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape>
-            <corners android:radius="35dp" />
+            <corners android:radius="@dimen/fullscreen_shade_radius" />
             <gradient
-                android:startColor="#2A000000"
+                android:startColor="@color/dark_grey"
                 android:endColor="@android:color/transparent"
-                android:angle="90" />
+                android:angle="@integer/fullscreen_shade_angle" />
         </shape>
 
     </item>
-    <item android:bottom="3dp"
+    <item android:bottom="@dimen/fullscreen_shade_padding"
         >
         <shape>
-            <corners android:radius="35dp" />
+            <corners android:radius="@dimen/fullscreen_shade_radius" />
             <solid android:color="@color/white"/>
         </shape>
     </item>

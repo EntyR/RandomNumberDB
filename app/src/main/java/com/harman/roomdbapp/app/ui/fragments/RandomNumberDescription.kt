@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.databinding.FragmentRandomNumberDescriptionBinding
 import com.harman.roomdbapp.app.other.MathUtils
+import com.harman.roomdbapp.app.other.NUMBER_VALUE
 
-private const val NUMBER_VALUE = "random_number_value"
 
 class RandomNumberDescription : Fragment() {
 
@@ -38,6 +38,10 @@ class RandomNumberDescription : Fragment() {
             if (numberIsEven)
                 resources.getString(R.string.number_is_even)
             else resources.getString(R.string.number_not_even)
+
+        binding.btBack.setOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
 
         return binding.root
     }

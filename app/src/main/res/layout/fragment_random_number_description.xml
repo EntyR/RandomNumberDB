@@ -8,12 +8,12 @@
     tools:context=".app.ui.fragments.RandomNumberDescription">
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="150dp"
+        android:layout_width="@dimen/number_description_container_width"
+        android:layout_height="@dimen/number_description_container_height"
+        android:layout_marginStart="@dimen/number_description_container_margin_start"
+        android:layout_marginTop="@dimen/number_description_container_margin_top"
+        android:layout_marginEnd="@dimen/number_description_container_margin_end"
+        android:layout_marginBottom="@dimen/number_description_container_margin_bottom"
         android:background="@drawable/fullscreen_item_shape"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -30,7 +30,7 @@
             android:layout_marginTop="@dimen/title_description_margins"
             android:layout_marginRight="@dimen/title_description_margins"
             android:fontFamily="@font/roboto_bold"
-            android:textColor="#000000"
+            android:textColor="@color/black"
             android:textSize="@dimen/title_description_text_size"
             tools:text="TextView" />
 
@@ -48,20 +48,26 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/btBack"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="@dimen/back_button_margins_vertical"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingTop="@dimen/back_button_padding_vertical"
+        android:paddingBottom="@dimen/back_button_padding_vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck">
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="4dp"
-            android:layout_weight="1"
+            android:layout_height="@dimen/back_image_view_height"
+            android:layout_marginStart="@dimen/back_image_view_margin_start"
+            android:layout_marginTop="@dimen/back_image_view_margin_top"
+            android:layout_marginBottom="@dimen/back_image_view_margin_bottom"
+            android:layout_weight="@integer/back_image_view_weight"
+            android:contentDescription="@string/return_back_button"
             android:src="@drawable/ic_back_arraow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -71,12 +77,13 @@
             android:id="@+id/tvBackText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/back_text_view_margin_end"
             android:fontFamily="@font/roboto_regular"
-            android:padding="0dp"
             android:text="@string/back"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="@dimen/back_text_view_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,4 +7,5 @@
     <string name="no_numbers">no numbers</string>
     <string name="number">Number %1$d</string>
     <string name="numberdescription">Number is %1$d</string>
+    <string name="return_back_button">return back button</string>
 </resources>
