@@ -6,12 +6,11 @@ import kotlinx.coroutines.flow.Flow
 
 class RandomNumberUseCase(private val repository: IRandomNumberRepository) {
 
-    suspend fun addNumber(number: RandomNumber){
+    suspend fun addNumber(number: RandomNumber) {
         repository.addNumber(number)
     }
 
     fun getNumbers(): Flow<List<RandomNumber>> {
         return repository.getNumbers()
     }
-
 }

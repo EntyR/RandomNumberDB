@@ -14,8 +14,7 @@ import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-
-fun providesDatabase(application: Application): RandomNumberDataBase{
+fun providesDatabase(application: Application): RandomNumberDataBase {
     return Room.databaseBuilder(application, RandomNumberDataBase::class.java, DATABASE_NAME)
         .build()
 }
@@ -33,11 +32,11 @@ val dataModule = module {
     single<IRandomNumberRepository> { RandomNumberRepository(get()) }
 }
 
-val useCaseModule = module{
+val useCaseModule = module {
     factory { RandomNumberUseCase(get()) }
 }
 
-val viewModelModule = module{
+val viewModelModule = module {
     single { Dispatchers.Default }
     viewModel { NumberListViewModel(get()) }
 }

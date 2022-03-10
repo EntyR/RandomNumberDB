@@ -3,8 +3,6 @@ package com.harman.roomdbapp.data
 import com.google.common.truth.Truth
 import com.harman.roomdbapp.data.enity.RandomNumberEntity
 import com.harman.roomdbapp.domain.model.RandomNumber
-import org.junit.jupiter.api.Assertions.*
-
 import org.junit.jupiter.api.Test
 
 internal class EntityMappersTest {
@@ -17,7 +15,6 @@ internal class EntityMappersTest {
 
         Truth.assertThat(initial.id).isEqualTo(expected.id)
         Truth.assertThat(initial.number).isEqualTo(expected.number)
-
     }
 
     @Test

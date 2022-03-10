@@ -1,6 +1,5 @@
 package com.harman.roomdbapp.data.repository
 
-import com.google.common.truth.Truth
 import com.google.common.truth.Truth.assertThat
 import com.harman.roomdbapp.data.dao.IRandomNumberDao
 import com.harman.roomdbapp.data.enity.RandomNumberEntity
@@ -8,15 +7,13 @@ import com.harman.roomdbapp.domain.model.RandomNumber
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 internal class RandomNumberRepositoryTest {
-
 
     lateinit var database: IRandomNumberDao
 
@@ -27,7 +24,7 @@ internal class RandomNumberRepositoryTest {
 
     @Test
     fun `Verify random numbers are added`() = runBlocking {
-        val number = RandomNumber( 2)
+        val number = RandomNumber(2)
         val expected = RandomNumberEntity(0, 2)
         val fakeList = mutableListOf<RandomNumberEntity>()
 
@@ -37,7 +34,6 @@ internal class RandomNumberRepositoryTest {
         val repository = RandomNumberRepository(database)
         repository.addNumber(number)
         assertThat(fakeList.contains(expected)).isTrue()
-
     }
 
     @Test
@@ -59,9 +55,5 @@ internal class RandomNumberRepositoryTest {
         val number = repository.getNumbers().first()
 
         assertThat(number).isEqualTo(expectedList)
-
     }
-
-
-
 }

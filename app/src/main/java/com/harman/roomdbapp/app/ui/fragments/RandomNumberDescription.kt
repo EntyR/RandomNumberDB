@@ -9,9 +9,7 @@ import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.databinding.FragmentRandomNumberDescriptionBinding
 import com.harman.roomdbapp.app.other.MathUtils
 
-
 private const val NUMBER_VALUE = "random_number_value"
-
 
 class RandomNumberDescription : Fragment() {
 
@@ -27,7 +25,8 @@ class RandomNumberDescription : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentRandomNumberDescriptionBinding.inflate(inflater, container, false)
@@ -60,6 +59,4 @@ class RandomNumberDescription : Fragment() {
                 }
             }
     }
-
-
 }

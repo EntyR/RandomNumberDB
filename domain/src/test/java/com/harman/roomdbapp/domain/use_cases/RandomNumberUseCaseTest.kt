@@ -13,7 +13,6 @@ import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-
 internal class RandomNumberUseCaseTest {
 
     lateinit var repository: IRandomNumberRepository
@@ -37,9 +36,7 @@ internal class RandomNumberUseCaseTest {
         useCase.addNumber(randomNumber)
 
         assertThat(list.contains(randomNumber)).isTrue()
-
     }
-
 
     @Test
     fun `Verify numbers are returned from repository`() = runBlocking {

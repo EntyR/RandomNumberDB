@@ -42,7 +42,5 @@ class NumberListAdapter(val context: Context, private val itemPressedCallback: (
         holder.binding.btItemValue.setOnClickListener {
             itemPressedCallback(currentList[position].number)
         }
-
     }
-
 }
