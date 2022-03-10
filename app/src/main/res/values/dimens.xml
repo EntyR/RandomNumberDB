@@ -17,16 +17,16 @@
     <dimen name="recycler_padding_bottom">50dp</dimen>
 
 
-    <dimen name="title_description_margins">24dp</dimen>
+    <dimen name="title_description_margins">30dp</dimen>
     <dimen name="title_description_text_size">34sp</dimen>
 
 
-    <dimen name="sub_description_margins_vertical">24dp</dimen>
-    <dimen name="sub_description_margins_horizontal">8dp</dimen>
+    <dimen name="sub_description_margins_vertical">30dp</dimen>
+    <dimen name="sub_description_margins_horizontal">0dp</dimen>
     <dimen name="sub_description_text_size">14sp</dimen>
 
 
-    <dimen name="back_button_margins_vertical">24dp</dimen>
+    <dimen name="back_button_margins_vertical">40dp</dimen>
     <dimen name="back_button_margins_horizontal">24dp</dimen>
 
     <dimen name="linear_layout_margins_vertical">32dp</dimen>
@@ -34,5 +34,24 @@
     <dimen name="linear_layout_margins_bottom">200dp</dimen>
 
     <dimen name="activity_layout_size">0dp</dimen>
+    <dimen name="back_button_padding_vertical">7dp</dimen>
+    <dimen name="back_image_view_height">0dp</dimen>
+    <dimen name="back_image_view_margin_start">16dp</dimen>
+    <dimen name="back_image_view_margin_top">5dp</dimen>
+    <dimen name="back_image_view_margin_bottom">4dp</dimen>
+    <item name="back_image_view_weight" format="float" type="integer">1</item>
+    <dimen name="back_text_view_margin_end">16dp</dimen>
+    <dimen name="back_text_view_text_size">16sp</dimen>
+    <dimen name="number_description_container_width">0dp</dimen>
+    <dimen name="number_description_container_height">0dp</dimen>
+    <dimen name="number_description_container_margin_start">12dp</dimen>
+    <dimen name="number_description_container_margin_top">70dp</dimen>
+    <dimen name="number_description_container_margin_end">12dp</dimen>
+    <dimen name="number_description_container_margin_bottom">150dp</dimen>
+    <dimen name="fullscreen_shade_radius">35dp</dimen>
+    <dimen name="fullscreen_shade_padding">3dp</dimen>
+    <item name="fullscreen_shade_angle" format="float" type="integer">90</item>
+
+
 
 </resources>

@@ -6,16 +6,13 @@ import androidx.test.core.app.ApplicationProvider
 import com.google.common.truth.Truth
 import com.harman.roomdbapp.data.db.RandomNumberDataBase
 import com.harman.roomdbapp.data.enity.RandomNumberEntity
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.After
-import org.junit.Assert.assertThrows
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-
 
 @RunWith(JUnit4::class)
 class RandomNumberDBTest {
@@ -27,13 +24,12 @@ class RandomNumberDBTest {
 
         val context = ApplicationProvider.getApplicationContext<Context>()
         db = Room.inMemoryDatabaseBuilder(context, RandomNumberDataBase::class.java).build()
-
     }
+
     @After
     fun closeDb() {
         db.close()
     }
-
 
     @Test
     fun verify_if_number_was_added_and_can_be_received_from_database() = runBlocking {
@@ -46,7 +42,7 @@ class RandomNumberDBTest {
             events.add(it)
         }
         Truth.assertThat(events.size).isEqualTo(numbers.size)
-        events.forEachIndexed{ index, entity ->
+        events.forEachIndexed { index, entity ->
             Truth.assertThat(entity.number).isEqualTo(numbers[index].number)
         }
     }
@@ -56,15 +52,9 @@ class RandomNumberDBTest {
         db.getDao().getAllNumbers()
     }
 
-
     @Test(expected = Test.None::class)
     fun verify_if_number_can_be_inserted_into_database_without_exception() = runBlocking {
         val number = RandomNumberEntity(0, 1)
         db.getDao().addNumber(number)
-
     }
-
-
-
-
 }

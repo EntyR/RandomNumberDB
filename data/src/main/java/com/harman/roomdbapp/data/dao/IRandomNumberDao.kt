@@ -14,5 +14,4 @@ interface IRandomNumberDao {
 
     @Query("SELECT * from RandomNumberEntity")
     fun getAllNumbers(): Flow<List<RandomNumberEntity>>
-
 }

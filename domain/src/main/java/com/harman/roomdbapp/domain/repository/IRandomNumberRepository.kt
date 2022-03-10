@@ -8,5 +8,4 @@ interface IRandomNumberRepository {
     suspend fun addNumber(number: RandomNumber)
 
     fun getNumbers(): Flow<List<RandomNumber>>
-
 }

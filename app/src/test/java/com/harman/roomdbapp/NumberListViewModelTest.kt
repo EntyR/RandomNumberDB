@@ -30,7 +30,7 @@ class NumberListViewModelTest {
     }
 
     @AfterEach
-    fun tearDown(){
+    fun tearDown() {
         Dispatchers.resetMain()
     }
 
@@ -41,7 +41,7 @@ class NumberListViewModelTest {
         coEvery { useCase.getNumbers() } returns flowOf(list)
         val events = mutableListOf<RandomNumber>()
         val viewModel = NumberListViewModel(useCase)
-        viewModel.getNumbers().observeForever{
+        viewModel.getNumbers().observeForever {
             events.addAll(it)
         }
         Truth.assertThat(events).containsExactlyElementsIn(list).inOrder()

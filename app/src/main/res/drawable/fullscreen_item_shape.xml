@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <corners android:radius="50dp" />
-    <solid android:color="@color/white" />
-</shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <corners android:radius="@dimen/fullscreen_shade_radius" />
+            <gradient
+                android:startColor="@color/dark_grey"
+                android:endColor="@android:color/transparent"
+                android:angle="@integer/fullscreen_shade_angle" />
+        </shape>
+
+    </item>
+    <item android:bottom="@dimen/fullscreen_shade_padding"
+        >
+        <shape>
+            <corners android:radius="@dimen/fullscreen_shade_radius" />
+            <solid android:color="@color/white"/>
+        </shape>
+    </item>
+</layer-list>
