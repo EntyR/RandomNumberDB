@@ -13,7 +13,6 @@ import com.harman.roomdbapp.app.ui.viewmodel.AddNumberViewModel
 import com.harman.roomdbapp.domain.model.RandomNumber
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class RandomNumberAddItem : Fragment() {
 
     private lateinit var binding: FragmentRandomNumberAddItemBinding
@@ -21,7 +20,8 @@ class RandomNumberAddItem : Fragment() {
     private val viewModel: AddNumberViewModel by viewModel()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
@@ -42,7 +42,6 @@ class RandomNumberAddItem : Fragment() {
 
             override fun afterTextChanged(p0: Editable?) = Unit
         })
-
 
         viewModel.isTextAdded.observe(viewLifecycleOwner) {
             if (it) {
@@ -65,7 +64,7 @@ class RandomNumberAddItem : Fragment() {
         }
 
         binding.btLargeAddNumber.setOnClickListener {
-            if (binding.etEnterNumber.text.isNotBlank()){
+            if (binding.etEnterNumber.text.isNotBlank()) {
                 viewModel.addNumber(
                     RandomNumber(
                         binding.etEnterNumber.text.toString().toInt()
@@ -73,7 +72,6 @@ class RandomNumberAddItem : Fragment() {
                 )
                 parentFragmentManager.popBackStack()
             }
-
         }
 
         binding.btBack.setOnClickListener {

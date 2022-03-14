@@ -17,7 +17,6 @@ class AddNumberViewModel(
     private val _isTextAdded = MutableLiveData<Boolean>(false)
     val isTextAdded: LiveData<Boolean> = _isTextAdded
 
-
     fun switchState() {
         _isTextAdded.value = !_isTextAdded.value!!
     }
@@ -25,5 +24,4 @@ class AddNumberViewModel(
     fun addNumber(number: RandomNumber) = viewModelScope.launch(dispatchers) {
         numberUseCase.addNumber(number)
     }
-
 }

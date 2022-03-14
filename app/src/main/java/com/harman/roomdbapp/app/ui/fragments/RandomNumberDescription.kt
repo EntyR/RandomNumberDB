@@ -10,7 +10,6 @@ import com.harman.roomdbapp.app.databinding.FragmentRandomNumberDescriptionBindi
 import com.harman.roomdbapp.app.other.MathUtils
 import com.harman.roomdbapp.app.other.NUMBER_VALUE
 
-
 class RandomNumberDescription : Fragment() {
 
     private var numberValue: Int = 0
@@ -28,7 +27,7 @@ class RandomNumberDescription : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentRandomNumberDescriptionBinding.inflate(inflater, container, false)
 
         val numberIsEven = MathUtils.isNumberEven(numberValue)

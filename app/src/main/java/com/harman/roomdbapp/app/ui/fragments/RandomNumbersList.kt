@@ -1,7 +1,6 @@
 package com.harman.roomdbapp.app.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +30,6 @@ class RandomNumbersList : Fragment() {
         val adapter = NumberListAdapter(requireContext()) {
             val fragment = RandomNumberDescription.newInstance(it)
             navigateTo(fragment, "go_to_description")
-
         }
         binding.rvNumberList.adapter = adapter
         binding.rvNumberList.layoutManager = LinearLayoutManager(requireContext())
@@ -69,12 +67,10 @@ class RandomNumbersList : Fragment() {
         fun newInstance() = RandomNumbersList()
     }
 
-    private fun navigateTo(fragmentToNavigate: Fragment, transactionName: String){
+    private fun navigateTo(fragmentToNavigate: Fragment, transactionName: String) {
         val transaction = parentFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainerView, fragmentToNavigate)
         transaction.addToBackStack(transactionName)
         transaction.commit()
     }
-
 }
-
