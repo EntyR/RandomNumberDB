@@ -3,6 +3,7 @@ package com.harman.roomdbapp.app.di
 import android.app.Application
 import androidx.room.Room
 import com.harman.roomdbapp.app.other.DATABASE_NAME
+import com.harman.roomdbapp.app.ui.viewmodel.AddNumberViewModel
 import com.harman.roomdbapp.app.ui.viewmodel.NumberListViewModel
 import com.harman.roomdbapp.data.dao.IRandomNumberDao
 import com.harman.roomdbapp.data.db.RandomNumberDataBase
@@ -39,4 +40,5 @@ val useCaseModule = module {
 val viewModelModule = module {
     single { Dispatchers.Default }
     viewModel { NumberListViewModel(get()) }
+    viewModel { AddNumberViewModel(get(), get()) }
 }

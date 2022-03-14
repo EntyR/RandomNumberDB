@@ -8,6 +8,29 @@
     android:background="@color/pale_yellow"
     tools:context=".ui.fragments.RandomNumberAddItem">
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btLargeAddNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/add_number_btn_margin"
+        android:layout_marginEnd="@dimen/add_number_btn_margin"
+        android:layout_marginBottom="@dimen/big_btn_btn_margin"
+        android:background="@drawable/add_new_number_shape"
+        android:fontFamily="@font/roboto_black"
+        android:minHeight="@dimen/big_btn_min_height"
+        android:paddingStart="@dimen/add_random_padding_left"
+        android:paddingTop="@dimen/add_random_padding_top"
+        android:paddingEnd="@dimen/add_random_padding_end"
+        android:paddingBottom="@dimen/add_random_padding_bottom"
+        android:text="@string/add_random"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/big_btn_text_size"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/btBack"
         android:layout_width="wrap_content"
@@ -61,6 +84,7 @@
         android:background="@drawable/fullscreen_item_shape"
         android:digits="0,1,2,3,4,5,6,7,8,9,\n"
         android:gravity="start|top"
+        android:hint="@string/enter_your_number"
         android:inputType="phone|textMultiLine"
         android:maxLength="@integer/add_number_et_max_length"
         android:orientation="vertical"
@@ -71,7 +95,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btBack"
-        app:shapeAppearance="@drawable/fullscreen_item_shape" />
+        app:shapeAppearance="@drawable/fullscreen_item_shape"
+        android:importantForAutofill="no" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btAddNewNumber"
@@ -93,7 +118,7 @@
         app:layout_constraintTop_toBottomOf="@+id/etEnterNumber" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/btOr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/or_text_margin_end"
