@@ -23,27 +23,22 @@ class RandomNumbersList : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentRandomNumbersListBinding.inflate(inflater, container, false)
 
         // Setting up adapter and layout manager
         val adapter = NumberListAdapter(requireContext()) {
             val fragment = RandomNumberDescription.newInstance(it)
-            val transaction = parentFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragmentContainerView, fragment)
-            transaction.addToBackStack("go_to_description")
-            transaction.commit()
+            navigateTo(fragment, "go_to_description")
+
         }
         binding.rvNumberList.adapter = adapter
         binding.rvNumberList.layoutManager = LinearLayoutManager(requireContext())
 
         binding.fabNewItem.setOnClickListener {
             val fragment = RandomNumberAddItem.newInstance()
-            val transaction = parentFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragmentContainerView, fragment)
-            transaction.addToBackStack("go_to_description")
-            transaction.commit()
+            navigateTo(fragment, "go_to_new_number_creation")
         }
 
         viewModel.getNumbers().observe(viewLifecycleOwner) {
@@ -73,4 +68,13 @@ class RandomNumbersList : Fragment() {
         @JvmStatic
         fun newInstance() = RandomNumbersList()
     }
+
+    private fun navigateTo(fragmentToNavigate: Fragment, transactionName: String){
+        val transaction = parentFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragmentContainerView, fragmentToNavigate)
+        transaction.addToBackStack(transactionName)
+        transaction.commit()
+    }
+
 }
+

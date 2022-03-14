@@ -8,10 +8,9 @@
     <string name="number">Number %1$d</string>
     <string name="numberdescription">Number is %1$d</string>
     <string name="return_back_button">return back button</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_random">Add Random</string>
     <string name="add_number">Add number</string>
     <string name="or">or</string>
-    <string name="enter_your_number">Enter your number</string>
+    <string name="enter_your_number">Add a new number…</string>
 </resources>

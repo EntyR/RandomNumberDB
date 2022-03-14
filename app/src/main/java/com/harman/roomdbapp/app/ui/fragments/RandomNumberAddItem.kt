@@ -7,9 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.harman.roomdbapp.app.databinding.FragmentRandomNumberAddItemBinding
+import com.harman.roomdbapp.app.other.MathUtils.generateRandomNumber
 import com.harman.roomdbapp.app.ui.viewmodel.AddNumberViewModel
+import com.harman.roomdbapp.domain.model.RandomNumber
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -53,6 +54,30 @@ class RandomNumberAddItem : Fragment() {
                 binding.btLargeAddNumber.visibility = View.GONE
                 binding.btOr.visibility = View.VISIBLE
             }
+        }
+        binding.btAddNewNumber.setOnClickListener {
+            viewModel.addNumber(
+                RandomNumber(
+                    generateRandomNumber()
+                )
+            )
+            parentFragmentManager.popBackStack()
+        }
+
+        binding.btLargeAddNumber.setOnClickListener {
+            if (binding.etEnterNumber.text.isNotBlank()){
+                viewModel.addNumber(
+                    RandomNumber(
+                        binding.etEnterNumber.text.toString().toInt()
+                    )
+                )
+                parentFragmentManager.popBackStack()
+            }
+
+        }
+
+        binding.btBack.setOnClickListener {
+            parentFragmentManager.popBackStack()
         }
 
         return binding.root
