@@ -50,6 +50,7 @@
     <dimen name="number_description_container_margin_bottom">150dp</dimen>
     <dimen name="fullscreen_shade_radius">35dp</dimen>
     <dimen name="fullscreen_shade_padding">3dp</dimen>
+    <dimen name="add_number_btn_margin">12dp</dimen>
     <item name="fullscreen_shade_angle" format="float" type="integer">90</item>
 
 

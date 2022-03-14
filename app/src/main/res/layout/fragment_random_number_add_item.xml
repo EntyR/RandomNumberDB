@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ctRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/pale_yellow"
     tools:context=".ui.fragments.RandomNumberAddItem">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/btBack"
         android:layout_width="wrap_content"
@@ -49,13 +51,13 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/etEnterNumber"
         android:layout_width="0dp"
         android:layout_height="@dimen/number_description_container_height"
         android:layout_marginStart="@dimen/number_description_container_margin_start"
         android:layout_marginTop="@dimen/number_description_container_margin_top"
         android:layout_marginEnd="@dimen/number_description_container_margin_end"
-        android:layout_marginBottom="@dimen/number_description_container_margin_bottom"
+        android:layout_marginBottom="200dp"
         android:background="@drawable/fullscreen_item_shape"
         android:digits="0,1,2,3,4,5,6,7,8,9,\n"
         android:gravity="start|top"
@@ -71,13 +73,14 @@
         app:layout_constraintTop_toBottomOf="@+id/btBack"
         app:shapeAppearance="@drawable/fullscreen_item_shape" />
 
-    <Button
-        android:id="@+id/button"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btAddNewNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
         android:background="@drawable/add_new_number_shape"
-        android:minHeight="34dp"
+        android:fontFamily="@font/roboto_black"
+        android:minHeight="42dp"
         android:paddingLeft="14dp"
         android:paddingTop="0dp"
         android:paddingEnd="14dp"
@@ -85,8 +88,9 @@
         android:text="@string/add_random"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/editText"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/etEnterNumber"
+        app:layout_constraintTop_toBottomOf="@+id/etEnterNumber" />
 
     <TextView
         android:id="@+id/textView2"
@@ -96,8 +100,8 @@
         android:text="or"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/button"
-        app:layout_constraintEnd_toStartOf="@+id/button"
-        app:layout_constraintTop_toTopOf="@+id/button" />
+        app:layout_constraintBottom_toBottomOf="@+id/btAddNewNumber"
+        app:layout_constraintEnd_toStartOf="@+id/btAddNewNumber"
+        app:layout_constraintTop_toTopOf="@+id/btAddNewNumber" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
