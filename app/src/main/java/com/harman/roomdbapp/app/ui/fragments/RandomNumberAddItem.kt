@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.harman.roomdbapp.app.databinding.FragmentRandomNumberAddItemBinding
+import com.harman.roomdbapp.app.other.AddNumberSate
 import com.harman.roomdbapp.app.other.MathUtils.generateRandomNumber
 import com.harman.roomdbapp.app.ui.viewmodel.AddNumberViewModel
 import com.harman.roomdbapp.domain.model.RandomNumber
@@ -44,14 +45,21 @@ class RandomNumberAddItem : Fragment() {
         })
 
         viewModel.isTextAdded.observe(viewLifecycleOwner) {
-            if (it) {
-                binding.btAddNewNumber.visibility = View.GONE
-                binding.btLargeAddNumber.visibility = View.VISIBLE
-                binding.btOr.visibility = View.GONE
-            } else {
-                binding.btAddNewNumber.visibility = View.VISIBLE
-                binding.btLargeAddNumber.visibility = View.GONE
-                binding.btOr.visibility = View.VISIBLE
+            when (it) {
+                AddNumberSate.AddCustom -> {
+                    binding.btAddNewNumber.visibility = View.GONE
+                    binding.btLargeAddNumber.visibility = View.VISIBLE
+                    binding.btOr.visibility = View.GONE
+                }
+                AddNumberSate.AddRandom -> {
+                    binding.btAddNewNumber.visibility = View.VISIBLE
+                    binding.btLargeAddNumber.visibility = View.GONE
+                    binding.btOr.visibility = View.VISIBLE
+                }
+                AddNumberSate.Done -> {
+                    parentFragmentManager.popBackStack()
+                }
+                null -> Unit
             }
         }
         binding.btAddNewNumber.setOnClickListener {
@@ -60,7 +68,6 @@ class RandomNumberAddItem : Fragment() {
                     generateRandomNumber()
                 )
             )
-            parentFragmentManager.popBackStack()
         }
 
         binding.btLargeAddNumber.setOnClickListener {
@@ -70,7 +77,6 @@ class RandomNumberAddItem : Fragment() {
                         binding.etEnterNumber.text.toString().toInt()
                     )
                 )
-                parentFragmentManager.popBackStack()
             }
         }
 
