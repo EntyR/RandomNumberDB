@@ -47,6 +47,7 @@ private  lateinit var binding: FragmentRandomNumberAddItemBinding
                     changedParams.width = 0
                     binding.btAddNewNumber.layoutParams = changedParams
                     binding.btAddNewNumber.textSize = 21f
+                    binding.btAddNewNumber.text = getString(R.string.add_number)
                     binding.btAddNewNumber.minHeight = 190
                 }
             }
@@ -55,6 +56,7 @@ private  lateinit var binding: FragmentRandomNumberAddItemBinding
                 if (p0.isNullOrBlank()){
                     binding.btAddNewNumber.layoutParams = layoutParam
                     binding.btAddNewNumber.textSize = 16f
+                    getString(R.string.add_random)
                     binding.btAddNewNumber.minHeight = 42
                 }
             }
