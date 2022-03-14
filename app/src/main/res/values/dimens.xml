@@ -51,6 +51,25 @@
     <dimen name="fullscreen_shade_radius">35dp</dimen>
     <dimen name="fullscreen_shade_padding">3dp</dimen>
     <dimen name="add_number_btn_margin">12dp</dimen>
+    <dimen name="big_btn_text_size">21sp</dimen>
+    <dimen name="big_btn_min_height">70dp</dimen>
+    <dimen name="big_btn_btn_margin">55dp</dimen>
+    <dimen name="big_btn_top_margin">0dp</dimen>
+    <dimen name="big_btn_width">0dp</dimen>
+    <dimen name="add_random_text_size">16sp</dimen>
+    <dimen name="or_text_text_size">16sp</dimen>
+    <dimen name="add_random_padding_left">14dp</dimen>
+    <dimen name="add_random_padding_end">14dp</dimen>
+    <dimen name="add_random_padding_top">0dp</dimen>
+    <dimen name="add_random_padding_bottom">3dp</dimen>
+    <dimen name="add_random_margin_top">17dp</dimen>
+    <dimen name="add_random_min_height">42sp</dimen>
+    <dimen name="or_text_margin_end">16dp</dimen>
+    <dimen name="add_number_et_text_size">16sp</dimen>
+    <dimen name="add_number_et_padding">24dp</dimen>
+    <dimen name="add_number_et_margin_bottom">200dp</dimen>
+    <dimen name="buttons_radius">50dp</dimen>
+    <dimen name="buttons_shadow_padding">4dp</dimen>
     <item name="fullscreen_shade_angle" format="float" type="integer">90</item>
 
 

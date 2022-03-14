@@ -2,17 +2,17 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape>
-            <corners android:radius="50dp" />
+            <corners android:radius="@dimen/buttons_radius" />
             <gradient
-                android:startColor="#3E000000"
+                android:startColor="@color/add_random_shadow"
                 android:endColor="@android:color/transparent"
-                android:angle="90" />
+                android:angle="@integer/shadow_angle" />
         </shape>
 
     </item>
-    <item android:bottom="4dp">
+    <item android:bottom="@dimen/buttons_shadow_padding">
         <shape>
-            <corners android:radius="50dp" />
+            <corners android:radius="@dimen/buttons_radius" />
             <solid android:color="@color/blue"/>
         </shape>
     </item>

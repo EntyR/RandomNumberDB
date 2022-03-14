@@ -3,6 +3,7 @@ package com.harman.roomdbapp.app.ui.fragments
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,26 +35,31 @@ class RandomNumberAddItem : Fragment() {
                     val changedParams = ConstraintLayout.LayoutParams(layoutParam)
                     val horMargin =
                         requireContext().resources.getDimensionPixelSize(R.dimen.add_number_btn_margin)
+                    val bottomMargin = requireContext().resources.getDimensionPixelSize(R.dimen.big_btn_btn_margin)
+                    val topMargin = requireContext().resources.getDimensionPixelSize(R.dimen.big_btn_top_margin)
+                    val width = requireContext().resources.getDimensionPixelSize(R.dimen.big_btn_width)
+                    val textSize = requireContext().resources.getDimension(R.dimen.big_btn_text_size)
                     changedParams.topToBottom = ConstraintLayout.LayoutParams.UNSET
                     changedParams.startToStart = binding.root.id
                     changedParams.endToEnd = binding.root.id
                     changedParams.bottomToBottom = binding.root.id
-                    changedParams.setMargins(horMargin, 0, horMargin, 140)
+                    changedParams.setMargins(horMargin, topMargin, horMargin, bottomMargin)
                     changedParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
-                    changedParams.width = 0
+                    changedParams.width = width
                     binding.btAddNewNumber.layoutParams = changedParams
-                    binding.btAddNewNumber.textSize = 21f
+                    binding.btAddNewNumber.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
                     binding.btAddNewNumber.text = getString(R.string.add_number)
-                    binding.btAddNewNumber.minHeight = 190
+                    binding.btAddNewNumber.minHeight = requireContext().resources.getDimensionPixelSize(R.dimen.big_btn_min_height)
                 }
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (p0.isNullOrBlank()) {
+                    val textSize = requireContext().resources.getDimension(R.dimen.add_random_text_size)
                     binding.btAddNewNumber.layoutParams = layoutParam
-                    binding.btAddNewNumber.textSize = 16f
+                    binding.btAddNewNumber.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
                     getString(R.string.add_random)
-                    binding.btAddNewNumber.minHeight = 42
+                    binding.btAddNewNumber.minHeight = requireContext().resources.getDimensionPixelSize(R.dimen.add_random_min_height)
                 }
             }
 
