@@ -72,6 +72,8 @@
     <dimen name="buttons_shadow_padding">4dp</dimen>
     <dimen name="recycler_padding_Top">20dp</dimen>
     <dimen name="or_text_margin_bottom">4dp</dimen>
+    <dimen name="rounded_btn_shape_shadow_padding">3dp</dimen>
+    <dimen name="cursor_width">1dp</dimen>
     <item name="fullscreen_shade_angle" format="float" type="integer">90</item>
 
 

@@ -4,19 +4,20 @@
         android:state_pressed="false">
         <layer-list>
             <item>
+
                     <shape>
-                        <corners android:radius="50dp" />
+                        <corners android:radius="@dimen/buttons_radius" />
                         <gradient
-                            android:startColor="#2A000000"
+                            android:startColor="@color/dark_grey"
                             android:endColor="@android:color/transparent"
-                            android:angle="90" />
+                            android:angle="@integer/shadow_angle" />
                     </shape>
 
             </item>
-            <item android:bottom="3dp"
+            <item android:bottom="@dimen/rounded_btn_shape_shadow_padding"
              >
                 <shape>
-                    <corners android:radius="50dp" />
+                    <corners android:radius="@dimen/buttons_radius" />
                     <solid android:color="@color/white"/>
                 </shape>
             </item>
@@ -27,17 +28,17 @@
         <layer-list>
             <item>
                 <shape>
-                    <corners android:radius="50dp" />
+                    <corners android:radius="@dimen/buttons_radius" />
                     <gradient
-                        android:startColor="#1E000000"
+                        android:startColor="@color/dark_grey"
                         android:endColor="@android:color/transparent"
-                        android:angle="90" />
+                        android:angle="@integer/shadow_angle" />
                 </shape>
 
             </item>
-            <item android:bottom="3dp">
+            <item android:bottom="@dimen/rounded_btn_shape_shadow_padding">
                 <shape>
-                    <corners android:radius="50dp" />
+                    <corners android:radius="@dimen/buttons_radius" />
                     <solid android:color="@color/blue"/>
                 </shape>
             </item>
