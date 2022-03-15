@@ -57,13 +57,13 @@
     <dimen name="big_btn_top_margin">0dp</dimen>
     <dimen name="big_btn_width">0dp</dimen>
     <dimen name="add_random_text_size">16sp</dimen>
-    <dimen name="or_text_text_size">16sp</dimen>
-    <dimen name="add_random_padding_left">14dp</dimen>
-    <dimen name="add_random_padding_end">14dp</dimen>
+    <dimen name="or_text_text_size">18sp</dimen>
+    <dimen name="add_random_padding_left">18dp</dimen>
+    <dimen name="add_random_padding_end">18dp</dimen>
     <dimen name="add_random_padding_top">0dp</dimen>
     <dimen name="add_random_padding_bottom">3dp</dimen>
     <dimen name="add_random_margin_top">17dp</dimen>
-    <dimen name="add_random_min_height">42sp</dimen>
+    <dimen name="add_random_min_height">48dp</dimen>
     <dimen name="or_text_margin_end">16dp</dimen>
     <dimen name="add_number_et_text_size">16sp</dimen>
     <dimen name="add_number_et_padding">24dp</dimen>
@@ -71,7 +71,9 @@
     <dimen name="buttons_radius">50dp</dimen>
     <dimen name="buttons_shadow_padding">4dp</dimen>
     <dimen name="recycler_padding_Top">20dp</dimen>
+    <dimen name="or_text_margin_bottom">4dp</dimen>
     <item name="fullscreen_shade_angle" format="float" type="integer">90</item>
+
 
 
 

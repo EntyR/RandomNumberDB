@@ -1,6 +1,7 @@
 package com.harman.roomdbapp.app.ui.fragments
 
 import android.content.Context
+import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,7 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.databinding.FragmentRandomNumberAddItemBinding
 import com.harman.roomdbapp.app.other.AddNumberSate
 import com.harman.roomdbapp.app.other.MathUtils.generateRandomNumber
@@ -35,12 +38,14 @@ class RandomNumberAddItem : Fragment() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (p0.isNullOrBlank()) {
                     viewModel.switchState()
+                    binding.etEnterNumber.typeface = ResourcesCompat.getFont(requireContext(), R.font.roboto_bold)
                 }
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (p0.isNullOrBlank()) {
                     viewModel.switchState()
+                    binding.etEnterNumber.typeface = ResourcesCompat.getFont(requireContext(), R.font.roboto_regular)
                 }
             }
 

@@ -13,4 +13,5 @@
     <color name="add_random_shadow">#3E000000</color>
     <color name="yellow">#FFC107</color>
     <color name="grey">#292929</color>
+    <color name="LightGrey">#686868</color>
 </resources>
