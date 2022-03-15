@@ -2,10 +2,8 @@ package com.harman.roomdbapp.app.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.os.Parcelable
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -22,13 +20,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RandomNumberAddItem : Fragment() {
 
-
-
     private lateinit var binding: FragmentRandomNumberAddItemBinding
 
     private val viewModel: AddNumberViewModel by viewModel()
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,7 +31,6 @@ class RandomNumberAddItem : Fragment() {
     ): View {
 
         binding = FragmentRandomNumberAddItemBinding.inflate(inflater, container, false)
-
 
         binding.etEnterNumber.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -110,14 +103,12 @@ class RandomNumberAddItem : Fragment() {
         return binding.root
     }
 
-
     override fun onDestroy() {
         super.onDestroy()
 
-        if(binding.etEnterNumber.text.toString().isNotEmpty()){
+        if (binding.etEnterNumber.text.toString().isNotEmpty()) {
             viewModel.switchState()
         }
-
     }
 
     private fun hideKB(view: View) {
@@ -126,15 +117,10 @@ class RandomNumberAddItem : Fragment() {
         manager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
-
-
     companion object {
 
         @JvmStatic
         fun newInstance() =
             RandomNumberAddItem()
     }
-
-
-
 }
