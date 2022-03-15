@@ -10,4 +10,8 @@
     <color name="pale_yellow">#FFEDAB</color>
     <color name="blue">#00B2FF</color>
     <color name="dark_grey">#2A000000</color>
+    <color name="add_random_shadow">#3E000000</color>
+    <color name="yellow">#FFC107</color>
+    <color name="grey">#292929</color>
+    <color name="LightGrey">#686868</color>
 </resources>

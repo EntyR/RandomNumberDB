@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/pale_yellow"
-    tools:context=".app.ui.fragments.RandomNumberDescription">
+    android:background="@color/pale_yellow">
 
     <LinearLayout
         android:layout_width="@dimen/number_description_container_width"
@@ -41,6 +40,7 @@
             android:layout_marginLeft="@dimen/sub_description_margins_vertical"
             android:layout_marginTop="@dimen/sub_description_margins_horizontal"
             android:layout_marginRight="@dimen/sub_description_margins_vertical"
+            android:textColor="@color/LightGrey"
             android:fontFamily="@font/roboto_regular"
             android:textSize="@dimen/sub_description_text_size"
             tools:text="TextView" />
@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/back_text_view_margin_end"
-            android:fontFamily="@font/roboto_regular"
+            android:fontFamily="sans-serif-medium"
             android:text="@string/back"
             android:textColor="@color/black"
             android:textSize="@dimen/back_text_view_text_size"
