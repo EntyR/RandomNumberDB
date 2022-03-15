@@ -1,11 +1,14 @@
 package com.harman.roomdbapp.app.ui.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import com.harman.roomdbapp.app.databinding.FragmentRandomNumberAddItemBinding
 import com.harman.roomdbapp.app.other.AddNumberSate
@@ -79,9 +82,13 @@ class RandomNumberAddItem : Fragment() {
                 )
             }
         }
-
         binding.btBack.setOnClickListener {
             parentFragmentManager.popBackStack()
+        }
+
+        binding.etEnterNumber.setOnFocusChangeListener { view, _ ->
+            val manager: InputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            manager.hideSoftInputFromWindow(view.windowToken, 0)
         }
 
         return binding.root

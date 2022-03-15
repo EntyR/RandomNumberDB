@@ -26,6 +26,7 @@ class AddNumberViewModel(
 
     fun addNumber(number: RandomNumber) = viewModelScope.launch(dispatchers) {
         numberUseCase.addNumber(number)
-        _isTextAdded.value = AddNumberSate.Done
+
+        _isTextAdded.postValue(AddNumberSate.Done)
     }
 }

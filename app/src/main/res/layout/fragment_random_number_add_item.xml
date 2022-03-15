@@ -6,7 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/pale_yellow"
-    tools:context=".ui.fragments.RandomNumberAddItem">
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".ui.fragments.RandomNumberAddItem"
+    tools:ignore="KeyboardInaccessibleWidget">
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btLargeAddNumber"
@@ -82,21 +85,22 @@
         android:layout_marginEnd="@dimen/number_description_container_margin_end"
         android:layout_marginBottom="@dimen/add_number_et_margin_bottom"
         android:background="@drawable/fullscreen_item_shape"
-        android:digits="0,1,2,3,4,5,6,7,8,9,\n"
+        android:digits="0,1,2,3,4,5,6,7,8,9"
+        android:fontFamily="@font/roboto_regular"
         android:gravity="start|top"
         android:hint="@string/enter_your_number"
+        android:importantForAutofill="no"
         android:inputType="phone|textMultiLine"
         android:maxLength="@integer/add_number_et_max_length"
         android:orientation="vertical"
         android:padding="@dimen/add_number_et_padding"
+        android:textCursorDrawable="@drawable/cursor_color"
         android:textSize="@dimen/add_number_et_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btBack"
-        app:shapeAppearance="@drawable/fullscreen_item_shape"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/btBack" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btAddNewNumber"
@@ -122,6 +126,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/or_text_margin_end"
+        android:fontFamily="@font/roboto_regular"
         android:text="@string/or"
         android:textColor="@color/black"
         android:textSize="@dimen/or_text_text_size"

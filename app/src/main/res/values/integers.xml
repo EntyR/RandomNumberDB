@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="shadow_angle">90</integer>
-    <integer name="add_number_et_max_length">9</integer>
+    <integer name="add_number_et_max_length">3</integer>
 
 </resources>

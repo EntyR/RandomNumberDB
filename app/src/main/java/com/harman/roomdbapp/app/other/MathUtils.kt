@@ -6,5 +6,5 @@ object MathUtils {
 
     fun isNumberEven(number: Int) = number % 2 == 0
 
-    fun generateRandomNumber() = Random.nextInt(0, Int.MAX_VALUE)
+    fun generateRandomNumber() = Random.nextInt(0, 1000)
 }
