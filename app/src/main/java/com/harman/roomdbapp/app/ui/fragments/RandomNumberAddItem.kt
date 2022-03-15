@@ -4,11 +4,11 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.harman.roomdbapp.app.R
@@ -37,19 +37,30 @@ class RandomNumberAddItem : Fragment() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (p0.isNullOrBlank()) {
                     viewModel.switchState()
-                    binding.etEnterNumber.typeface = ResourcesCompat.getFont(requireContext(), R.font.roboto_bold)
+                    binding.etEnterNumber.typeface =
+                        ResourcesCompat.getFont(requireContext(), R.font.roboto_bold)
                 }
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (p0.isNullOrBlank()) {
                     viewModel.switchState()
-                    binding.etEnterNumber.typeface = ResourcesCompat.getFont(requireContext(), R.font.roboto_regular)
+                    binding.etEnterNumber.typeface =
+                        ResourcesCompat.getFont(requireContext(), R.font.roboto_regular)
                 }
             }
 
             override fun afterTextChanged(p0: Editable?) = Unit
         })
+
+        binding.etEnterNumber.setOnKeyListener { view, i, event ->
+            if ((event.action == KeyEvent.ACTION_DOWN) &&
+                (i == KeyEvent.KEYCODE_ENTER)
+            ) {
+                hideKB(view)
+                true
+            } else false
+        }
 
         viewModel.isTextAdded.observe(viewLifecycleOwner) {
             when (it) {
@@ -91,11 +102,16 @@ class RandomNumberAddItem : Fragment() {
         }
 
         binding.etEnterNumber.setOnFocusChangeListener { view, _ ->
-            val manager: InputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            manager.hideSoftInputFromWindow(view.windowToken, 0)
+            hideKB(view)
         }
 
         return binding.root
+    }
+
+    private fun hideKB(view: View) {
+        val manager: InputMethodManager =
+            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        manager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     companion object {
