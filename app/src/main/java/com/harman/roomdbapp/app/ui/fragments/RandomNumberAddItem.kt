@@ -1,7 +1,6 @@
 package com.harman.roomdbapp.app.ui.fragments
 
 import android.content.Context
-import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher

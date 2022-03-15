@@ -1,22 +1,17 @@
 package com.harman.roomdbapp
 
-import androidx.lifecycle.Observer
 import com.google.common.truth.Truth
 import com.harman.roomdbapp.app.other.AddNumberSate
 import com.harman.roomdbapp.app.ui.viewmodel.AddNumberViewModel
-import com.harman.roomdbapp.app.ui.viewmodel.NumberListViewModel
 import com.harman.roomdbapp.domain.model.RandomNumber
 import com.harman.roomdbapp.domain.use_cases.RandomNumberUseCase
 import com.harman.roomdbapp.extension.InstantExecutorExtension
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
-import org.junit.jupiter.api.Assertions.*
-
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -38,7 +33,6 @@ class AddNumberViewModelTest {
     fun tearDown() {
         Dispatchers.resetMain()
     }
-
 
     @Test
     fun `Verify what isTextAdded is switched`() {
@@ -65,6 +59,5 @@ class AddNumberViewModelTest {
         viewModel.addNumber(number)
 
         Truth.assertThat(list).containsExactlyElementsIn(listOf(number))
-
     }
 }
