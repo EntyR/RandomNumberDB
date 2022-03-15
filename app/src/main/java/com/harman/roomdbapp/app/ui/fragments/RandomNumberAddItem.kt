@@ -13,8 +13,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.databinding.FragmentRandomNumberAddItemBinding
-import com.harman.roomdbapp.app.other.AddNumberSate
-import com.harman.roomdbapp.app.other.MathUtils.generateRandomNumber
+import com.harman.roomdbapp.app.other.AddNumberState
 import com.harman.roomdbapp.app.ui.viewmodel.AddNumberViewModel
 import com.harman.roomdbapp.domain.model.RandomNumber
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -37,16 +36,12 @@ class RandomNumberAddItem : Fragment() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (p0.isNullOrBlank()) {
                     viewModel.switchState()
-                    binding.etEnterNumber.typeface =
-                        ResourcesCompat.getFont(requireContext(), R.font.roboto_bold)
                 }
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (p0.isNullOrBlank()) {
                     viewModel.switchState()
-                    binding.etEnterNumber.typeface =
-                        ResourcesCompat.getFont(requireContext(), R.font.roboto_regular)
                 }
             }
 
@@ -62,30 +57,30 @@ class RandomNumberAddItem : Fragment() {
             } else false
         }
 
-        viewModel.isTextAdded.observe(viewLifecycleOwner) {
+        viewModel.textState.observe(viewLifecycleOwner) {
             when (it) {
-                AddNumberSate.AddCustom -> {
+                AddNumberState.AddCustom -> {
                     binding.btAddNewNumber.visibility = View.GONE
                     binding.btLargeAddNumber.visibility = View.VISIBLE
                     binding.btOr.visibility = View.GONE
+                    binding.etEnterNumber.typeface =
+                        ResourcesCompat.getFont(requireContext(), R.font.roboto_bold)
                 }
-                AddNumberSate.AddRandom -> {
+                AddNumberState.AddRandom -> {
                     binding.btAddNewNumber.visibility = View.VISIBLE
                     binding.btLargeAddNumber.visibility = View.GONE
                     binding.btOr.visibility = View.VISIBLE
+                    binding.etEnterNumber.typeface =
+                        ResourcesCompat.getFont(requireContext(), R.font.roboto_regular)
                 }
-                AddNumberSate.Done -> {
+                AddNumberState.Done -> {
                     parentFragmentManager.popBackStack()
                 }
                 null -> Unit
             }
         }
         binding.btAddNewNumber.setOnClickListener {
-            viewModel.addNumber(
-                RandomNumber(
-                    generateRandomNumber()
-                )
-            )
+            viewModel.generateRandom()
         }
 
         binding.btLargeAddNumber.setOnClickListener {

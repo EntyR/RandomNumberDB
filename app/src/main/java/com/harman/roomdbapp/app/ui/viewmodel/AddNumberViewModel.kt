@@ -4,7 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.harman.roomdbapp.app.other.AddNumberSate
+import com.harman.roomdbapp.app.other.AddNumberState
+import com.harman.roomdbapp.app.other.MathUtils
 import com.harman.roomdbapp.domain.model.RandomNumber
 import com.harman.roomdbapp.domain.use_cases.RandomNumberUseCase
 import kotlinx.coroutines.CoroutineDispatcher
@@ -15,17 +16,25 @@ class AddNumberViewModel(
     private val dispatchers: CoroutineDispatcher
 ) : ViewModel() {
 
-    private val _isTextAdded = MutableLiveData<AddNumberSate>(AddNumberSate.AddRandom)
-    val isTextAdded: LiveData<AddNumberSate> = _isTextAdded
+    private val _textState = MutableLiveData<AddNumberState>(AddNumberState.AddRandom)
+    val textState: LiveData<AddNumberState> = _textState
 
     fun switchState() {
-        if (_isTextAdded.value == AddNumberSate.AddCustom)
-            _isTextAdded.value = AddNumberSate.AddRandom
-        else _isTextAdded.value = AddNumberSate.AddCustom
+        if (_textState.value == AddNumberState.AddCustom)
+            _textState.value = AddNumberState.AddRandom
+        else _textState.value = AddNumberState.AddCustom
     }
 
     fun addNumber(number: RandomNumber) = viewModelScope.launch(dispatchers) {
         numberUseCase.addNumber(number)
-        _isTextAdded.postValue(AddNumberSate.Done)
+        _textState.postValue(AddNumberState.Done)
+    }
+
+    fun generateRandom() {
+        addNumber(
+            RandomNumber(
+                MathUtils.generateRandomNumber()
+            )
+        )
     }
 }

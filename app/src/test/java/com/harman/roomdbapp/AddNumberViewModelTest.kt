@@ -1,7 +1,7 @@
 package com.harman.roomdbapp
 
 import com.google.common.truth.Truth
-import com.harman.roomdbapp.app.other.AddNumberSate
+import com.harman.roomdbapp.app.other.AddNumberState
 import com.harman.roomdbapp.app.ui.viewmodel.AddNumberViewModel
 import com.harman.roomdbapp.domain.model.RandomNumber
 import com.harman.roomdbapp.domain.use_cases.RandomNumberUseCase
@@ -37,15 +37,15 @@ class AddNumberViewModelTest {
     @Test
     fun `Verify what isTextAdded is switched`() {
         val viewModel = AddNumberViewModel(useCase, dispatcher)
-        val initial = viewModel.isTextAdded.value
-        var endValue: AddNumberSate? = null
-        viewModel.isTextAdded.observeForever {
+        val initial = viewModel.textState.value
+        var endValue: AddNumberState? = null
+        viewModel.textState.observeForever {
             endValue = it
         }
         viewModel.switchState()
         Truth.assertThat(endValue).isNotNull()
         Truth.assertThat(endValue).isNotEqualTo(initial)
-        Truth.assertThat(endValue).isNotEqualTo(AddNumberSate.Done)
+        Truth.assertThat(endValue).isNotEqualTo(AddNumberState.Done)
     }
 
     @Test

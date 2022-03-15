@@ -25,7 +25,7 @@
         android:paddingTop="@dimen/add_random_padding_top"
         android:paddingEnd="@dimen/add_random_padding_end"
         android:paddingBottom="@dimen/add_random_padding_bottom"
-        android:text="@string/add_random"
+        android:text="@string/add_number"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="@dimen/big_btn_text_size"
