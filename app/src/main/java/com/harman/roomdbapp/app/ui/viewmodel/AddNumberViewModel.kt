@@ -19,10 +19,11 @@ class AddNumberViewModel(
     private val _textState = MutableLiveData<AddNumberState>(AddNumberState.AddRandom)
     val textState: LiveData<AddNumberState> = _textState
 
-    fun switchState() {
-        if (_textState.value == AddNumberState.AddCustom)
+    fun switchState(text: String) {
+        if (text.isEmpty() && textState.value == AddNumberState.AddCustom)
             _textState.value = AddNumberState.AddRandom
-        else _textState.value = AddNumberState.AddCustom
+        else if(textState.value == AddNumberState.AddRandom)
+            _textState.value = AddNumberState.AddCustom
     }
 
     fun addNumber(number: RandomNumber) = viewModelScope.launch(dispatchers) {
