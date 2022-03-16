@@ -22,8 +22,7 @@ class AddNumberViewModel(
     fun switchState(text: String) {
         if (text.isEmpty())
             _textState.value = AddNumberState.AddRandom
-        else if(text.isNotEmpty())
-            _textState.value = AddNumberState.AddCustom
+        else _textState.value = AddNumberState.AddCustom
     }
 
     fun addNumber(number: RandomNumber) = viewModelScope.launch(dispatchers) {
