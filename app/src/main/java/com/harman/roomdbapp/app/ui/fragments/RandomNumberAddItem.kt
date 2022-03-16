@@ -50,8 +50,8 @@ class RandomNumberAddItem : Fragment() {
 
         binding.etEnterNumber.setOnKeyListener { view, i, event ->
 
-            if ((event.action == KeyEvent.ACTION_DOWN) &&
-                ((i == KeyEvent.KEYCODE_ENTER))
+            if (event.action == KeyEvent.ACTION_DOWN &&
+                (i == KeyEvent.KEYCODE_ENTER)
             ) {
                 hideKB(view)
                 true

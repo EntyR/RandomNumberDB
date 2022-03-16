@@ -1,13 +1,10 @@
 <resources>
-    <string name="app_name">RoomDb</string>
-    <string name="add_new_random_number">Добавить новое случайное число</string>
     <string name="back">Назад</string>
     <string name="number_is_even">Число четное</string>
     <string name="number_not_even">число нечетное</string>
     <string name="no_numbers">Нет чисел</string>
     <string name="number">Число %1$d</string>
     <string name="numberdescription">Число %1$d</string>
-    <string name="return_back_button">Кнопка для возвращения обратно</string>
     <string name="add_random">Добавить случайное</string>
     <string name="add_number">Добавить число</string>
     <string name="or">или</string>
