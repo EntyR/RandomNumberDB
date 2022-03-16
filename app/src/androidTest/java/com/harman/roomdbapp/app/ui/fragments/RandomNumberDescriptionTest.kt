@@ -23,7 +23,7 @@ class RandomNumberDescriptionTest {
     lateinit var activityScenario: ActivityScenario<MainActivity>
 
     private lateinit var spy: FragmentManager
-    val value = 15
+    private val value = 15
 
     @Before
     fun setUp() {
