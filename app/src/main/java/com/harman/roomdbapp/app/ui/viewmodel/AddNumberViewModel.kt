@@ -20,9 +20,9 @@ class AddNumberViewModel(
     val textState: LiveData<AddNumberState> = _textState
 
     fun switchState(text: String) {
-        if (text.isEmpty() && textState.value == AddNumberState.AddCustom)
+        if (text.isEmpty())
             _textState.value = AddNumberState.AddRandom
-        else if(textState.value == AddNumberState.AddRandom)
+        else if(text.isNotEmpty())
             _textState.value = AddNumberState.AddCustom
     }
 

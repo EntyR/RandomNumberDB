@@ -30,7 +30,10 @@ class RandomNumberAddItem : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
+
         binding = FragmentRandomNumberAddItemBinding.inflate(inflater, container, false)
+
+        viewModel.switchState(binding.etEnterNumber.text.toString())
 
         binding.etEnterNumber.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
