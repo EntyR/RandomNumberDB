@@ -19,8 +19,8 @@ class AddNumberViewModel(
     private val _textState = MutableLiveData<AddNumberState>(AddNumberState.AddRandom)
     val textState: LiveData<AddNumberState> = _textState
 
-    fun switchState() {
-        if (_textState.value == AddNumberState.AddCustom)
+    fun switchState(text: String) {
+        if (text.isEmpty())
             _textState.value = AddNumberState.AddRandom
         else _textState.value = AddNumberState.AddCustom
     }

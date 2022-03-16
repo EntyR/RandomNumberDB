@@ -30,19 +30,16 @@ class RandomNumberAddItem : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
+
         binding = FragmentRandomNumberAddItemBinding.inflate(inflater, container, false)
 
+        viewModel.switchState(binding.etEnterNumber.text.toString())
+
         binding.etEnterNumber.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (p0.isNullOrBlank()) {
-                    viewModel.switchState()
-                }
-            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (p0.isNullOrBlank()) {
-                    viewModel.switchState()
-                }
+                viewModel.switchState(p0.toString())
             }
 
             override fun afterTextChanged(p0: Editable?) = Unit
@@ -103,6 +100,7 @@ class RandomNumberAddItem : Fragment() {
 
         return binding.root
     }
+
 
     private fun hideKB(view: View) {
         val manager: InputMethodManager =

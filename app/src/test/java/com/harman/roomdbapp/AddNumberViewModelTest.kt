@@ -35,16 +35,33 @@ class AddNumberViewModelTest {
     }
 
     @Test
-    fun `Verify what isTextAdded is switched`() {
+    fun `Verify what isTextAdded is switched when text was null before`() {
         val viewModel = AddNumberViewModel(useCase, dispatcher)
         val initial = viewModel.textState.value
         var endValue: AddNumberState? = null
+        val text = "Text"
         viewModel.textState.observeForever {
             endValue = it
         }
-        viewModel.switchState()
+        viewModel.switchState(text)
         Truth.assertThat(endValue).isNotNull()
         Truth.assertThat(endValue).isNotEqualTo(initial)
+        Truth.assertThat(endValue).isNotEqualTo(AddNumberState.Done)
+    }
+
+    @Test
+    fun `Verify what isTextAdded isn't switched when next number added`() {
+        val viewModel = AddNumberViewModel(useCase, dispatcher)
+        viewModel.switchState("1")
+        val initial = viewModel.textState.value
+        var endValue: AddNumberState? = null
+        val text = "12"
+        viewModel.textState.observeForever {
+            endValue = it
+        }
+        viewModel.switchState(text)
+        Truth.assertThat(endValue).isNotNull()
+        Truth.assertThat(endValue).isEqualTo(initial)
         Truth.assertThat(endValue).isNotEqualTo(AddNumberState.Done)
     }
 
