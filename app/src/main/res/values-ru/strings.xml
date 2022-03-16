@@ -1,0 +1,12 @@
+<resources>
+    <string name="back">Назад</string>
+    <string name="number_is_even">Число четное</string>
+    <string name="number_not_even">число нечетное</string>
+    <string name="no_numbers">Нет чисел</string>
+    <string name="number">Число %1$d</string>
+    <string name="numberdescription">Число %1$d</string>
+    <string name="add_random">Добавить случайное</string>
+    <string name="add_number">Добавить число</string>
+    <string name="or">или</string>
+    <string name="enter_your_number">Добавить новое число…</string>
+</resources>

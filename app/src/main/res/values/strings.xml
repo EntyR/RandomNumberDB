@@ -1,14 +1,13 @@
 <resources>
-    <string name="app_name">RoomDb</string>
-    <string name="add_new_random_number">Add new random number</string>
+    <string name="app_name" translatable="false">RoomDb</string>
+    <string name="add_new_random_number" translatable="false">Add new random number</string>
     <string name="back">Back</string>
     <string name="number_is_even">Number is even</string>
     <string name="number_not_even">Number is odd</string>
     <string name="no_numbers">no numbers</string>
     <string name="number">Number %1$d</string>
-    <string name="numberdescription">Number is %1$d</string>
-    <string name="return_back_button">return back button</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="numberdescription" translatable="false">Number is %1$d</string>
+    <string name="return_back_button" translatable="false">return back button</string>
     <string name="add_random">Add Random</string>
     <string name="add_number">Add Number</string>
     <string name="or">or</string>
