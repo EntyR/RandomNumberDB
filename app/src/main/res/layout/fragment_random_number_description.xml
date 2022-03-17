@@ -94,6 +94,7 @@
         android:layout_width="@dimen/share_btn_size"
         android:layout_height="@dimen/share_btn_size"
         android:background="@drawable/round_shape"
+        android:contentDescription="@string/share_button"
         android:padding="@dimen/share_btn_padding"
         android:scaleType="centerInside"
         app:layout_constraintBottom_toBottomOf="@+id/llNumberContainer"
@@ -101,6 +102,6 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/llNumberContainer"
         app:layout_constraintTop_toTopOf="@+id/llNumberContainer"
-        app:srcCompat="@drawable/ic_group_3"
-        android:contentDescription="@string/share_button" />
+        app:srcCompat="@drawable/ic_group_3" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,13 @@
 package com.harman.roomdbapp.app.ui.fragments
 
+import android.content.ContentValues
+import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Canvas
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +16,9 @@ import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.databinding.FragmentRandomNumberDescriptionBinding
 import com.harman.roomdbapp.app.other.MathUtils
 import com.harman.roomdbapp.app.other.NUMBER_VALUE
-
+import com.harman.roomdbapp.app.other.runOnSdk29orUp
+import java.io.IOException
+import java.util.UUID
 
 class RandomNumberDescription : Fragment() {
 
@@ -38,8 +43,16 @@ class RandomNumberDescription : Fragment() {
         val numberIsEven = MathUtils.isNumberEven(numberValue)
 
         binding.ivShareBtn.setOnClickListener {
-            val bitmap = getBitMapFromView(it)
-            Log.e("TAG", "onCreateView: ${bitmap != null}")
+            val bitmap = getBitMapFromView(binding.llNumberContainer)
+            bitmap?.let {
+                val uri = getUriFromBitmap(bitmap, requireContext())
+                val sendImageIntent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_STREAM, uri)
+                    type = "image/png"
+                }
+                startActivity(sendImageIntent)
+            }
         }
 
         binding.tvNumberValue.text = resources.getString(R.string.number, numberValue)
@@ -73,11 +86,30 @@ class RandomNumberDescription : Fragment() {
             }
     }
 
-    fun getBitMapFromView(view: View): Bitmap? {
+    private fun getBitMapFromView(view: View): Bitmap? {
         val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
         view.draw(canvas)
         return bitmap
     }
 
+    private fun getUriFromBitmap(bitmap: Bitmap, context: Context): Uri? {
+        val contentUri = runOnSdk29orUp {
+            MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
+        } ?: MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+
+        val value = ContentValues().apply {
+            put(MediaStore.Images.Media.DISPLAY_NAME, "${UUID.randomUUID()}.png")
+            put(MediaStore.Images.Media.MIME_TYPE, "image/png")
+            put(MediaStore.Images.Media.WIDTH, bitmap.width)
+            put(MediaStore.Images.Media.HEIGHT, bitmap.height)
+        }
+        val uri = context.contentResolver.insert(contentUri, value) ?: return null
+
+        context.contentResolver.openOutputStream(uri).use {
+            if (!bitmap.compress(Bitmap.CompressFormat.PNG, 100, it))
+                throw IOException("Couldn't share file")
+        }
+        return uri
+    }
 }
