@@ -7,6 +7,7 @@
     android:background="@color/pale_yellow">
 
     <LinearLayout
+        android:id="@+id/llNumberContainer"
         android:layout_width="@dimen/number_description_container_width"
         android:layout_height="@dimen/number_description_container_height"
         android:layout_marginStart="@dimen/number_description_container_margin_start"
@@ -40,8 +41,8 @@
             android:layout_marginLeft="@dimen/sub_description_margins_vertical"
             android:layout_marginTop="@dimen/sub_description_margins_horizontal"
             android:layout_marginRight="@dimen/sub_description_margins_vertical"
-            android:textColor="@color/LightGrey"
             android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/LightGrey"
             android:textSize="@dimen/sub_description_text_size"
             tools:text="TextView" />
     </LinearLayout>
@@ -87,4 +88,19 @@
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/ivShareBtn"
+        android:layout_width="@dimen/share_btn_size"
+        android:layout_height="@dimen/share_btn_size"
+        android:background="@drawable/round_shape"
+        android:padding="@dimen/share_btn_padding"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="@+id/llNumberContainer"
+        app:layout_constraintEnd_toEndOf="@+id/llNumberContainer"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/llNumberContainer"
+        app:layout_constraintTop_toTopOf="@+id/llNumberContainer"
+        app:srcCompat="@drawable/ic_group_3"
+        android:contentDescription="@string/share_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

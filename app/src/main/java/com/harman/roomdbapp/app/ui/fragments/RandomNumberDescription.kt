@@ -1,6 +1,10 @@
 package com.harman.roomdbapp.app.ui.fragments
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +13,7 @@ import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.databinding.FragmentRandomNumberDescriptionBinding
 import com.harman.roomdbapp.app.other.MathUtils
 import com.harman.roomdbapp.app.other.NUMBER_VALUE
+
 
 class RandomNumberDescription : Fragment() {
 
@@ -31,6 +36,11 @@ class RandomNumberDescription : Fragment() {
         binding = FragmentRandomNumberDescriptionBinding.inflate(inflater, container, false)
 
         val numberIsEven = MathUtils.isNumberEven(numberValue)
+
+        binding.ivShareBtn.setOnClickListener {
+            val bitmap = getBitMapFromView(it)
+            Log.e("TAG", "onCreateView: ${bitmap != null}")
+        }
 
         binding.tvNumberValue.text = resources.getString(R.string.number, numberValue)
         binding.tvNumberDescription.text =
@@ -62,4 +72,12 @@ class RandomNumberDescription : Fragment() {
                 }
             }
     }
+
+    fun getBitMapFromView(view: View): Bitmap? {
+        val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        view.draw(canvas)
+        return bitmap
+    }
+
 }
