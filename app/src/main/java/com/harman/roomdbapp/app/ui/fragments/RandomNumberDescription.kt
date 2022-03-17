@@ -41,11 +41,11 @@ class RandomNumberDescription : Fragment() {
 
     private val externalLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-            when {
-                it -> binding.ivShareBtn.callOnClick()
-                !shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE) -> permissionDeniedDialog.show()
-            }
+            if (it) binding.ivShareBtn.callOnClick()
+            else if (!shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) permissionDeniedDialog.show()
+
         }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
