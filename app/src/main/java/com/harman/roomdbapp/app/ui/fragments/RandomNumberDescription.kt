@@ -1,8 +1,10 @@
 package com.harman.roomdbapp.app.ui.fragments
 
+import android.Manifest
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.net.Uri
@@ -11,6 +13,8 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.databinding.FragmentRandomNumberDescriptionBinding
@@ -23,6 +27,8 @@ import java.util.UUID
 class RandomNumberDescription : Fragment() {
 
     private var numberValue: Int = 0
+
+    private val externalLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {}
 
     private lateinit var binding: FragmentRandomNumberDescriptionBinding
 
@@ -43,15 +49,17 @@ class RandomNumberDescription : Fragment() {
         val numberIsEven = MathUtils.isNumberEven(numberValue)
 
         binding.ivShareBtn.setOnClickListener {
-            val bitmap = getBitMapFromView(binding.llNumberContainer)
-            bitmap?.let {
-                val uri = getUriFromBitmap(bitmap, requireContext())
-                val sendImageIntent = Intent().apply {
-                    action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_STREAM, uri)
-                    type = "image/png"
+            executeWithPerm {
+                val bitmap = getBitMapFromView(binding.llNumberContainer)
+                bitmap?.let {
+                    val uri = getUriFromBitmap(bitmap, requireContext())
+                    val sendImageIntent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_STREAM, uri)
+                        type = "image/png"
+                    }
+                    startActivity(sendImageIntent)
                 }
-                startActivity(sendImageIntent)
             }
         }
 
@@ -111,5 +119,16 @@ class RandomNumberDescription : Fragment() {
                 throw IOException("Couldn't share file")
         }
         return uri
+    }
+
+    private fun executeWithPerm(code: () -> Unit) {
+        val isPermissionGranted =
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED
+
+        if (isPermissionGranted) return code()
+        else externalLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     }
 }
