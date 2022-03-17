@@ -28,7 +28,9 @@ class RandomNumberDescription : Fragment() {
 
     private var numberValue: Int = 0
 
-    private val externalLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {}
+    private val externalLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+        binding.ivShareBtn.callOnClick()
+    }
 
     private lateinit var binding: FragmentRandomNumberDescriptionBinding
 
