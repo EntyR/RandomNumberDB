@@ -1,6 +1,7 @@
 package com.harman.roomdbapp.app.ui.fragments
 
 import android.Manifest
+import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
@@ -10,6 +11,7 @@ import android.graphics.Canvas
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +22,7 @@ import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.databinding.FragmentRandomNumberDescriptionBinding
 import com.harman.roomdbapp.app.other.MathUtils
 import com.harman.roomdbapp.app.other.NUMBER_VALUE
+import com.harman.roomdbapp.app.other.SettingContract
 import com.harman.roomdbapp.app.other.runOnSdk29orUp
 import java.io.IOException
 import java.util.UUID
@@ -28,11 +31,21 @@ class RandomNumberDescription : Fragment() {
 
     private var numberValue: Int = 0
 
-    private val externalLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-        if(it)  binding.ivShareBtn.callOnClick()
+    private lateinit var binding: FragmentRandomNumberDescriptionBinding
+
+    private var readActivityLauncher = registerForActivityResult(SettingContract()) {
+        binding.ivShareBtn.performClick()
     }
 
-    private lateinit var binding: FragmentRandomNumberDescriptionBinding
+    lateinit var permissionDeniedDialog: AlertDialog.Builder
+
+    private val externalLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+            when {
+                it -> binding.ivShareBtn.callOnClick()
+                !shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE) -> permissionDeniedDialog.show()
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +62,13 @@ class RandomNumberDescription : Fragment() {
         binding = FragmentRandomNumberDescriptionBinding.inflate(inflater, container, false)
 
         val numberIsEven = MathUtils.isNumberEven(numberValue)
+
+        permissionDeniedDialog = AlertDialog.Builder(requireContext())
+            .setTitle("External storage permission")
+            .setMessage("You denied permission too much time please go to setting and set it manually")
+            .setPositiveButton("Continue") { _, _ ->
+                readActivityLauncher.launch(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+            }
 
         binding.ivShareBtn.setOnClickListener {
             executeWithPerm {
