@@ -7,6 +7,14 @@ plugins {
 
 android {
 
+    signingConfigs {
+        debug {
+            storeFile file('C:\\Users\\andrzakharov\\key\\keystore.jks')
+            storePassword '852456'
+            keyPassword '852456'
+            keyAlias 'key'
+        }
+    }
     compileSdk 31
 
     defaultConfig {
@@ -26,6 +34,11 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.debug
+        }
     }
 }
 
