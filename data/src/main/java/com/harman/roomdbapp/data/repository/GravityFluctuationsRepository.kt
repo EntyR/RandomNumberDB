@@ -10,8 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 class GravityFluctuationsRepository(
     private val fluctuationDao: IFluctuationDao,
     private val gravitySensor: GravitySensorDataSource
-) :
-    IGravityFluctuationsRepository {
+) : IGravityFluctuationsRepository {
 
     override suspend fun getGravityFluctuationsRecord(): StateFlow<List<Float>> {
         val list = gravitySensor.getCensorEventsFlow().value

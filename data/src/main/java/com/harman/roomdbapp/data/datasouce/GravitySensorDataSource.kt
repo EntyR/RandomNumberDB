@@ -19,7 +19,7 @@ class GravitySensorDataSource(val context: Context) : IGravityCensorDataSource {
 
     private val fluctuationsFlow: MutableStateFlow<List<GravityValue>> =
         MutableStateFlow(emptyList())
-    val scope = CoroutineScope(Dispatchers.Default)
+    private val scope = CoroutineScope(Dispatchers.Default)
 
     init {
         sensorManager.registerListener(
