@@ -2,12 +2,11 @@ package com.harman.roomdbapp.domain.repository
 
 import kotlinx.coroutines.flow.Flow
 
-
 interface IGravityFluctuationsRepository {
 
-    fun getGravityFluctuationsRecord(): Flow<List<Int>>
+    suspend fun getGravityFluctuationsRecord(): Flow<List<Float>>
 
-    fun addGravityRecord(fluctuation: Int)
+    suspend fun saveRecordSessionData()
 
-    fun updateDb()
+    suspend fun getFluctuationsPreviousSessionRecord(): List<Float>
 }

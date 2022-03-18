@@ -1,21 +1,19 @@
 package com.harman.roomdbapp.domain.use_cases
 
-import com.harman.roomdbapp.domain.model.GravityValue
 import com.harman.roomdbapp.domain.repository.IGravityFluctuationsRepository
 import kotlinx.coroutines.flow.Flow
 
 class GravityFluctuationUseCase(private val repository: IGravityFluctuationsRepository) {
 
-    fun addFluctuationRecord(previousValue: GravityValue, currentValue: GravityValue) {
-        repository.addGravityRecord(currentValue.getFluctuation(previousValue))
+    suspend fun getPreviousRecord(): List<Float> {
+        return repository.getFluctuationsPreviousSessionRecord()
     }
 
-    fun getFluctuationsRecord(): Flow<List<Int>> {
+    suspend fun getFluctuationsRecord(): Flow<List<Float>> {
         return repository.getGravityFluctuationsRecord()
     }
 
-    fun updateDb() {
-        repository.updateDb()
+    suspend fun updateDb() {
+        repository.saveRecordSessionData()
     }
-
 }
