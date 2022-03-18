@@ -35,7 +35,7 @@ class GravitySensorDataSource(val context: Context) : IGravityCensorDataSource {
                         scope.launch(Dispatchers.Default) {
                             val list = fluctuationsFlow.value.toMutableList()
                             list.add(gravValue)
-                            fluctuationsFlow.emit(list)
+                            fluctuationsFlow.value = list
                         }
                     }
                 }
