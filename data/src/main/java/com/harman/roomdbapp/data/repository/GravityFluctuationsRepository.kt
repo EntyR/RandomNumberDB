@@ -13,7 +13,7 @@ class GravityFluctuationsRepository(
     private val gravitySensor: GravitySensorDataSource
 ) : IGravityFluctuationsRepository {
 
-    val stateFlow = MutableStateFlow<List<Float>>(emptyList())
+    private val stateFlow = MutableStateFlow<List<Float>>(emptyList())
 
     //TODO Not sure this method will work
 
