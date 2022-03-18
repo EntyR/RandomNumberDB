@@ -30,7 +30,6 @@ class RandomNumberAddItem : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-
         binding = FragmentRandomNumberAddItemBinding.inflate(inflater, container, false)
 
         viewModel.switchState(binding.etEnterNumber.text.toString())
@@ -100,7 +99,6 @@ class RandomNumberAddItem : Fragment() {
 
         return binding.root
     }
-
 
     private fun hideKB(view: View) {
         val manager: InputMethodManager =

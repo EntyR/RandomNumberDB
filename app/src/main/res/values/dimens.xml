@@ -74,6 +74,9 @@
     <dimen name="or_text_margin_bottom">4dp</dimen>
     <dimen name="rounded_btn_shape_shadow_padding">3dp</dimen>
     <dimen name="cursor_width">1dp</dimen>
+    <dimen name="circle_button_radius">240dp</dimen>
+    <dimen name="share_btn_size">120dp</dimen>
+    <dimen name="share_btn_padding">33dp</dimen>
     <item name="fullscreen_shade_angle" format="float" type="integer">90</item>
 
 

@@ -12,4 +12,5 @@
     <string name="add_number">Add Number</string>
     <string name="or">or</string>
     <string name="enter_your_number">Add a new number…</string>
+    <string name="share_button" translatable="false">Share button</string>
 </resources>
