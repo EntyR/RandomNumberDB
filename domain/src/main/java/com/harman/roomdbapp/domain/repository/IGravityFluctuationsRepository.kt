@@ -6,7 +6,7 @@ interface IGravityFluctuationsRepository {
 
     suspend fun getGravityFluctuationsRecord(): Flow<List<Float>>
 
-    suspend fun saveRecordSessionData()
+    suspend fun saveRecordSessionData(data: List<Float>)
 
     suspend fun getFluctuationsPreviousSessionRecord(): List<Float>
 }

@@ -21,15 +21,17 @@ class GravityFluctuationsRepository(
         }
     }
 
-    override suspend fun saveRecordSessionData() {
-        fluctuationDao.addGravityFluctuationsRecord(
-            getGravityFluctuationsRecord().first().map {
+    override suspend fun saveRecordSessionData(data: List<Float>) {
+        fluctuationDao.replaceGravityFluctuationsRecord(
+            data.map {
                 FluctuationEntity(
                     record = it
                 )
             }
         )
     }
+
+
 
     override suspend fun getFluctuationsPreviousSessionRecord(): List<Float> {
         return fluctuationDao.getGravityFluctuationsRecord().map {

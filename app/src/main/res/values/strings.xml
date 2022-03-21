@@ -13,8 +13,8 @@
     <string name="or">or</string>
     <string name="enter_your_number">Add a new number…</string>
     <string name="share_button" translatable="false">Share button</string>
-    <string name="censor_notification_channel_name" translatable="false">censor_notification</string>
-    <string name="censor_notification_description" >Gravity fluctuation currently is ON</string>
-    <string name="censor_notification_tittle">Recording gravity fluctuation</string>
+    <string name="sensor_notification_channel_name" translatable="false">censor_notification</string>
+    <string name="sensor_notification_description" >Gravity fluctuation currently is ON</string>
+    <string name="sensor_notification_tittle">Recording gravity fluctuation</string>
 
 </resources>

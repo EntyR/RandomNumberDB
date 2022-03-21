@@ -1,16 +1,27 @@
 package com.harman.roomdbapp.data.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.harman.roomdbapp.data.enity.FluctuationEntity
 
 @Dao
-interface IFluctuationDao {
+abstract class IFluctuationDao {
+
+    @Transaction
+    suspend fun replaceGravityFluctuationsRecord(records: List<FluctuationEntity>){
+        deleteAllItems()
+        insertNewItems(records)
+    }
 
     @Insert
-    suspend fun addGravityFluctuationsRecord(records: List<FluctuationEntity>)
+    abstract fun insertNewItems(list: List<FluctuationEntity>)
 
     @Query("SELECT * from FluctuationEntity")
-    suspend fun getGravityFluctuationsRecord(): List<FluctuationEntity>
+    abstract suspend fun getGravityFluctuationsRecord(): List<FluctuationEntity>
+
+    @Query("DELETE from FluctuationEntity")
+    abstract suspend fun  deleteAllItems()
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract suspend fun addNewRecord(record: FluctuationEntity)
+
 }
