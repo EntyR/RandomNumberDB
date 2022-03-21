@@ -4,7 +4,9 @@ import com.harman.roomdbapp.data.dao.IFluctuationDao
 import com.harman.roomdbapp.data.datasouce.GravitySensorDataSource
 import com.harman.roomdbapp.data.enity.FluctuationEntity
 import com.harman.roomdbapp.domain.repository.IGravityFluctuationsRepository
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 
 class GravityFluctuationsRepository(
     private val fluctuationDao: IFluctuationDao,
@@ -12,10 +14,9 @@ class GravityFluctuationsRepository(
 ) : IGravityFluctuationsRepository {
 
 
-    //TODO Not sure this method will work
 
     override suspend fun getGravityFluctuationsRecord(): Flow<List<Float>> {
-        return gravitySensor.getCensorEventsFlow().map {
+        return gravitySensor.getCensorFlow().map {
             val newList: MutableList<Float> = mutableListOf()
             it.onEachIndexed { index, gravityValue ->
                 if (index == 0) return@onEachIndexed
