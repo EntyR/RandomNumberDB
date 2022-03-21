@@ -11,5 +11,4 @@ abstract class RandomNumberDataBase : RoomDatabase() {
     abstract fun randomNumberDao(): IRandomNumberDao
 
     abstract fun fluctuationDao(): IRandomNumberDao
-
 }

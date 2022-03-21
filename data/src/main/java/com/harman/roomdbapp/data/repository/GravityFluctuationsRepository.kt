@@ -13,17 +13,11 @@ class GravityFluctuationsRepository(
     private val gravitySensor: GravitySensorDataSource
 ) : IGravityFluctuationsRepository {
 
-
-
     override suspend fun getGravityFluctuationsRecord(): Flow<List<Float>> {
         return gravitySensor.getCensorFlow().map {
-            val newList: MutableList<Float> = mutableListOf()
-            it.onEachIndexed { index, gravityValue ->
-                if (index == 0) return@onEachIndexed
-                newList.add(gravityValue.getFluctuation(it[index - 1]))
+            it.map { gravity ->
+                gravity.getFluctuation()
             }
-
-            newList
         }
     }
 
