@@ -7,9 +7,7 @@ data class GravityValue(
     val y: Float,
     val z: Float
 ) {
-    fun getFluctuation(previousValue: GravityValue): Float {
-        return abs(previousValue.x - x) +
-            abs(previousValue.y - y) +
-            abs(previousValue.z - z)
+    fun getFluctuation(): Float {
+        return abs(x) + abs(y) + abs(z)
     }
 }
