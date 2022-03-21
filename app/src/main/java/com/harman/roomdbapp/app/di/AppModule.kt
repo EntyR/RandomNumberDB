@@ -21,7 +21,7 @@ fun providesDatabase(application: Application): RandomNumberDataBase {
 }
 
 fun providesRandomNumberDao(database: RandomNumberDataBase): IRandomNumberDao {
-    return database.getDao()
+    return database.randomNumberDao()
 }
 
 val dataBaseModule = module {
