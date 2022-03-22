@@ -16,19 +16,16 @@ class GravitySensorDataSource(val context: Context) : IGravityCensorDataSource {
 
     override suspend fun getCensorFlow() = callbackFlow {
 
-        val list: MutableList<GravityValue> = mutableListOf()
-
         val listener = object : SensorEventListener {
             override fun onSensorChanged(event: SensorEvent?) {
                 val value = event?.values
                 value?.let { vector ->
                     val gravValue = GravityValue(
-                        value[0],
-                        value[1],
-                        value[2]
+                        vector[0],
+                        vector[1],
+                        vector[2]
                     )
-                    list.add(gravValue)
-                    trySend(list)
+                    trySend(gravValue)
                 }
             }
 

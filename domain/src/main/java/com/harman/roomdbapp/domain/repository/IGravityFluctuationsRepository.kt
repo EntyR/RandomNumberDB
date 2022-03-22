@@ -4,9 +4,11 @@ import kotlinx.coroutines.flow.Flow
 
 interface IGravityFluctuationsRepository {
 
-    suspend fun getGravityFluctuationsRecord(): Flow<List<Float>>
+    suspend fun getGravityFluctuationsRecord(): Flow<Float>
 
-    suspend fun saveRecordSessionData(data: List<Float>)
+    suspend fun saveRecordsSessionData(data: List<Float>)
 
-    suspend fun getFluctuationsPreviousSessionRecord(): List<Float>
+    suspend fun saveOneRecord(record: Float)
+
+    suspend fun deletePreviousRecords()
 }

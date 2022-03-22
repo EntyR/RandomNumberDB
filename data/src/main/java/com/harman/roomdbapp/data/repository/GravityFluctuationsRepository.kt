@@ -5,7 +5,6 @@ import com.harman.roomdbapp.data.datasouce.GravitySensorDataSource
 import com.harman.roomdbapp.data.enity.FluctuationEntity
 import com.harman.roomdbapp.domain.repository.IGravityFluctuationsRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
 class GravityFluctuationsRepository(
@@ -13,16 +12,14 @@ class GravityFluctuationsRepository(
     private val gravitySensor: GravitySensorDataSource
 ) : IGravityFluctuationsRepository {
 
-    override suspend fun getGravityFluctuationsRecord(): Flow<List<Float>> {
-        return gravitySensor.getCensorFlow().map {
-            it.map { gravity ->
-                gravity.getFluctuation()
-            }
+    override suspend fun getGravityFluctuationsRecord(): Flow<Float> {
+        return gravitySensor.getCensorFlow().map { gravity ->
+            gravity.getFluctuation()
         }
     }
 
-    override suspend fun saveRecordSessionData(data: List<Float>) {
-        fluctuationDao.replaceGravityFluctuationsRecord(
+    override suspend fun saveRecordsSessionData(data: List<Float>) {
+        fluctuationDao.insertNewItems(
             data.map {
                 FluctuationEntity(
                     record = it
@@ -31,11 +28,13 @@ class GravityFluctuationsRepository(
         )
     }
 
+    override suspend fun saveOneRecord(record: Float) {
+        fluctuationDao.addNewRecord(
+            FluctuationEntity(record = record)
+        )
+    }
 
-
-    override suspend fun getFluctuationsPreviousSessionRecord(): List<Float> {
-        return fluctuationDao.getGravityFluctuationsRecord().map {
-            it.record
-        }
+    override suspend fun deletePreviousRecords() {
+        fluctuationDao.deleteAllItems()
     }
 }

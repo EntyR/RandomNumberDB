@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface IGravityCensorDataSource {
 
-    suspend fun getCensorFlow(): Flow<List<GravityValue>>
+    suspend fun getCensorFlow(): Flow<GravityValue>
 }

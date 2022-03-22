@@ -5,15 +5,21 @@ import kotlinx.coroutines.flow.Flow
 
 class GravityFluctuationUseCase(private val repository: IGravityFluctuationsRepository) {
 
-    suspend fun getPreviousRecord(): List<Float> {
-        return repository.getFluctuationsPreviousSessionRecord()
-    }
 
-    suspend fun getFluctuationsRecord(): Flow<List<Float>> {
+
+    suspend fun getFluctuationsRecord(): Flow<Float> {
         return repository.getGravityFluctuationsRecord()
     }
 
-    suspend fun updateDb() {
-        repository.saveRecordSessionData()
+    suspend fun addNewItem(float: Float){
+        repository.saveOneRecord(float)
+    }
+
+    suspend fun deletePreviousValue(){
+        repository.deletePreviousRecords()
+    }
+
+    suspend fun addNewList(list: List<Float>){
+        repository.saveRecordsSessionData(list)
     }
 }
