@@ -42,7 +42,7 @@ val dataBaseModule = module {
 
 val dataModule = module {
     single<IRandomNumberRepository> { RandomNumberRepository(get()) }
-    single<IGravitySensorDataSource> { GravitySensorDataSource(androidContext())}
+    single<IGravitySensorDataSource> { GravitySensorDataSource(androidContext()) }
     single<IGravityFluctuationsRepository> { GravityFluctuationsRepository(get(), get()) }
 }
 
@@ -55,5 +55,3 @@ val viewModelModule = module {
     viewModel { NumberListViewModel(get()) }
     viewModel { AddNumberViewModel(get(), get()) }
 }
-
-
