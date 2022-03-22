@@ -5,12 +5,12 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import com.harman.roomdbapp.domain.datasource.IGravityCensorDataSource
+import com.harman.roomdbapp.domain.datasource.IGravitySensorDataSource
 import com.harman.roomdbapp.domain.model.GravityValue
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 
-class GravitySensorDataSource(val context: Context) : IGravityCensorDataSource {
+class GravitySensorDataSource(val context: Context) : IGravitySensorDataSource {
     private val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
     private val sensor: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY)
 
