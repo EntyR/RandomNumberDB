@@ -1,6 +1,7 @@
 package com.harman.roomdbapp.domain.model
 
-import kotlin.math.abs
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 data class GravityValue(
     val x: Float,
@@ -8,6 +9,6 @@ data class GravityValue(
     val z: Float
 ) {
     fun getFluctuation(): Float {
-        return abs(x) + abs(y) + abs(z)
+        return sqrt(x.pow(2) + y.pow(2) + x.pow(2))
     }
 }

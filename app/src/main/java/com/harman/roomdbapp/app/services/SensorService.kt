@@ -7,10 +7,9 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import com.harman.roomdbapp.app.R
@@ -18,16 +17,14 @@ import com.harman.roomdbapp.app.other.SENSOR_CHANNEL_ID
 import com.harman.roomdbapp.app.ui.MainActivity
 import com.harman.roomdbapp.domain.use_cases.GravityFluctuationUseCase
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 class SensorService : LifecycleService() {
 
-    private val useCase: GravityFluctuationUseCase by inject()
+    private val gravityFluctuationUseCase: GravityFluctuationUseCase by inject()
 
     private val dispatcher: CoroutineDispatcher by inject()
-
-    private val _liveData = MutableLiveData<List<Float>>()
-    private val liveData: LiveData<List<Float>> = _liveData
 
     override fun onCreate() {
         super.onCreate()
@@ -55,40 +52,20 @@ class SensorService : LifecycleService() {
         startForeground(1, notification.build())
 
         lifecycleScope.launchWhenCreated {
-            useCase.deletePreviousValue()
+            gravityFluctuationUseCase.deletePreviousValue()
         }
 
-        startGravityCensorObserving()
-        liveData.observe(this, { list ->
-
-            if (list.size >= 10) {
-                stopSelf()
-            } else {
-                val previousList = liveData.value
-                val newValue = previousList?.singleOrNull {
-                    !list.contains(it)
-                }
-                newValue?.let {
-                    lifecycleScope.launchWhenCreated {
-                        useCase.addNewItem(it)
-                    }
-                }
+        gravityFluctuationUseCase.getFluctuationsRecord().asLiveData().observe(this){ value ->
+            Log.d("TAG", "Sensor event: $value")
+            lifecycleScope.launch(dispatcher){
+                gravityFluctuationUseCase.addNewItem(value)
             }
-        })
+        }
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
 
         return START_STICKY
-    }
-
-    private fun startGravityCensorObserving() {
-        useCase.getFluctuationsRecord().asLiveData()
-            .observe(this@SensorService, { value ->
-                _liveData.value = liveData.value?.toMutableList()?.apply {
-                    add(value)
-                } ?: mutableListOf()
-            })
     }
 }
