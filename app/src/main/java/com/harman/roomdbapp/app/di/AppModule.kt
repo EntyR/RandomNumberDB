@@ -22,8 +22,10 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
+//TODO Add proper migration for release version
 fun providesDatabase(application: Application): RandomNumberDataBase {
     return Room.databaseBuilder(application, RandomNumberDataBase::class.java, DATABASE_NAME)
+        .fallbackToDestructiveMigration()
         .build()
 }
 
