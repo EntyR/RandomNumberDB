@@ -11,14 +11,13 @@ import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.other.SENSOR_CHANNEL_ID
 import com.harman.roomdbapp.app.ui.MainActivity
 import com.harman.roomdbapp.domain.use_cases.GravityFluctuationUseCase
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 class SensorService : LifecycleService() {
@@ -32,8 +31,6 @@ class SensorService : LifecycleService() {
 
     override fun onCreate() {
         super.onCreate()
-
-
 
         val onPressIntent = Intent(this, MainActivity::class.java)
         val pendingIntent =
@@ -86,13 +83,12 @@ class SensorService : LifecycleService() {
         return START_STICKY
     }
 
-    private fun startGravityCensorObserving() = lifecycleScope.launch(dispatcher) {
-        useCase.getFluctuationsRecord()
-            .collect { value ->
-
+    private fun startGravityCensorObserving() {
+        useCase.getFluctuationsRecord().asLiveData()
+            .observe(this@SensorService, { value ->
                 _liveData.value = liveData.value?.toMutableList()?.apply {
                     add(value)
-                }
-            }
+                } ?: mutableListOf()
+            })
     }
 }
