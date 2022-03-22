@@ -14,7 +14,7 @@ class GravitySensorDataSource(val context: Context) : IGravitySensorDataSource {
     private val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
     private val sensor: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY)
 
-    override suspend fun getCensorFlow() = callbackFlow {
+    override fun getSensorFlow() = callbackFlow {
 
         val listener = object : SensorEventListener {
             override fun onSensorChanged(event: SensorEvent?) {

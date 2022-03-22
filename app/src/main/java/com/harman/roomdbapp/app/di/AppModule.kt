@@ -14,6 +14,7 @@ import com.harman.roomdbapp.data.repository.RandomNumberRepository
 import com.harman.roomdbapp.domain.datasource.IGravitySensorDataSource
 import com.harman.roomdbapp.domain.repository.IGravityFluctuationsRepository
 import com.harman.roomdbapp.domain.repository.IRandomNumberRepository
+import com.harman.roomdbapp.domain.use_cases.GravityFluctuationUseCase
 import com.harman.roomdbapp.domain.use_cases.RandomNumberUseCase
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidApplication
@@ -48,6 +49,7 @@ val dataModule = module {
 
 val useCaseModule = module {
     factory { RandomNumberUseCase(get()) }
+    factory { GravityFluctuationUseCase(get()) }
 }
 
 val viewModelModule = module {
