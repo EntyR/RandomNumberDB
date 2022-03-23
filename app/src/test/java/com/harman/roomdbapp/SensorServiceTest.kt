@@ -1,7 +1,8 @@
 package com.harman.roomdbapp
 
+import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
+import androidx.core.app.NotificationCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleRegistry
 import com.google.common.truth.Truth
@@ -11,38 +12,70 @@ import com.harman.roomdbapp.extension.InstantExecutorExtension
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
-import kotlinx.coroutines.CoroutineDispatcher
+import io.mockk.mockkConstructor
+import io.mockk.mockkStatic
+import io.mockk.spyk
+import io.mockk.unmockkConstructor
+import io.mockk.unmockkStatic
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
 import org.koin.dsl.module
-
+import org.koin.test.KoinTest
 
 @ExtendWith(InstantExecutorExtension::class)
-class SensorServiceTest {
+class SensorServiceTest : KoinTest {
 
-    lateinit var useCase: GravityFluctuationUseCase
-    lateinit var service: SensorService
-    val dispatcher = TestCoroutineDispatcher()
+    private lateinit var useCase: GravityFluctuationUseCase
+    private lateinit var service: SensorService
+    private val dispatcher = TestCoroutineDispatcher()
 
     @BeforeEach
     fun setUp() {
-
+        val context: Context = mockk(relaxed = true) {
+            every { applicationContext } returns this
+        }
         useCase = mockk(relaxed = true)
-        service = mockk()
 
         startKoin {
             modules(
                 module {
                     single { useCase }
-                    single<CoroutineDispatcher> { dispatcher }
+                    single { Dispatchers.Default }
                 }
             )
         }
+        val lifecycle = LifecycleRegistry(mockk(relaxed = true))
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+        service = spyk(SensorService())
+        every { service.lifecycle } returns lifecycle
 
+        val notificationService: android.app.NotificationManager = mockk(relaxed = true)
+        mockkStatic(PendingIntent::class)
+        every { PendingIntent.getActivity(any(), any(), any(), any()) } returns mockk()
+        mockkConstructor(NotificationCompat.Builder::class)
+        every { anyConstructed<NotificationCompat.Builder>().build() } returns mockk(relaxed = true)
+
+        every { service.applicationContext } returns context
+        every { service.getSystemService(Context.NOTIFICATION_SERVICE) } returns notificationService
+        every { service.packageManager } returns mockk(relaxed = true)
+        Dispatchers.setMain(dispatcher)
+    }
+
+    @AfterEach
+    fun tearDown() {
+        stopKoin()
+        unmockkConstructor(NotificationCompat.Builder::class)
+        unmockkStatic(PendingIntent::class)
+        Dispatchers.resetMain()
     }
 
     @Test
@@ -51,13 +84,6 @@ class SensorServiceTest {
         val initFlow = flowOf(initVal)
         val resultList = mutableListOf<Float>()
         coEvery { useCase.getFluctuationsRecord() } returns initFlow
-
-        val lifecycle = LifecycleRegistry(mockk(relaxed = true))
-        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
-        every { service.lifecycle } returns lifecycle
-        every { service.onCreate() } answers {
-            callOriginal()
-        }
         coEvery { useCase.addNewItem(initVal) }.answers {
             resultList.add(initVal)
         }
