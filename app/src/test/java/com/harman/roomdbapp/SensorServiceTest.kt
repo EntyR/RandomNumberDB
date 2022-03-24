@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleRegistry
+import androidx.lifecycle.LifecycleService
 import com.google.common.truth.Truth
 import com.harman.roomdbapp.app.services.SensorService
 import com.harman.roomdbapp.domain.use_cases.GravityFluctuationUseCase
@@ -53,20 +54,22 @@ class SensorServiceTest : KoinTest {
                 }
             )
         }
+        val notificationService: android.app.NotificationManager = mockk(relaxed = true)
         val lifecycle = LifecycleRegistry(mockk(relaxed = true))
         lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
-        service = spyk(SensorService())
-        every { service.lifecycle } returns lifecycle
+        service = spyk(SensorService()){
+            every { applicationContext } returns context
+            every { this@spyk.lifecycle } returns lifecycle
+            every { getSystemService(Context.NOTIFICATION_SERVICE) } returns notificationService
+            every { packageManager } returns mockk(relaxed = true)
+        }
 
-        val notificationService: android.app.NotificationManager = mockk(relaxed = true)
         mockkStatic(PendingIntent::class)
-        every { PendingIntent.getActivity(any(), any(), any(), any()) } returns mockk()
+        every { PendingIntent.getActivity(any(), any(), any(), any()) } returns mockk(relaxed = true)
+
         mockkConstructor(NotificationCompat.Builder::class)
         every { anyConstructed<NotificationCompat.Builder>().build() } returns mockk(relaxed = true)
 
-        every { service.applicationContext } returns context
-        every { service.getSystemService(Context.NOTIFICATION_SERVICE) } returns notificationService
-        every { service.packageManager } returns mockk(relaxed = true)
         Dispatchers.setMain(dispatcher)
     }
 
