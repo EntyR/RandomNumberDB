@@ -19,8 +19,9 @@ import com.harman.roomdbapp.domain.use_cases.GravityFluctuationUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import org.koin.core.component.KoinComponent
 
-class SensorService : LifecycleService() {
+class SensorService : LifecycleService(), KoinComponent {
 
     private val gravityFluctuationUseCase: GravityFluctuationUseCase by inject()
 
