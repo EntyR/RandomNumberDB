@@ -35,10 +35,10 @@ class RandomNumberDBTest {
     fun verify_if_number_was_added_and_can_be_received_from_database() = runBlocking {
         val numbers = listOf(RandomNumberEntity(0, 1))
         numbers.forEach {
-            db.getDao().addNumber(it)
+            db.randomNumberDao().addNumber(it)
         }
         val events = mutableListOf<RandomNumberEntity>()
-        db.getDao().getAllNumbers().first().forEach {
+        db.randomNumberDao().getAllNumbers().first().forEach {
             events.add(it)
         }
         Truth.assertThat(events.size).isEqualTo(numbers.size)
@@ -49,12 +49,12 @@ class RandomNumberDBTest {
 
     @Test(expected = Test.None::class)
     fun verify_if_flow_can_be_received_from_database_without_exception() {
-        db.getDao().getAllNumbers()
+        db.randomNumberDao().getAllNumbers()
     }
 
     @Test(expected = Test.None::class)
     fun verify_if_number_can_be_inserted_into_database_without_exception() = runBlocking {
         val number = RandomNumberEntity(0, 1)
-        db.getDao().addNumber(number)
+        db.randomNumberDao().addNumber(number)
     }
 }

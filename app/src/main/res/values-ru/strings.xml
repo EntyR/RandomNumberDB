@@ -9,4 +9,7 @@
     <string name="add_number">Добавить число</string>
     <string name="or">или</string>
     <string name="enter_your_number">Добавить новое число…</string>
+    <string name="sensor_notification_description" >Идет измерение колебания гравитации</string>
+    <string name="sensor_notification_tittle">Запись колебания гравитации</string>
+
 </resources>
