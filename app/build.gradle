@@ -19,6 +19,20 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        release {
+            storePassword '852456'
+            keyAlias 'key'
+            keyPassword '852456'
+            storeFile file('C:\\Users\\andrzakharov\\key\\keystore.jks')
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+
     buildFeatures {
         viewBinding true
     }
