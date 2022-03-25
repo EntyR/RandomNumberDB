@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.harman.roomdbapp.data.dao.IRandomNumberDao
 import com.harman.roomdbapp.data.enity.RandomNumberEntity
 
-@Database(entities = [RandomNumberEntity::class], version = 1)
+@Database(entities = [RandomNumberEntity::class], version = 2)
 abstract class RandomNumberDataBase : RoomDatabase() {
     abstract fun getDao(): IRandomNumberDao
 }

@@ -13,4 +13,5 @@
     <string name="or">or</string>
     <string name="enter_your_number">Add a new number…</string>
     <string name="share_button" translatable="false">Share button</string>
+    <string name="record_gravity_fluctuation">Запись колебаний гравитации</string>
 </resources>

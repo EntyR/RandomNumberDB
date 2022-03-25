@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/clWidget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/widget_shape"
+        android:orientation="vertical"
+        android:paddingEnd="110dp"
+        android:paddingBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry">
+
+        <ImageView
+            android:id="@+id/ivWidgetImage"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:adjustViewBounds="true"
+
+            tools:srcCompat="@drawable/grav_widget" />
+
+        <TextView
+            android:id="@+id/tvWedgetName"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:breakStrategy="high_quality"
+            android:fontFamily="@font/roboto_medium"
+            android:lines="3"
+            android:text="@string/record_gravity_fluctuation"
+            android:textColor="#000000"
+            android:textSize="20sp"
+
+            />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

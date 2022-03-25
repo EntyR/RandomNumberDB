@@ -8,7 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.adapters.NumberListAdapter
+import com.harman.roomdbapp.app.adapters.WidgetAdapter
+import com.harman.roomdbapp.app.adapters.layout_managers.CenterZoomLayoutManager
 import com.harman.roomdbapp.app.databinding.FragmentRandomNumbersListBinding
+import com.harman.roomdbapp.app.other.FakeRepository
 import com.harman.roomdbapp.app.ui.viewmodel.NumberListViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -27,17 +30,25 @@ class RandomNumbersList : Fragment() {
         binding = FragmentRandomNumbersListBinding.inflate(inflater, container, false)
 
         // Setting up adapter and layout manager
-        val adapter = NumberListAdapter(requireContext()) {
+        val randomNumberAdapter = NumberListAdapter(requireContext()) {
             val fragment = RandomNumberDescription.newInstance(it)
             navigateTo(fragment, "go_to_description")
         }
-        binding.rvNumberList.adapter = adapter
+        binding.rvNumberList.adapter = randomNumberAdapter
         binding.rvNumberList.layoutManager = LinearLayoutManager(requireContext())
 
         binding.fabNewItem.setOnClickListener {
             val fragment = RandomNumberAddItem.newInstance()
             navigateTo(fragment, "go_to_new_number_creation")
         }
+        val widgetAdapter = WidgetAdapter()
+
+        binding.rvWidgetList.apply {
+            layoutManager = CenterZoomLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL)
+            adapter = widgetAdapter
+        }
+
+        widgetAdapter.submitList(FakeRepository.repository)
 
         viewModel.getNumbers().observe(viewLifecycleOwner) {
             // make empty list text notification visible if list if empty
@@ -49,7 +60,7 @@ class RandomNumbersList : Fragment() {
                 binding.rvNumberList.visibility = View.VISIBLE
             }
 
-            adapter.submitList(it)
+            randomNumberAdapter.submitList(it)
         }
 
         return binding.root
