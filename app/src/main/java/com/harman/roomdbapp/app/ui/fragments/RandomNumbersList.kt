@@ -14,6 +14,7 @@ import com.harman.roomdbapp.app.adapters.NumberListAdapter
 import com.harman.roomdbapp.app.adapters.WidgetAdapter
 import com.harman.roomdbapp.app.adapters.layout_managers.CenterZoomLayoutManager
 import com.harman.roomdbapp.app.databinding.FragmentRandomNumbersListBinding
+import com.harman.roomdbapp.app.model.Widget
 import com.harman.roomdbapp.app.other.FakeRepository
 import com.harman.roomdbapp.app.ui.viewmodel.NumberListViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -56,13 +57,10 @@ class RandomNumbersList : Fragment() {
                 layoutManager = lManager
                 adapter = widgetAdapter
             }
-            widgetAdapter.submitList(FakeRepository.repository)
+            widgetAdapter.submitList(listOf(Widget(getString(R.string.record_gravity_fluctuation), R.drawable.grav_widget)))
         }
 
-        binding.rvWidgetList.doOnPreDraw {
-//            binding.rvWidgetList.smoothScrollToPosition( 0)
 
-        }
 
 
 

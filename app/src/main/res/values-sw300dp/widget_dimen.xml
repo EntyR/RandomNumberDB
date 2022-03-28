@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="widget_text_size">13sp</dimen>
+    <dimen name="image_width">55dp</dimen>
+    <dimen name="text_view_width">100dp</dimen>
+</resources>
