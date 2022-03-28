@@ -1,11 +1,9 @@
 package com.harman.roomdbapp.app.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
@@ -15,7 +13,6 @@ import com.harman.roomdbapp.app.adapters.WidgetAdapter
 import com.harman.roomdbapp.app.adapters.layout_managers.CenterZoomLayoutManager
 import com.harman.roomdbapp.app.databinding.FragmentRandomNumbersListBinding
 import com.harman.roomdbapp.app.model.Widget
-import com.harman.roomdbapp.app.other.FakeRepository
 import com.harman.roomdbapp.app.ui.viewmodel.NumberListViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -46,8 +43,6 @@ class RandomNumbersList : Fragment() {
             navigateTo(fragment, "go_to_new_number_creation")
         }
 
-
-
         binding.rvWidgetList.post {
             val snapHelper = LinearSnapHelper()
             val lManager = CenterZoomLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL)
@@ -59,13 +54,6 @@ class RandomNumbersList : Fragment() {
             }
             widgetAdapter.submitList(listOf(Widget(getString(R.string.record_gravity_fluctuation), R.drawable.grav_widget)))
         }
-
-
-
-
-
-
-
 
         viewModel.getNumbers().observe(viewLifecycleOwner) {
             // make empty list text notification visible if list if empty

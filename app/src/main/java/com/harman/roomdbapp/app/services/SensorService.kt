@@ -56,9 +56,9 @@ class SensorService : LifecycleService(), KoinComponent {
             gravityFluctuationUseCase.deletePreviousValue()
         }
 
-        gravityFluctuationUseCase.getFluctuationsRecord().asLiveData().observe(this){ value ->
+        gravityFluctuationUseCase.getFluctuationsRecord().asLiveData().observe(this) { value ->
             Log.d("TAG", "Sensor event: $value")
-            lifecycleScope.launch(dispatcher){
+            lifecycleScope.launch(dispatcher) {
                 gravityFluctuationUseCase.addNewItem(value)
             }
         }

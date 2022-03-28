@@ -3,8 +3,6 @@ package com.harman.roomdbapp.app.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.updateMargins
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -41,8 +39,6 @@ class WidgetAdapter(private val ctx: Context, private val recyclerWidth: Int) : 
         )
     }
 
-
-
     override fun onBindViewHolder(holder: WidgetViewHolder, position: Int) {
 
         val layoutParams = holder.binding.root.layoutParams as ViewGroup.MarginLayoutParams
@@ -63,7 +59,7 @@ class WidgetAdapter(private val ctx: Context, private val recyclerWidth: Int) : 
                 val offset = (recyclerWidth - elemSize) / 2
                 layoutParams.updateMargins(left = offset.toInt(), right = baseMargin)
             }
-            currentList.size-1 -> {
+            currentList.size - 1 -> {
                 val offset = (recyclerWidth - elemSize) / 2
                 layoutParams.updateMargins(right = offset.toInt(), left = baseMargin)
             }
