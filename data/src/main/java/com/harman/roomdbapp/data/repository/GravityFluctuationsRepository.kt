@@ -1,6 +1,7 @@
 package com.harman.roomdbapp.data.repository
 
 import com.harman.roomdbapp.data.dao.IFluctuationDao
+import com.harman.roomdbapp.data.dto.GravityFluctuation
 import com.harman.roomdbapp.data.enity.FluctuationEntity
 import com.harman.roomdbapp.domain.datasource.IGravitySensorDataSource
 import com.harman.roomdbapp.domain.repository.IGravityFluctuationsRepository
@@ -19,19 +20,17 @@ class GravityFluctuationsRepository(
         }.filterNotNull()
     }
 
-    override suspend fun saveRecordsSessionData(data: List<Float>) {
+    override suspend fun saveRecordsSessionData(data: List<GravityFluctuation>) {
         fluctuationDao.insertNewItems(
             data.map {
-                FluctuationEntity(
-                    record = it
-                )
+                it.toEntity()
             }
         )
     }
 
-    override suspend fun saveOneRecord(record: Float) {
+    override suspend fun saveOneRecord(record: GravityFluctuation) {
         fluctuationDao.addNewRecord(
-            FluctuationEntity(record = record)
+            record.toEntity()
         )
     }
 
