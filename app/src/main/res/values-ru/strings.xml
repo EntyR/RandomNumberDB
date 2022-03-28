@@ -4,11 +4,10 @@
     <string name="number_not_even">число нечетное</string>
     <string name="no_numbers">Нет чисел</string>
     <string name="number">Число %1$d</string>
-    <string name="numberdescription">Число %1$d</string>
     <string name="add_random">Добавить случайное</string>
     <string name="add_number">Добавить число</string>
     <string name="or">или</string>
     <string name="enter_your_number">Добавить новое число…</string>
-    <string name="record_gravity_fluctuation">Record \nGravity \nFluctuation</string>
+    <string name="record_gravity_fluctuation">Запись колебания гравитации</string>
 
 </resources>

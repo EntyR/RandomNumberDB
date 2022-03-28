@@ -27,11 +27,6 @@
 
 
     <dimen name="back_button_margins_vertical">40dp</dimen>
-    <dimen name="back_button_margins_horizontal">24dp</dimen>
-
-    <dimen name="linear_layout_margins_vertical">32dp</dimen>
-    <dimen name="linear_layout_margins_horizontal">32dp</dimen>
-    <dimen name="linear_layout_margins_bottom">200dp</dimen>
 
     <dimen name="activity_layout_size">0dp</dimen>
     <dimen name="back_button_padding_vertical">7dp</dimen>
@@ -54,8 +49,6 @@
     <dimen name="big_btn_text_size">21sp</dimen>
     <dimen name="big_btn_min_height">70dp</dimen>
     <dimen name="big_btn_btn_margin">55dp</dimen>
-    <dimen name="big_btn_top_margin">0dp</dimen>
-    <dimen name="big_btn_width">0dp</dimen>
     <dimen name="add_random_text_size">16sp</dimen>
     <dimen name="or_text_text_size">18sp</dimen>
     <dimen name="add_random_padding_left">18dp</dimen>
@@ -77,6 +70,16 @@
     <dimen name="circle_button_radius">240dp</dimen>
     <dimen name="share_btn_size">120dp</dimen>
     <dimen name="share_btn_padding">33dp</dimen>
+    <dimen name="widget_offset">0dp</dimen>
+    <dimen name="status_bar_margin">30dp</dimen>
+    <dimen name="tvWedgetName_margin_start">32dp</dimen>
+    <dimen name="tvWedgetName_margin_top">24dp</dimen>
+    <dimen name="ivWidgetImage_margin_top">24dp</dimen>
+    <dimen name="ivWidgetImage_m_start">32dp</dimen>
+    <dimen name="widget_item_p_bottom">10dp</dimen>
+    <dimen name="widget_item_p">10dp</dimen>
+    <dimen name="rvWidgetList_width">0dp</dimen>
+
     <item name="fullscreen_shade_angle" format="float" type="integer">90</item>
 
 

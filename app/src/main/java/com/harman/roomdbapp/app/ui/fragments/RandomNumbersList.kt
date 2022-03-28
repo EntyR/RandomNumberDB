@@ -1,11 +1,14 @@
 package com.harman.roomdbapp.app.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.adapters.NumberListAdapter
 import com.harman.roomdbapp.app.adapters.WidgetAdapter
@@ -41,14 +44,30 @@ class RandomNumbersList : Fragment() {
             val fragment = RandomNumberAddItem.newInstance()
             navigateTo(fragment, "go_to_new_number_creation")
         }
-        val widgetAdapter = WidgetAdapter()
 
-        binding.rvWidgetList.apply {
-            layoutManager = CenterZoomLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL)
-            adapter = widgetAdapter
+
+
+        binding.rvWidgetList.post {
+            val snapHelper = LinearSnapHelper()
+            val lManager = CenterZoomLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL)
+            val widgetAdapter = WidgetAdapter(requireContext(), binding.rvWidgetList.width)
+            binding.rvWidgetList.apply {
+                snapHelper.attachToRecyclerView(this)
+                layoutManager = lManager
+                adapter = widgetAdapter
+            }
+            widgetAdapter.submitList(FakeRepository.repository)
         }
 
-        widgetAdapter.submitList(FakeRepository.repository)
+        binding.rvWidgetList.doOnPreDraw {
+//            binding.rvWidgetList.smoothScrollToPosition( 0)
+
+        }
+
+
+
+
+
 
         viewModel.getNumbers().observe(viewLifecycleOwner) {
             // make empty list text notification visible if list if empty
