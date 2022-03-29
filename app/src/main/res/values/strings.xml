@@ -6,15 +6,16 @@
     <string name="number_not_even">Number is odd</string>
     <string name="no_numbers">no numbers</string>
     <string name="number">Number %1$d</string>
-    <string name="numberdescription" translatable="false">Number is %1$d</string>
     <string name="return_back_button" translatable="false">return back button</string>
     <string name="add_random">Add Random</string>
     <string name="add_number">Add Number</string>
     <string name="or">or</string>
     <string name="enter_your_number">Add a new number…</string>
     <string name="share_button" translatable="false">Share button</string>
+    <string name="record_gravity_fluctuation">"Widget \nGravity \nFluctuation"</string>
     <string name="sensor_notification_channel_name" translatable="false">censor_notification</string>
     <string name="sensor_notification_description" >Gravity fluctuation currently is ON</string>
     <string name="sensor_notification_tittle">Recording gravity fluctuation</string>
+    <string name="widget_item" translatable="false">widget_item</string>
 
 </resources>

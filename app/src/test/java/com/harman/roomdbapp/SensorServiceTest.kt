@@ -5,12 +5,9 @@ import android.content.Context
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleRegistry
-import androidx.lifecycle.LifecycleService
-import com.google.common.truth.Truth
 import com.harman.roomdbapp.app.services.SensorService
 import com.harman.roomdbapp.domain.use_cases.GravityFluctuationUseCase
 import com.harman.roomdbapp.extension.InstantExecutorExtension
-import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkConstructor
@@ -19,13 +16,11 @@ import io.mockk.spyk
 import io.mockk.unmockkConstructor
 import io.mockk.unmockkStatic
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
@@ -57,7 +52,7 @@ class SensorServiceTest : KoinTest {
         val notificationService: android.app.NotificationManager = mockk(relaxed = true)
         val lifecycle = LifecycleRegistry(mockk(relaxed = true))
         lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
-        service = spyk(SensorService()){
+        service = spyk(SensorService()) {
             every { applicationContext } returns context
             every { this@spyk.lifecycle } returns lifecycle
             every { getSystemService(Context.NOTIFICATION_SERVICE) } returns notificationService
