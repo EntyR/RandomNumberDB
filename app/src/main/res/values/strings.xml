@@ -16,5 +16,6 @@
     <string name="sensor_notification_channel_name" translatable="false">censor_notification</string>
     <string name="sensor_notification_description" >Gravity fluctuation currently is ON</string>
     <string name="sensor_notification_tittle">Recording gravity fluctuation</string>
+    <string name="widget_item" translatable="false">widget_item</string>
 
 </resources>

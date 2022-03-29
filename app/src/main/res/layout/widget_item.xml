@@ -21,28 +21,26 @@
 
         <ImageView
             android:id="@+id/ivWidgetImage"
-            android:layout_width="@dimen/image_width"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/ivWidgetImage_m_start"
-            android:layout_marginTop="@dimen/ivWidgetImage_margin_top"
+
             android:adjustViewBounds="true"
 
-            tools:srcCompat="@drawable/grav_widget" />
+            tools:srcCompat="@drawable/grav_widget"
+            android:contentDescription="@string/widget_item" />
 
         <TextView
             android:id="@+id/tvWedgetName"
-            android:layout_width="@dimen/text_view_width"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/tvWedgetName_margin_start"
-            android:layout_marginTop="@dimen/tvWedgetName_margin_top"
+
             android:breakStrategy="high_quality"
             android:fontFamily="@font/roboto_bold"
             android:lineSpacingExtra="2sp"
+            app:autoSizeTextType="uniform"
             android:lines="3"
             android:text="@string/record_gravity_fluctuation"
-            android:textColor="#000000"
-
-            android:textSize="@dimen/widget_text_size" />
+            android:textColor="#000000" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

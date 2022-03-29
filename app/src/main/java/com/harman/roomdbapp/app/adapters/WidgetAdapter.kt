@@ -3,6 +3,7 @@ package com.harman.roomdbapp.app.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.core.view.updateMargins
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -52,6 +53,23 @@ class WidgetAdapter(private val ctx: Context, private val recyclerWidth: Int) : 
             params.width = elemSize.toInt()
             params.height = elemSize.toInt()
             setLayoutParams(params)
+        }
+        holder.binding.tvWedgetName.apply {
+            val params = this.layoutParams as LinearLayout.LayoutParams
+            params.width = (elemSize / 2.5).toInt()
+            params.height = (elemSize / 2.5).toInt()
+            setLayoutParams(params)
+
+            val margin = this.layoutParams as ViewGroup.MarginLayoutParams
+            margin.updateMargins(left = (elemSize / 8).toInt(), top = (elemSize / 20).toInt())
+        }
+        holder.binding.ivWidgetImage.apply {
+            val params = this.layoutParams as LinearLayout.LayoutParams
+            params.width = (elemSize / 2.8).toInt()
+            setLayoutParams(params)
+
+            val margin = this.layoutParams as ViewGroup.MarginLayoutParams
+            margin.updateMargins(left = (elemSize / 8).toInt(), top = (elemSize / 13).toInt())
         }
 
         when (position) {
