@@ -65,7 +65,6 @@ class SensorService : LifecycleService(), KoinComponent {
                 gravityFluctuationUseCase.addNewItem(
                     record
                 )
-
             }
         }
     }
