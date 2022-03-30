@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/widget_item_p">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/clWidget"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/widget_shape"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlSymmetry">
+
+        <ImageView
+            android:id="@+id/ivWidgetImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:adjustViewBounds="true"
+
+            tools:srcCompat="@drawable/grav_widget"
+            android:contentDescription="@string/widget_item" />
+
+        <TextView
+            android:id="@+id/tvWedgetName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:breakStrategy="high_quality"
+            android:fontFamily="@font/roboto_bold"
+            android:lineSpacingExtra="2sp"
+            app:autoSizeTextType="uniform"
+            android:lines="3"
+            android:text="@string/record_gravity_fluctuation"
+            android:textColor="#000000" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

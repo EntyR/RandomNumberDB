@@ -8,14 +8,14 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvNumberList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="@dimen/recycler_padding_bottom"
+        android:layout_height="0dp"
         android:paddingTop="@dimen/recycler_padding_Top"
+        android:paddingBottom="@dimen/recycler_padding_bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/rvWidgetList" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabNewItem"
@@ -43,5 +43,16 @@
         app:layout_constraintBottom_toBottomOf="@id/rvNumberList"
         app:layout_constraintEnd_toEndOf="@+id/rvNumberList"
         app:layout_constraintStart_toStartOf="@+id/rvNumberList"
+        app:layout_constraintTop_toTopOf="@+id/rvNumberList"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvWidgetList"
+        android:layout_width="@dimen/rvWidgetList_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/status_bar_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
