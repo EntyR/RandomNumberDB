@@ -14,8 +14,9 @@
     <string name="share_button" translatable="false">Share button</string>
     <string name="record_gravity_fluctuation">"Widget \nGravity \nFluctuation"</string>
     <string name="sensor_notification_channel_name" translatable="false">censor_notification</string>
-    <string name="sensor_notification_description" >Gravity fluctuation currently is ON</string>
+    <string name="sensor_notification_description">Gravity fluctuation currently is ON</string>
     <string name="sensor_notification_tittle">Recording gravity fluctuation</string>
     <string name="widget_item" translatable="false">widget_item</string>
+    <string name="start_recording">Start recording</string>
 
 </resources>

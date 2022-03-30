@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.harman.roomdbapp.app.other.DATABASE_NAME
 import com.harman.roomdbapp.app.ui.viewmodel.AddNumberViewModel
+import com.harman.roomdbapp.app.ui.viewmodel.GravityViewModel
 import com.harman.roomdbapp.app.ui.viewmodel.NumberListViewModel
 import com.harman.roomdbapp.data.dao.IFluctuationDao
 import com.harman.roomdbapp.data.dao.IRandomNumberDao
@@ -56,6 +57,7 @@ val useCaseModule = module {
 
 val viewModelModule = module {
     single { Dispatchers.Default }
+    viewModel { GravityViewModel(get()) }
     viewModel { NumberListViewModel(get()) }
     viewModel { AddNumberViewModel(get(), get()) }
 }
