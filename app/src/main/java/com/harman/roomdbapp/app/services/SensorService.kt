@@ -21,6 +21,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.core.component.KoinComponent
+import java.time.Clock
 
 class SensorService : LifecycleService(), KoinComponent {
 
@@ -59,7 +60,11 @@ class SensorService : LifecycleService(), KoinComponent {
 
         gravityFluctuationUseCase.getFluctuationsFlow().asLiveData().observe(this) { value ->
 
-            val record = GravityRecord(value, System.currentTimeMillis())
+            val record = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                GravityRecord(value, Clock.systemUTC().millis())
+            } else {
+                GravityRecord(value, System.currentTimeMillis())
+            }
             Log.d("TAG", "Sensor event: $record")
             lifecycleScope.launch(dispatcher) {
                 gravityFluctuationUseCase.addNewItem(
