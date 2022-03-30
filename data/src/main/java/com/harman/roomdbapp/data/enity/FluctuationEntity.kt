@@ -8,5 +8,5 @@ data class FluctuationEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val record: Float,
-    val timestamp: Float
+    val timestamp: Long
 )

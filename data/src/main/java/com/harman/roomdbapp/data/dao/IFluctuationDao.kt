@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.harman.roomdbapp.data.enity.FluctuationEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface IFluctuationDao {
@@ -13,7 +14,7 @@ interface IFluctuationDao {
     fun insertNewItems(list: List<FluctuationEntity>)
 
     @Query("SELECT * from FluctuationEntity")
-    suspend fun getGravityFluctuationsRecord(): List<FluctuationEntity>
+    fun getGravityFluctuationsRecord(): Flow<List<FluctuationEntity>>
 
     @Query("DELETE from FluctuationEntity")
     suspend fun deleteAllItems()

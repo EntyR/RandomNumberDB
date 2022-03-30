@@ -57,7 +57,7 @@ class SensorService : LifecycleService(), KoinComponent {
             gravityFluctuationUseCase.deletePreviousValue()
         }
 
-        gravityFluctuationUseCase.getFluctuationsRecord().asLiveData().observe(this) { value ->
+        gravityFluctuationUseCase.getFluctuationsFlow().asLiveData().observe(this) { value ->
 
             val record = GravityRecord(value, System.currentTimeMillis())
             Log.d("TAG", "Sensor event: $record")

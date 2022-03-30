@@ -6,8 +6,12 @@ import kotlinx.coroutines.flow.Flow
 
 class GravityFluctuationUseCase(private val repository: IGravityFluctuationsRepository) {
 
-    fun getFluctuationsRecord(): Flow<Float> {
-        return repository.getGravityFluctuationsRecord()
+    fun getFluctuationsFlow(): Flow<Float> {
+        return repository.getGravityFluctuationsFlow()
+    }
+
+    fun getFluctuationRecords(): Flow<List<GravityRecord>> {
+        return repository.getGravityFluctuationsRecords()
     }
 
     suspend fun addNewItem(record: GravityRecord) {

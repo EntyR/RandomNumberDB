@@ -20,13 +20,13 @@ fun RandomNumberEntity.convertToRNumber(): RandomNumber {
 fun FluctuationEntity.toGravityRecord(): GravityRecord {
     return GravityRecord(
         this.record,
-        this.timestamp.toLong()
+        this.timestamp
     )
 }
 
 fun GravityRecord.toEntity(): FluctuationEntity {
     return FluctuationEntity(
         record = record,
-        timestamp = timestamp.toFloat()
+        timestamp = timestamp
     )
 }
