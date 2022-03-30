@@ -4,6 +4,7 @@ import com.google.common.truth.Truth
 import com.harman.roomdbapp.data.dao.IFluctuationDao
 import com.harman.roomdbapp.data.enity.FluctuationEntity
 import com.harman.roomdbapp.domain.datasource.IGravitySensorDataSource
+import com.harman.roomdbapp.domain.model.GravityRecord
 import com.harman.roomdbapp.domain.model.GravityValue
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -37,7 +38,7 @@ internal class GravityFluctuationsRepositoryTest {
 
         val repository = GravityFluctuationsRepository(fluctuationDao, dataSource)
 
-        val returnFlow = repository.getGravityFluctuationsRecord()
+        val returnFlow = repository.getGravityFluctuationsFlow()
 
         Truth.assertThat(returnFlow.last()).isEqualTo(initValue.getFluctuation())
     }
@@ -45,15 +46,16 @@ internal class GravityFluctuationsRepositoryTest {
     @Test
     fun `verify items are added into database`(): Unit = runBlocking {
         val value = 2f
+        val init = GravityRecord(value, 123)
 
-        val expected = listOf(FluctuationEntity(record = value))
+        val expected = listOf(FluctuationEntity(record = value, timestamp = 123))
         var fakeList = mutableListOf<FluctuationEntity>()
 
         coEvery { database.insertNewItems(expected) } answers {
             fakeList = expected.toMutableList()
         }
         val repository = GravityFluctuationsRepository(database, dataSource)
-        repository.saveRecordsSessionData(listOf(value))
+        repository.saveRecordsSessionData(listOf(init))
         Truth.assertThat(fakeList).isEqualTo(expected)
     }
 
@@ -61,7 +63,7 @@ internal class GravityFluctuationsRepositoryTest {
     fun `verify item is added into database`(): Unit = runBlocking {
         val value = 2f
 
-        val expected = FluctuationEntity(record = value)
+        val expected = FluctuationEntity(record = value, timestamp = 123)
         val fakeList = mutableListOf<FluctuationEntity>(expected)
 
         coEvery { database.deleteAllItems() } answers {
