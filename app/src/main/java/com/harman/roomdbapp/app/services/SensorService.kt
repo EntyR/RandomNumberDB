@@ -58,12 +58,14 @@ class SensorService : LifecycleService(), KoinComponent {
         }
 
         gravityFluctuationUseCase.getFluctuationsRecord().asLiveData().observe(this) { value ->
+
             val record = GravityRecord(value, System.currentTimeMillis())
             Log.d("TAG", "Sensor event: $record")
             lifecycleScope.launch(dispatcher) {
                 gravityFluctuationUseCase.addNewItem(
                     record
                 )
+
             }
         }
     }
