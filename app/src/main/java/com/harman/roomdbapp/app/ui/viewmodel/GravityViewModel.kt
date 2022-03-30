@@ -10,7 +10,6 @@ import com.harman.roomdbapp.app.other.RecordingState
 import com.harman.roomdbapp.app.services.SensorService
 import com.harman.roomdbapp.domain.use_cases.GravityFluctuationUseCase
 
-
 class GravityViewModel(
     private val useCase: GravityFluctuationUseCase,
     private val appContext: Application
@@ -18,7 +17,6 @@ class GravityViewModel(
 
     private val _recordingState = MutableLiveData<RecordingState>()
     val recordingState: LiveData<RecordingState> = _recordingState
-
 
     fun getRecordingState() {
         val isActive = SensorService.isMyServiceRunning
@@ -41,7 +39,5 @@ class GravityViewModel(
         if (recordingState.value == RecordingState.Started) {
             _recordingState.value = RecordingState.Stopped
         } else _recordingState.value = RecordingState.Started
-
     }
-
 }

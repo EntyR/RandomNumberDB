@@ -73,7 +73,6 @@ class SensorService : LifecycleService(), KoinComponent {
     override fun onDestroy() {
         super.onDestroy()
         isMyServiceRunning = false
-
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {

@@ -9,14 +9,14 @@ import com.google.common.truth.Truth
 import com.harman.roomdbapp.app.services.SensorService
 import com.harman.roomdbapp.domain.use_cases.GravityFluctuationUseCase
 import com.harman.roomdbapp.extension.InstantExecutorExtension
+import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.mockkConstructor
 import io.mockk.mockkStatic
 import io.mockk.spyk
-import io.mockk.mockkConstructor
 import io.mockk.unmockkConstructor
 import io.mockk.unmockkStatic
-import io.mockk.coEvery
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.TestCoroutineDispatcher
@@ -80,7 +80,6 @@ class SensorServiceTest : KoinTest {
         Dispatchers.resetMain()
     }
 
-
     @Test
     fun verify_service_adding_new_value_when_receive() {
         val initVal = 1f
@@ -96,4 +95,3 @@ class SensorServiceTest : KoinTest {
             .contains(initVal)
     }
 }
-

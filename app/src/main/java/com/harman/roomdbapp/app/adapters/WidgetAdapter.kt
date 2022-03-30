@@ -12,11 +12,10 @@ import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.databinding.WidgetItemBinding
 import com.harman.roomdbapp.app.model.Widget
 
-
 class WidgetAdapter(
     private val ctx: Context,
     private val recyclerWidth: Int,
-    private val callback: ()->Unit
+    private val callback: () -> Unit
 ) : ListAdapter<Widget, WidgetAdapter.WidgetViewHolder>(Companion) {
 
     class WidgetViewHolder(val binding: WidgetItemBinding) :
@@ -50,7 +49,6 @@ class WidgetAdapter(
         val baseMargin = ctx.resources.getDimensionPixelOffset(R.dimen.widget_offset)
 
         val elemSize = recyclerWidth / 1.7
-
 
         holder.binding.root.apply {
             val params = this.layoutParams as RecyclerView.LayoutParams

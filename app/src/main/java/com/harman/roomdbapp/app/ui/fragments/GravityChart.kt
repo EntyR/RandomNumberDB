@@ -6,23 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.databinding.FragmentGravityChartBinding
 import com.harman.roomdbapp.app.other.RecordingState
 import com.harman.roomdbapp.app.ui.viewmodel.GravityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class GravityChart : Fragment() {
-
 
     lateinit var binding: FragmentGravityChartBinding
 
     private val viewModel: GravityViewModel by viewModel()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
