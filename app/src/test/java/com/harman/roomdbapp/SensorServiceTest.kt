@@ -5,22 +5,26 @@ import android.content.Context
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleRegistry
+import com.google.common.truth.Truth
 import com.harman.roomdbapp.app.services.SensorService
 import com.harman.roomdbapp.domain.use_cases.GravityFluctuationUseCase
 import com.harman.roomdbapp.extension.InstantExecutorExtension
 import io.mockk.every
 import io.mockk.mockk
-import io.mockk.mockkConstructor
 import io.mockk.mockkStatic
 import io.mockk.spyk
+import io.mockk.mockkConstructor
 import io.mockk.unmockkConstructor
 import io.mockk.unmockkStatic
+import io.mockk.coEvery
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
@@ -76,18 +80,20 @@ class SensorServiceTest : KoinTest {
         Dispatchers.resetMain()
     }
 
-//    @Test // todo regularly check https://stackoverflow.com/questions/71599128/unable-to-mock-service-in-unit-test
-//    fun verify_service_adding_new_value_when_receive() {
-//        val initVal = 1f
-//        val initFlow = flowOf(initVal)
-//        val resultList = mutableListOf<Float>()
-//        coEvery { useCase.getFluctuationsRecord() } returns initFlow
-//        coEvery { useCase.addNewItem(initVal) }.answers {
-//            resultList.add(initVal)
-//        }
-//
-//        service.onCreate()
-//        Truth.assertThat(resultList)
-//            .contains(initVal)
-//    }
+
+    @Test
+    fun verify_service_adding_new_value_when_receive() {
+        val initVal = 1f
+        val initFlow = flowOf(initVal)
+        val resultList = mutableListOf<Float>()
+        coEvery { useCase.getFluctuationsRecord() } returns initFlow
+        coEvery { useCase.addNewItem(initVal) }.answers {
+            resultList.add(initVal)
+        }
+
+        service.onCreate()
+        Truth.assertThat(resultList)
+            .contains(initVal)
+    }
 }
+
