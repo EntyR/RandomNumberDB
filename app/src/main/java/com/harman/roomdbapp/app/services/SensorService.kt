@@ -15,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.other.SENSOR_CHANNEL_ID
 import com.harman.roomdbapp.app.ui.MainActivity
+import com.harman.roomdbapp.domain.model.GravityRecord
 import com.harman.roomdbapp.domain.use_cases.GravityFluctuationUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -56,10 +57,13 @@ class SensorService : LifecycleService(), KoinComponent {
             gravityFluctuationUseCase.deletePreviousValue()
         }
 
-        gravityFluctuationUseCase.getFluctuationsRecord().asLiveData().observe(this){ value ->
-            Log.d("TAG", "Sensor event: $value")
-            lifecycleScope.launch(dispatcher){
-                gravityFluctuationUseCase.addNewItem(value)
+        gravityFluctuationUseCase.getFluctuationsRecord().asLiveData().observe(this) { value ->
+            val record = GravityRecord(value, System.currentTimeMillis())
+            Log.d("TAG", "Sensor event: $record")
+            lifecycleScope.launch(dispatcher) {
+                gravityFluctuationUseCase.addNewItem(
+                    record
+                )
             }
         }
     }

@@ -7,7 +7,7 @@ import com.harman.roomdbapp.data.dao.IRandomNumberDao
 import com.harman.roomdbapp.data.enity.FluctuationEntity
 import com.harman.roomdbapp.data.enity.RandomNumberEntity
 
-@Database(entities = [RandomNumberEntity::class, FluctuationEntity::class], version = 2)
+@Database(entities = [RandomNumberEntity::class, FluctuationEntity::class], version = 3)
 abstract class RandomNumberDataBase : RoomDatabase() {
     abstract fun randomNumberDao(): IRandomNumberDao
 
