@@ -27,8 +27,14 @@ class SensorService : LifecycleService(), KoinComponent {
 
     private val dispatcher: CoroutineDispatcher by inject()
 
+    companion object {
+        var isMyServiceRunning = false
+    }
+
     override fun onCreate() {
         super.onCreate()
+
+        isMyServiceRunning = true
 
         val onPressIntent = Intent(this, MainActivity::class.java)
         val pendingIntent =
@@ -62,6 +68,12 @@ class SensorService : LifecycleService(), KoinComponent {
                 gravityFluctuationUseCase.addNewItem(value)
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        isMyServiceRunning = false
+
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {

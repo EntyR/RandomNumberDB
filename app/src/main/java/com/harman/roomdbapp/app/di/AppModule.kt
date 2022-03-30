@@ -57,7 +57,7 @@ val useCaseModule = module {
 
 val viewModelModule = module {
     single { Dispatchers.Default }
-    viewModel { GravityViewModel(get()) }
+    viewModel { GravityViewModel(get(), androidApplication()) }
     viewModel { NumberListViewModel(get()) }
     viewModel { AddNumberViewModel(get(), get()) }
 }

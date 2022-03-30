@@ -13,7 +13,7 @@
     <item android:bottom="@dimen/buttons_shadow_padding">
         <shape>
             <corners android:radius="@dimen/buttons_radius" />
-            <solid android:color="@color/blue"/>
+            <solid android:color="@color/black"/>
         </shape>
     </item>
 </layer-list>

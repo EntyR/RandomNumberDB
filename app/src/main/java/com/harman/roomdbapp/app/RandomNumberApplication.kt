@@ -25,8 +25,6 @@ class RandomNumberApplication : Application() {
             )
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(Intent(applicationContext, SensorService::class.java))
-        } else startService(Intent(applicationContext, SensorService::class.java))
+
     }
 }
