@@ -36,8 +36,6 @@ class SensorService : LifecycleService(), KoinComponent {
     override fun onCreate() {
         super.onCreate()
 
-
-
         val onPressIntent = Intent(this, MainActivity::class.java)
         val pendingIntent =
             PendingIntent.getActivity(this, 1, onPressIntent, PendingIntent.FLAG_IMMUTABLE)

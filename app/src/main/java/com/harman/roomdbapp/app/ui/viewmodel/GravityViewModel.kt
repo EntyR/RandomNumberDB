@@ -20,8 +20,6 @@ class GravityViewModel(
     private val _recordingState = MutableLiveData<RecordingState>()
     val recordingState: LiveData<RecordingState> = _recordingState
 
-
-
     fun getSensorData(): LiveData<List<GravityRecord>> {
         return useCase.getFluctuationRecords().asLiveData()
     }

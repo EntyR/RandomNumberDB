@@ -7,6 +7,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.GravityChart">
 
+    <com.github.mikephil.charting.charts.ScatterChart
+        android:id="@+id/chScatterChart"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="150dp"
+        app:layout_constraintBottom_toTopOf="@+id/btStartRecording"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btBack" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btStartRecording"
         android:layout_width="0dp"
