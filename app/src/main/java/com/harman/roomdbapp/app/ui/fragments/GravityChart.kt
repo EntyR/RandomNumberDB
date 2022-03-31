@@ -50,6 +50,10 @@ class GravityChart : Fragment() {
             }
         }
 
+        viewModel.getSensorData().observe(viewLifecycleOwner) {
+            //TODO populate chart
+        }
+
         viewModel.getRecordingState()
 
         return binding.root

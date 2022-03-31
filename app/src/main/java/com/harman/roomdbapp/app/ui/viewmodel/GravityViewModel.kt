@@ -6,8 +6,10 @@ import android.os.Build
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import com.harman.roomdbapp.app.other.RecordingState
 import com.harman.roomdbapp.app.services.SensorService
+import com.harman.roomdbapp.domain.model.GravityRecord
 import com.harman.roomdbapp.domain.use_cases.GravityFluctuationUseCase
 
 class GravityViewModel(
@@ -17,6 +19,12 @@ class GravityViewModel(
 
     private val _recordingState = MutableLiveData<RecordingState>()
     val recordingState: LiveData<RecordingState> = _recordingState
+
+
+
+    fun getSensorData(): LiveData<List<GravityRecord>> {
+        return useCase.getFluctuationRecords().asLiveData()
+    }
 
     fun getRecordingState() {
         val isActive = SensorService.isMyServiceRunning
