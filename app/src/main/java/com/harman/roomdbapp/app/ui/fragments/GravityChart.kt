@@ -104,6 +104,8 @@ class GravityChart : Fragment() {
 
             val entry = list.sortedBy {
                 it.timestamp
+            }.filterIndexed { index, gravityRecord ->
+                index<=10
             }.mapIndexed { index, gravityRecord ->
                 Entry(index.toFloat(), gravityRecord.record)
             }
