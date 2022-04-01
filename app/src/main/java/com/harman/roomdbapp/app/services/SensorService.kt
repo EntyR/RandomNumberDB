@@ -35,6 +35,7 @@ class SensorService : LifecycleService(), KoinComponent {
 
     override fun onCreate() {
         super.onCreate()
+        isMyServiceRunning = true
 
         val onPressIntent = Intent(this, MainActivity::class.java)
         val pendingIntent =
@@ -85,7 +86,6 @@ class SensorService : LifecycleService(), KoinComponent {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
-        isMyServiceRunning = true
         return START_STICKY
     }
 }

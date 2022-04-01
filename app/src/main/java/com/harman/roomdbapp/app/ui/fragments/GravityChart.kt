@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.ScatterData
 import com.github.mikephil.charting.data.ScatterDataSet
 import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.databinding.FragmentGravityChartBinding
+import com.harman.roomdbapp.app.other.GravityValueFormatter
 import com.harman.roomdbapp.app.other.RecordingState
 import com.harman.roomdbapp.app.ui.viewmodel.GravityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -57,12 +59,28 @@ class GravityChart : Fragment() {
                 else -> Unit
             }
         }
+        binding.chScatterChart.xAxis.setDrawGridLines(false)
+        binding.chScatterChart.axisLeft.setDrawGridLines(false)
+        binding.chScatterChart.axisLeft.valueFormatter = GravityValueFormatter()
+        binding.chScatterChart.axisRight.isEnabled = false
+        binding.chScatterChart.xAxis.axisLineWidth = 3f
+        binding.chScatterChart.xAxis.axisMaximum = 10f
+        binding.chScatterChart.axisLeft.axisLineWidth = 3f
+        binding.chScatterChart.xAxis.position = XAxis.XAxisPosition.BOTTOM
+
+        binding.chScatterChart.description.isEnabled = false
+        binding.chScatterChart.legend.isEnabled = false
+        binding.chScatterChart.xAxis.valueFormatter = GravityValueFormatter()
 
         viewModel.getSensorData().observe(viewLifecycleOwner) { list ->
 
-            val entry = listOf(Entry(1f, 2f),
-            Entry(2f,3f)
-            )
+            val entry = list.sortedBy {
+                it.timestamp
+            }.mapIndexed { index, gravityRecord ->
+                Entry(index.toFloat(), gravityRecord.record )
+            }
+
+
 
             //TODO populate with real value
 
@@ -70,12 +88,12 @@ class GravityChart : Fragment() {
             dataset.color = R.color.black
 
             val data = ScatterData(dataset)
+            data.setValueFormatter(GravityValueFormatter())
 
             binding.chScatterChart.data = data
             binding.chScatterChart.invalidate()
-            binding.chScatterChart.xAxis.setDrawGridLines(false);
-            binding.chScatterChart.axisLeft.setDrawGridLines(false);
-            binding.chScatterChart.axisRight.setDrawGridLines(false);
+
+
         }
 
         viewModel.getRecordingState()
