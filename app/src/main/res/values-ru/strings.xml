@@ -14,6 +14,7 @@
     <string name="sensor_notification_tittle">Запись колебания гравитации</string>
 
     <string name="start_recording">Начало записи</string>
+    <string name="tv_record_gravity_fluctuations">Запись колебания гравитации</string>
 
 
 </resources>

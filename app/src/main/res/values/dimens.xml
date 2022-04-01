@@ -79,6 +79,7 @@
     <dimen name="widget_item_p_bottom">10dp</dimen>
     <dimen name="widget_item_p">10dp</dimen>
     <dimen name="rvWidgetList_width">0dp</dimen>
+    <dimen name="gravity_widget_description_text_size">22sp</dimen>
 
     <item name="fullscreen_shade_angle" format="float" type="integer">90</item>
 

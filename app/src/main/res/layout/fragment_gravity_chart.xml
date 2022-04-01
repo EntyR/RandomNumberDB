@@ -6,17 +6,39 @@
     android:background="@color/pale_yellow"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.GravityChart">
-
-    <com.github.mikephil.charting.charts.ScatterChart
-        android:id="@+id/chScatterChart"
+    <!--TODO Extract rest value-->
+    <LinearLayout
+        android:id="@+id/lnChartContainer"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="150dp"
-        app:layout_constraintBottom_toTopOf="@+id/btStartRecording"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/fullscreen_item_shape"
+        android:orientation="vertical"
+        android:padding="30dp"
+        app:layout_constraintBottom_toTopOf="@id/btStartRecording"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btBack" />
+        app:layout_constraintTop_toBottomOf="@id/btBack">
+
+        <TextView
+            android:id="@+id/tvNumberValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
+            android:text="@string/tv_record_gravity_fluctuations"
+            android:textColor="@color/black"
+            android:textSize="@dimen/gravity_widget_description_text_size"
+            app:autoSizeTextType="uniform" />
+
+        <com.github.mikephil.charting.charts.ScatterChart
+            android:id="@+id/chScatterChart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp" />
+    </LinearLayout>
+
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btStartRecording"

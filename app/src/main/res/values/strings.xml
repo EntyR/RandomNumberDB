@@ -18,5 +18,6 @@
     <string name="sensor_notification_tittle">Recording gravity fluctuation</string>
     <string name="widget_item" translatable="false">widget_item</string>
     <string name="start_recording">Start recording</string>
+    <string name="tv_record_gravity_fluctuations">Record Gravity Fluctuations</string>
 
 </resources>
