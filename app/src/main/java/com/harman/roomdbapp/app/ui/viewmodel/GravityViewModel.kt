@@ -10,6 +10,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.map
 import com.github.mikephil.charting.data.Entry
 import com.harman.roomdbapp.app.other.RecordingState
+import com.harman.roomdbapp.app.other.TimeUtil
 import com.harman.roomdbapp.app.services.SensorService
 import com.harman.roomdbapp.domain.use_cases.GravityFluctuationUseCase
 
@@ -27,8 +28,10 @@ class GravityViewModel(
         val list = gravRecords.sortedBy { it.timestamp }
         list.filterIndexed { index, _ ->
             index >= list.size - 10
-        }.mapIndexed { index, record ->
-            Entry(index.toFloat(), record.record)
+        }.map { record ->
+            val converted = TimeUtil.getMinutesInMillis(record.timestamp).toFloat()
+
+            Entry(converted, record.record)
         }
     }
 

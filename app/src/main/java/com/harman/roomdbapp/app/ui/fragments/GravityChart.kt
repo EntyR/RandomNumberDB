@@ -14,8 +14,11 @@ import com.github.mikephil.charting.data.ScatterData
 import com.github.mikephil.charting.data.ScatterDataSet
 import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.databinding.FragmentGravityChartBinding
-import com.harman.roomdbapp.app.other.GravityValueFormatter
+import com.harman.roomdbapp.app.other.PointValueFormatter
 import com.harman.roomdbapp.app.other.RecordingState
+import com.harman.roomdbapp.app.other.TimeUtil
+import com.harman.roomdbapp.app.other.XValueFormatter
+import com.harman.roomdbapp.app.other.YValueFormatter
 import com.harman.roomdbapp.app.ui.viewmodel.GravityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -72,22 +75,24 @@ class GravityChart : Fragment() {
             }
         }
         binding.chScatterChart.xAxis.apply {
+
             setDrawGridLines(false)
             axisLineColor = Color.BLACK
+            binding.chScatterChart.xAxis.setLabelCount(4, true)
+
             position = XAxis.XAxisPosition.BOTTOM
-            valueFormatter = GravityValueFormatter()
+            valueFormatter = XValueFormatter()
             axisLineWidth = 2f
-            axisMaximum = 10f
         }
         binding.chScatterChart.axisLeft.apply {
-            valueFormatter = GravityValueFormatter()
+            valueFormatter = YValueFormatter()
             setDrawGridLines(false)
             axisMinimum = 0f
             axisMaximum = 30f
             axisLineColor = Color.BLACK
             axisLineWidth = 2f
         }
-
+        binding.chScatterChart.isAutoScaleMinMaxEnabled = true
         binding.chScatterChart.axisRight.isEnabled = false
         binding.chScatterChart.description.isEnabled = false
         binding.chScatterChart.legend.isEnabled = false
@@ -105,11 +110,25 @@ class GravityChart : Fragment() {
             dataset.setScatterShape(ScatterChart.ScatterShape.CIRCLE)
             dataset.scatterShapeSize = 20f
             dataset.color = Color.BLACK
-            val data = ScatterData(dataset)
-            data.setValueFormatter(GravityValueFormatter())
 
-            binding.chScatterChart.data = data
-            binding.chScatterChart.invalidate()
+            val data = ScatterData(dataset)
+            data.setValueFormatter(PointValueFormatter())
+
+            if (list.isNotEmpty()) {
+
+                val maxValue =
+                    TimeUtil.addSeconds(
+                        (((10 - list.size) * 2) + 2).toLong(),
+                        list.last().x.toLong()
+                    )
+
+                val minValue = TimeUtil.addSeconds(-2L, list.first().x.toLong())
+
+                binding.chScatterChart.data = data
+                binding.chScatterChart.xAxis.axisMaximum = maxValue.toFloat()
+                binding.chScatterChart.xAxis.axisMinimum = minValue.toFloat()
+                binding.chScatterChart.invalidate()
+            }
         }
 
         viewModel.getRecordingState()
