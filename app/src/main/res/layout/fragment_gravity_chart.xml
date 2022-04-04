@@ -6,16 +6,16 @@
     android:background="@color/pale_yellow"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.GravityChart">
-    <!--TODO Extract rest value-->
+
     <LinearLayout
         android:id="@+id/lnChartContainer"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/lnChartContainer_width"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginStart="@dimen/lnChartContainer__marginStart"
+        android:layout_marginEnd="@dimen/lnChartContainer_marginEnd"
         android:background="@drawable/fullscreen_item_shape"
         android:orientation="vertical"
-        android:padding="30dp"
+        android:padding="@dimen/lnChartContainer_padding"
         app:layout_constraintBottom_toTopOf="@id/btStartRecording"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +35,7 @@
             android:id="@+id/chScatterChart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp" />
+            android:layout_marginTop="@dimen/chScatterChart_marginTop" />
     </LinearLayout>
 
 

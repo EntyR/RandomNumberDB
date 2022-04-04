@@ -80,6 +80,11 @@
     <dimen name="widget_item_p">10dp</dimen>
     <dimen name="rvWidgetList_width">0dp</dimen>
     <dimen name="gravity_widget_description_text_size">22sp</dimen>
+    <dimen name="lnChartContainer_padding">30dp</dimen>
+    <dimen name="lnChartContainer__marginStart">12dp</dimen>
+    <dimen name="lnChartContainer_marginEnd">12dp</dimen>
+    <dimen name="chScatterChart_marginTop">24dp</dimen>
+    <dimen name="lnChartContainer_width">0dp</dimen>
 
     <item name="fullscreen_shade_angle" format="float" type="integer">90</item>
 

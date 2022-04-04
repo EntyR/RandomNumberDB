@@ -3,7 +3,12 @@ package com.harman.roomdbapp.app.ui.viewmodel
 import android.app.Application
 import android.content.Intent
 import android.os.Build
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.map
+import com.github.mikephil.charting.data.Entry
 import com.harman.roomdbapp.app.other.RecordingState
 import com.harman.roomdbapp.app.services.SensorService
 import com.harman.roomdbapp.domain.use_cases.GravityFluctuationUseCase
@@ -18,7 +23,14 @@ class GravityViewModel(
 
     var isNewSensorRecord = false
 
-    fun getSensorData() = useCase.getFluctuationRecords().asLiveData()
+    fun getSensorData() = useCase.getFluctuationRecords().asLiveData().map { gravRecords ->
+        val list = gravRecords.sortedBy { it.timestamp }
+        list.filterIndexed { index, _ ->
+            index >= list.size - 10
+        }.mapIndexed { index, record ->
+            Entry(index.toFloat(), record.record)
+        }
+    }
 
     fun getRecordingState() {
         val isActive = SensorService.isMyServiceRunning

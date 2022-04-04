@@ -19,5 +19,6 @@
     <string name="widget_item" translatable="false">widget_item</string>
     <string name="start_recording">Start recording</string>
     <string name="tv_record_gravity_fluctuations">Record Gravity Fluctuations</string>
+    <string name="stop_recording">Stop recording</string>
 
 </resources>

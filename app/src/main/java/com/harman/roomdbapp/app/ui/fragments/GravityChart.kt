@@ -10,7 +10,6 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.charts.ScatterChart
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.ScatterData
 import com.github.mikephil.charting.data.ScatterDataSet
 import com.harman.roomdbapp.app.R
@@ -46,6 +45,7 @@ class GravityChart : Fragment() {
             when (it) {
                 RecordingState.Started -> {
                     viewModel.startRecording()
+                    binding.btStartRecording.text = getString(R.string.stop_recording)
                     binding.btStartRecording.background =
                         ResourcesCompat.getDrawable(
                             resources,
@@ -56,15 +56,11 @@ class GravityChart : Fragment() {
                     viewModel.getSensorData().observe(viewLifecycleOwner) { list ->
 
                         if (list.isEmpty()) viewModel.isNewSensorRecord = true
-
-                        if (list.size >= 10 && viewModel.isNewSensorRecord) {
-                            viewModel.switchRecordState()
-                            viewModel.isNewSensorRecord = false
-                        }
                     }
                 }
                 RecordingState.Stopped -> {
                     viewModel.stopRecording()
+                    binding.btStartRecording.text = getString(R.string.start_recording)
                     binding.btStartRecording.background =
                         ResourcesCompat.getDrawable(
                             resources,
@@ -75,24 +71,26 @@ class GravityChart : Fragment() {
                 else -> Unit
             }
         }
-        binding.chScatterChart.xAxis.setDrawGridLines(false)
-        binding.chScatterChart.axisLeft.setDrawGridLines(false)
-        binding.chScatterChart.axisLeft.valueFormatter = GravityValueFormatter()
+        binding.chScatterChart.xAxis.apply {
+            setDrawGridLines(false)
+            axisLineColor = Color.BLACK
+            position = XAxis.XAxisPosition.BOTTOM
+            valueFormatter = GravityValueFormatter()
+            axisLineWidth = 2f
+            axisMaximum = 10f
+        }
+        binding.chScatterChart.axisLeft.apply {
+            valueFormatter = GravityValueFormatter()
+            setDrawGridLines(false)
+            axisMinimum = 0f
+            axisMaximum = 30f
+            axisLineColor = Color.BLACK
+            axisLineWidth = 2f
+        }
+
         binding.chScatterChart.axisRight.isEnabled = false
-        binding.chScatterChart.axisLeft.axisMinimum = 0f
-        binding.chScatterChart.axisLeft.axisMaximum = 30f
-        binding.chScatterChart.xAxis.axisLineColor = Color.BLACK
-        binding.chScatterChart.axisLeft.axisLineColor = Color.BLACK
-
-        binding.chScatterChart.xAxis.axisLineWidth = 2f
-        binding.chScatterChart.xAxis.axisMaximum = 10f
-
-        binding.chScatterChart.axisLeft.axisLineWidth = 2f
-        binding.chScatterChart.xAxis.position = XAxis.XAxisPosition.BOTTOM
-
         binding.chScatterChart.description.isEnabled = false
         binding.chScatterChart.legend.isEnabled = false
-        binding.chScatterChart.xAxis.valueFormatter = GravityValueFormatter()
 
         binding.chScatterChart.post {
             val layoutParm = binding.chScatterChart.layoutParams as LinearLayout.LayoutParams
@@ -102,15 +100,7 @@ class GravityChart : Fragment() {
 
         viewModel.getSensorData().observe(viewLifecycleOwner) { list ->
 
-            val entry = list.sortedBy {
-                it.timestamp
-            }.filterIndexed { index, gravityRecord ->
-                index<=10
-            }.mapIndexed { index, gravityRecord ->
-                Entry(index.toFloat(), gravityRecord.record)
-            }
-
-            val dataset = ScatterDataSet(entry, "Gravity fluctuation")
+            val dataset = ScatterDataSet(list, "Gravity fluctuation")
             dataset.color = R.color.black
             dataset.setScatterShape(ScatterChart.ScatterShape.CIRCLE)
             dataset.scatterShapeSize = 20f
@@ -121,8 +111,6 @@ class GravityChart : Fragment() {
             binding.chScatterChart.data = data
             binding.chScatterChart.invalidate()
         }
-
-        viewModel.getSensorData()
 
         viewModel.getRecordingState()
 
