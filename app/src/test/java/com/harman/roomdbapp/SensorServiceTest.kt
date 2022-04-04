@@ -2,7 +2,6 @@ package com.harman.roomdbapp
 
 import android.app.PendingIntent
 import android.content.Context
-import android.os.Build
 import android.os.Build.VERSION
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.Lifecycle
@@ -38,7 +37,6 @@ import java.lang.reflect.Field
 import java.lang.reflect.Modifier
 import java.time.Clock
 
-
 @ExtendWith(InstantExecutorExtension::class)
 class SensorServiceTest : KoinTest {
 
@@ -46,7 +44,6 @@ class SensorServiceTest : KoinTest {
     private lateinit var service: SensorService
     private val dispatcher = TestCoroutineDispatcher()
     private val currentTime = 1550160535168L
-
 
     @BeforeEach
     fun setUp() {
@@ -74,8 +71,6 @@ class SensorServiceTest : KoinTest {
             every { packageManager } returns mockk(relaxed = true)
         }
 
-
-
         setStaticFieldViaReflection(VERSION::class.java.getField("SDK_INT"), 26)
 
         mockkStatic(PendingIntent::class)
@@ -83,7 +78,6 @@ class SensorServiceTest : KoinTest {
 
         mockkStatic(Clock::class)
         every { Clock.systemUTC().millis() } returns currentTime
-
 
         mockkConstructor(NotificationCompat.Builder::class)
         every { anyConstructed<NotificationCompat.Builder>().build() } returns mockk(relaxed = true)
@@ -111,7 +105,6 @@ class SensorServiceTest : KoinTest {
             resultList.add(initRecord)
         }
 
-
         service.onCreate()
         Truth.assertThat(resultList)
             .contains(initRecord)
@@ -125,5 +118,4 @@ class SensorServiceTest : KoinTest {
         }
         field.set(null, value)
     }
-
 }
