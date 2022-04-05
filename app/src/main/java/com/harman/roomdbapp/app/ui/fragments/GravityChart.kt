@@ -16,9 +16,9 @@ import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.databinding.FragmentGravityChartBinding
 import com.harman.roomdbapp.app.other.PointValueFormatter
 import com.harman.roomdbapp.app.other.RecordingState
-import com.harman.roomdbapp.app.other.TimeUtil
 import com.harman.roomdbapp.app.other.XValueFormatter
 import com.harman.roomdbapp.app.other.YValueFormatter
+import com.harman.roomdbapp.app.other.addSeconds
 import com.harman.roomdbapp.app.ui.viewmodel.GravityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -117,12 +117,12 @@ class GravityChart : Fragment() {
             if (list.isNotEmpty()) {
 
                 val maxValue =
-                    TimeUtil.addSeconds(
+                    addSeconds(
                         (((10 - list.size) * 2) + 2).toLong(),
                         list.last().x.toLong()
                     )
 
-                val minValue = TimeUtil.addSeconds(-2L, list.first().x.toLong())
+                val minValue = addSeconds(-2L, list.first().x.toLong())
 
                 binding.chScatterChart.data = data
                 binding.chScatterChart.xAxis.axisMaximum = maxValue.toFloat()

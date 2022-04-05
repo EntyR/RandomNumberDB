@@ -21,7 +21,7 @@ class XValueFormatter : ValueFormatter() {
 
     override fun getFormattedValue(value: Float): String {
 
-        return TimeUtil.getFormattedTimeFromMillis(value.toLong())
+        return getFormattedTimeFromMillis(value.toLong())
     }
 }
 

@@ -12,6 +12,7 @@ import com.harman.roomdbapp.app.services.SensorService
 import com.harman.roomdbapp.domain.model.GravityRecord
 import com.harman.roomdbapp.domain.use_cases.GravityFluctuationUseCase
 import com.harman.roomdbapp.extension.InstantExecutorExtension
+import com.harman.roomdbapp.other.setStaticFieldViaReflection
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
@@ -33,8 +34,6 @@ import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.dsl.module
 import org.koin.test.KoinTest
-import java.lang.reflect.Field
-import java.lang.reflect.Modifier
 import java.time.Clock
 
 @ExtendWith(InstantExecutorExtension::class)
@@ -108,14 +107,5 @@ class SensorServiceTest : KoinTest {
         service.onCreate()
         Truth.assertThat(resultList)
             .contains(initRecord)
-    }
-
-    private fun setStaticFieldViaReflection(field: Field, value: Any) {
-        field.isAccessible = true
-        Field::class.java.getDeclaredField("modifiers").apply {
-            isAccessible = true
-            setInt(field, field.modifiers and Modifier.FINAL.inv())
-        }
-        field.set(null, value)
     }
 }
