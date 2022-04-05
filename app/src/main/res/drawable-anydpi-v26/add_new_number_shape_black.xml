@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <corners android:radius="@dimen/buttons_radius" />
+            <gradient
+                android:startColor="@color/add_random_shadow"
+                android:endColor="@android:color/transparent"
+                android:angle="@integer/shadow_angle" />
+        </shape>
+
+    </item>
+    <item android:bottom="@dimen/buttons_shadow_padding">
+        <shape>
+            <corners android:radius="@dimen/buttons_radius" />
+            <solid android:color="@color/black"/>
+        </shape>
+    </item>
+</layer-list>

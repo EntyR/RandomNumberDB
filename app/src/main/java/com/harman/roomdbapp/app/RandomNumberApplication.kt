@@ -1,13 +1,10 @@
 package com.harman.roomdbapp.app
 
 import android.app.Application
-import android.content.Intent
-import android.os.Build
 import com.harman.roomdbapp.app.di.dataBaseModule
 import com.harman.roomdbapp.app.di.dataModule
 import com.harman.roomdbapp.app.di.useCaseModule
 import com.harman.roomdbapp.app.di.viewModelModule
-import com.harman.roomdbapp.app.services.SensorService
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -24,9 +21,5 @@ class RandomNumberApplication : Application() {
                 viewModelModule
             )
         }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(Intent(applicationContext, SensorService::class.java))
-        } else startService(Intent(applicationContext, SensorService::class.java))
     }
 }

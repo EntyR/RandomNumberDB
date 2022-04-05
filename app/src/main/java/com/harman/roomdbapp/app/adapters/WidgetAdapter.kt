@@ -12,9 +12,11 @@ import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.databinding.WidgetItemBinding
 import com.harman.roomdbapp.app.model.Widget
 
-// TODO Add button pressed callback
-
-class WidgetAdapter(private val ctx: Context, private val recyclerWidth: Int) : ListAdapter<Widget, WidgetAdapter.WidgetViewHolder>(Companion) {
+class WidgetAdapter(
+    private val ctx: Context,
+    private val recyclerWidth: Int,
+    private val callback: () -> Unit
+) : ListAdapter<Widget, WidgetAdapter.WidgetViewHolder>(Companion) {
 
     class WidgetViewHolder(val binding: WidgetItemBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -53,6 +55,10 @@ class WidgetAdapter(private val ctx: Context, private val recyclerWidth: Int) : 
             params.width = elemSize.toInt()
             params.height = elemSize.toInt()
             setLayoutParams(params)
+
+            setOnClickListener {
+                callback()
+            }
         }
         holder.binding.tvWedgetName.apply {
             val params = this.layoutParams as LinearLayout.LayoutParams

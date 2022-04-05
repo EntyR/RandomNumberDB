@@ -29,6 +29,10 @@ class SensorService : LifecycleService(), KoinComponent {
 
     private val dispatcher: CoroutineDispatcher by inject()
 
+    companion object {
+        var isMyServiceRunning = false
+    }
+
     override fun onCreate() {
         super.onCreate()
 
@@ -74,8 +78,14 @@ class SensorService : LifecycleService(), KoinComponent {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        isMyServiceRunning = false
+    }
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
+        isMyServiceRunning = true
 
         return START_STICKY
     }

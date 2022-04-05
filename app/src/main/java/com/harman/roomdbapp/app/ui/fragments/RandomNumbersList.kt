@@ -46,13 +46,23 @@ class RandomNumbersList : Fragment() {
         binding.rvWidgetList.post {
             val snapHelper = LinearSnapHelper()
             val lManager = CenterZoomLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL)
-            val widgetAdapter = WidgetAdapter(requireContext(), binding.rvWidgetList.width)
+            val widgetAdapter = WidgetAdapter(requireContext(), binding.rvWidgetList.width) {
+                val fragment = GravityChart.newInstance()
+                navigateTo(fragment, "navigate_to_grav_chart")
+            }
             binding.rvWidgetList.apply {
                 snapHelper.attachToRecyclerView(this)
                 layoutManager = lManager
                 adapter = widgetAdapter
             }
-            widgetAdapter.submitList(listOf(Widget(getString(R.string.record_gravity_fluctuation), R.drawable.grav_widget)))
+            widgetAdapter.submitList(
+                listOf(
+                    Widget(
+                        getString(R.string.record_gravity_fluctuation),
+                        R.drawable.grav_widget
+                    )
+                )
+            )
         }
 
         viewModel.getNumbers().observe(viewLifecycleOwner) {

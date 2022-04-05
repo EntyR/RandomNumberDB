@@ -57,6 +57,7 @@ android {
             useJUnitPlatform()
         }
     }
+
 }
 
 
@@ -110,4 +111,6 @@ dependencies {
     androidTestImplementation 'org.mockito:mockito-android:2.24.5'
 
     implementation "androidx.lifecycle:lifecycle-service:2.4.1"
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

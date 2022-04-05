@@ -5,16 +5,10 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.os.SystemClock
 import com.harman.roomdbapp.domain.datasource.IGravitySensorDataSource
 import com.harman.roomdbapp.domain.model.GravityValue
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.launch
-import java.time.Clock
 import java.util.concurrent.TimeUnit
 
 class GravitySensorDataSource(val context: Context) : IGravitySensorDataSource {
@@ -33,7 +27,7 @@ class GravitySensorDataSource(val context: Context) : IGravitySensorDataSource {
                         vector[1],
                         vector[2]
                     )
-                    if(System.currentTimeMillis() - lastEventTimestamp >= SENSOR_INTERVAL_MILLIS){
+                    if (System.currentTimeMillis() - lastEventTimestamp >= SENSOR_INTERVAL_MILLIS) {
                         lastEventTimestamp = System.currentTimeMillis()
                         trySend(gravValue)
                     }
@@ -53,7 +47,7 @@ class GravitySensorDataSource(val context: Context) : IGravitySensorDataSource {
         }
     }
 
-    companion object{
+    companion object {
         private const val SENSOR_INTERVAL_MILLIS = 2000L
     }
 }
