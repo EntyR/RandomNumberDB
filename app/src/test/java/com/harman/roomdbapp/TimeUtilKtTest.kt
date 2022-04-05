@@ -9,9 +9,6 @@ import org.junit.jupiter.api.Test
 
 internal class TimeUtilKtTest {
 
-    @BeforeEach
-    fun setUp() {
-    }
 
     @Test
     fun `verify what formatted string returned from method`() {
