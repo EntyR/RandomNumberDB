@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.view.updateMargins
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +16,7 @@ import com.harman.roomdbapp.app.model.Widget
 class WidgetAdapter(
     private val ctx: Context,
     private val recyclerWidth: Int,
-    private val callback: () -> Unit
+    private val callback: (widgetName: String) -> Unit
 ) : ListAdapter<Widget, WidgetAdapter.WidgetViewHolder>(Companion) {
 
     class WidgetViewHolder(val binding: WidgetItemBinding) :
@@ -57,7 +58,7 @@ class WidgetAdapter(
             setLayoutParams(params)
 
             setOnClickListener {
-                callback()
+                callback(holder.binding.tvWedgetName.text.toString())
             }
         }
         holder.binding.tvWedgetName.apply {
@@ -105,4 +106,7 @@ class WidgetAdapter(
     override fun getItem(position: Int): Widget {
         return super.getItem(position)
     }
+
+
+
 }

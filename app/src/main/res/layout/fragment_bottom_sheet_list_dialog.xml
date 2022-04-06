@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lnBottomSheet"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvNumberValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/title_description_margins"
+        android:layout_marginTop="@dimen/title_description_margins"
+        android:layout_marginRight="@dimen/title_description_margins"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="@font/roboto_bold"
+        tools:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="28sp" />
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="@color/black" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/list_item_spacing_half"
+        tools:context=".ui.fragments.BottomSheetFragment"
+        tools:listitem="@layout/fragment_bottom_sheet_list_dialog_item" />
+</LinearLayout>
