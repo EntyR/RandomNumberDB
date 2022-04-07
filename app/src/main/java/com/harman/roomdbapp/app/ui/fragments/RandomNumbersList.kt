@@ -73,6 +73,8 @@ class RandomNumbersList : Fragment() {
                         getString(R.string.data_storage_widget),
                         R.drawable.ic_data_storage
                     )
+
+
                 )
             )
         }

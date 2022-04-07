@@ -30,9 +30,17 @@ class DataStorageFragment : Fragment() {
 
         val itemTouchHelper = ItemTouchHelper(
             SwipeToDeleteCallback {
+                val newList = adapter.currentList.toMutableList()
+                newList.removeAt(it)
+                adapter.submitList(newList)
                 // TODO delete value
             }
         )
+
+        binding.btBack.setOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
+
         binding.rvDocList.apply {
             this.adapter = adapter
             layoutManager = LinearLayoutManager(requireContext())

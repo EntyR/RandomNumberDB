@@ -1,6 +1,7 @@
 package com.harman.roomdbapp.app.adapters
 
 import android.content.Context
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -41,9 +42,14 @@ class DocumentsAdapter(
 
     override fun onBindViewHolder(holder: DocumentViewHolder, position: Int) {
         val numberString = ctx.getString(R.string.document, currentList[position].docName)
-        holder.binding.btItemValue.text = numberString
+        holder.binding.tvValue.text = numberString
+
+        holder.binding.tvValue.isSelected = true
+
         holder.binding.btItemValue.setOnClickListener {
             itemPressedCallback(currentList[position].docName)
         }
     }
+
+
 }

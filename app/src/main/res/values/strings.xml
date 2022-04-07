@@ -21,6 +21,6 @@
     <string name="start_recording">Start recording</string>
     <string name="tv_record_gravity_fluctuations">Record Gravity Fluctuations</string>
     <string name="stop_recording">Stop recording</string>
-    <string name="data_storage_widget">Gravity Data  Files Storage</string>
+    <string name="data_storage_widget">Gravity Data \nFiles Storage</string>
 
 </resources>
