@@ -24,7 +24,7 @@ class DataStorageFragment : Fragment() {
         binding = FragmentDataStorageBinding.inflate(inflater, container, false)
 
         val adapter = DocumentsAdapter(requireContext()) {
-            val btnSheet = BottomSheetFragment.newInstance("1855513256.csv")
+            val btnSheet = BottomSheetFragment.newInstance(it)
             btnSheet.show(parentFragmentManager, "Modal Bottom Sheet")
         }
 
