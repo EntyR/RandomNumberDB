@@ -31,7 +31,6 @@ class DataStorageFragment : Fragment() {
 
         val itemTouchHelper = ItemTouchHelper(
             SwipeToDeleteCallback {
-                Log.e("TAG", "onCreateView: swipe", )
                 // TODO delete value
             }
         )
