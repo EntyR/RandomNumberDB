@@ -20,6 +20,7 @@
             android:background="?attr/selectableItemBackground"
             android:fontFamily="@font/roboto_medium"
             android:gravity="start"
+            android:singleLine="true"
             android:textAlignment="gravity"
             android:textColor="@color/black"
             android:textSize="@dimen/tvValue_textSize"
@@ -33,6 +34,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/roboto_medium"
             android:gravity="end"
+            android:singleLine="true"
             android:textColor="@color/black"
             android:textSize="@dimen/tvDate_text_size"
             tools:text="22.02.2012" />

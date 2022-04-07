@@ -16,9 +16,10 @@
         android:layout_marginRight="@dimen/title_description_margins"
         android:layout_marginBottom="30dp"
         android:fontFamily="@font/roboto_bold"
-        tools:text="TextView"
+        android:singleLine="true"
         android:textColor="@color/black"
-        android:textSize="@dimen/tvNumberValue_text_size" />
+        android:textSize="@dimen/tvNumberValue_text_size"
+        tools:text="TextView" />
 
     <View
         android:id="@+id/divider4"
