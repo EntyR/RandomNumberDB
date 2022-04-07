@@ -76,6 +76,8 @@ dependencies {
     //Koin
     implementation("io.insert-koin:koin-android:3.1.2")
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
+    implementation "io.insert-koin:koin-androidx-workmanager:3.1.2"
+
 
     //Room
     implementation "androidx.room:room-ktx:2.4.2"
@@ -113,4 +115,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-service:2.4.1"
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    implementation"androidx.work:work-runtime-ktx:2.7.1"
 }

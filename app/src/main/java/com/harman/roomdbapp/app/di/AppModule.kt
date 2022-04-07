@@ -3,6 +3,7 @@ package com.harman.roomdbapp.app.di
 import android.app.Application
 import androidx.room.Room
 import com.harman.roomdbapp.app.other.DATABASE_NAME
+import com.harman.roomdbapp.app.other.worker.DocumentCoroutineWorker
 import com.harman.roomdbapp.app.ui.viewmodel.AddNumberViewModel
 import com.harman.roomdbapp.app.ui.viewmodel.GravityViewModel
 import com.harman.roomdbapp.app.ui.viewmodel.NumberListViewModel
@@ -21,6 +22,7 @@ import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.androidx.workmanager.dsl.worker
 import org.koin.dsl.module
 
 // TODO Add proper migration for release version
@@ -48,6 +50,10 @@ val dataModule = module {
     single<IRandomNumberRepository> { RandomNumberRepository(get()) }
     single<IGravitySensorDataSource> { GravitySensorDataSource(androidContext()) }
     single<IGravityFluctuationsRepository> { GravityFluctuationsRepository(get(), get()) }
+}
+
+val workerModule = module {
+    worker { DocumentCoroutineWorker(get(), get()) }
 }
 
 val useCaseModule = module {
