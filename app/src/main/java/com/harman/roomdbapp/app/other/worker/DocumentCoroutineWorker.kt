@@ -1,10 +1,6 @@
 package com.harman.roomdbapp.app.other.worker
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.harman.roomdbapp.domain.model.DocumentEntry
@@ -29,9 +25,8 @@ class DocumentCoroutineWorker(val context: Context, params: WorkerParameters) :
                 val lines = it.readLines()
                 val lastLine = if (lines.isNotEmpty()) lines.last() else ""
                 val lastLineList = if (lastLine.isNotBlank()) lastLine.split(",") else emptyList()
-                val timeStamp = if (lastLineList.size > 1 ) lastLineList.last() else ""
+                val timeStamp = if (lastLineList.size > 1) lastLineList.last() else ""
                 DocumentEntry(it.name, timeStamp)
-
             } ?: listOf()
         }
     }
@@ -41,7 +36,7 @@ class DocumentCoroutineWorker(val context: Context, params: WorkerParameters) :
             val file = File(context.filesDir, filename)
             file.createNewFile()
             true
-        } catch(e: IOException) {
+        } catch (e: IOException) {
             e.printStackTrace()
             false
         }
@@ -50,10 +45,10 @@ class DocumentCoroutineWorker(val context: Context, params: WorkerParameters) :
     private fun addNewEntry(filename: String, csvString: String): Boolean {
         return try {
             val file = File(context.filesDir, filename)
-            val pw =  PrintWriter(file)
+            val pw = PrintWriter(file)
             pw.println(csvString)
             true
-        } catch(e: IOException) {
+        } catch (e: IOException) {
             e.printStackTrace()
             false
         }
