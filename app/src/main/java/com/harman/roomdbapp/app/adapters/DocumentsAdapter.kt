@@ -11,7 +11,7 @@ import com.harman.roomdbapp.app.databinding.DataStorageItemBinding
 import com.harman.roomdbapp.domain.model.Document
 
 class DocumentsAdapter(
-    val ctx: Context,
+    private val ctx: Context,
     private val itemPressedCallback: (docName: String) -> Unit
 ) :
     ListAdapter<Document, DocumentsAdapter.DocumentViewHolder>(Companion) {

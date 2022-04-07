@@ -32,5 +32,3 @@ fun getFormattedDateFromMillis(millis: Long): String {
     calendar.timeInMillis = millis
     return formatter.format(calendar.time)
 }
-
-

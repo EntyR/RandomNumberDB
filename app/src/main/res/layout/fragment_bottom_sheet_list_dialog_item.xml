@@ -9,38 +9,38 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
+        android:paddingTop="@dimen/sheet_item_padding"
+        android:paddingBottom="@dimen/sheet_item_padding">
 
         <TextView
             android:id="@+id/tvValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
+            android:layout_marginStart="@dimen/tvValue_mgStart"
             android:background="?attr/selectableItemBackground"
             android:fontFamily="@font/roboto_medium"
             android:gravity="start"
             android:textAlignment="gravity"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="@dimen/tvValue_textSize"
             tools:text="Hello" />
 
         <TextView
             android:id="@+id/tvDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="14dp"
+            android:layout_marginEnd="@dimen/tvDate_margin_end"
             android:layout_weight="1"
             android:fontFamily="@font/roboto_medium"
             android:gravity="end"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="@dimen/tvDate_text_size"
             tools:text="22.02.2012" />
     </LinearLayout>
 
     <View
         android:id="@+id/divider3"
         android:layout_width="match_parent"
-        android:layout_height="1.5dp"
+        android:layout_height="@dimen/divider_height"
         android:background="@color/black" />
 </LinearLayout>

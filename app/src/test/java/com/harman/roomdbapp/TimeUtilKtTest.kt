@@ -4,11 +4,9 @@ import com.google.common.truth.Truth
 import com.harman.roomdbapp.app.other.addSeconds
 import com.harman.roomdbapp.app.other.getFormattedTimeFromMillis
 import com.harman.roomdbapp.app.other.getMinutesInMillis
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 internal class TimeUtilKtTest {
-
 
     @Test
     fun `verify what formatted string returned from method`() {

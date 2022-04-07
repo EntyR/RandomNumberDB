@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.view.updateMargins
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -106,7 +105,4 @@ class WidgetAdapter(
     override fun getItem(position: Int): Widget {
         return super.getItem(position)
     }
-
-
-
 }

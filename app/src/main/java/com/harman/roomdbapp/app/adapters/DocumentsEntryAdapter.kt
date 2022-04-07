@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.harman.roomdbapp.app.databinding.FragmentBottomSheetListDialogItemBinding
 import com.harman.roomdbapp.app.other.getFormattedDateFromMillis
 import com.harman.roomdbapp.domain.model.GravityRecord
-import java.util.*
+import java.util.Collections
 
 class DocumentsEntryAdapter :
     ListAdapter<GravityRecord?, DocumentsEntryAdapter.DocumentEntryViewHolder>(Companion) {
@@ -43,10 +43,7 @@ class DocumentsEntryAdapter :
             else ""
         holder.binding.tvValue.text = value.toString()
         holder.binding.tvDate.text = date
-
     }
-
-
 
     override fun submitList(list: List<GravityRecord?>?) {
 
