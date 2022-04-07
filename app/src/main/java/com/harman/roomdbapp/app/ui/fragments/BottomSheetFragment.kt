@@ -39,6 +39,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
         binding.tvNumberValue.text = getString(R.string.document, docName ?: ".csv")
 
+        binding.tvNumberValue.isSelected = true
         val adapter = DocumentsEntryAdapter()
         binding.list.apply {
 
