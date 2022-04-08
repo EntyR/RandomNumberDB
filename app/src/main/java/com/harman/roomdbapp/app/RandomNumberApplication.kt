@@ -30,8 +30,9 @@ class RandomNumberApplication : Application() {
             )
         }
 
+        // TODO Change to minutes
         val monitorDataRequest =
-            PeriodicWorkRequestBuilder<DocumentCoroutineWorker>(5, TimeUnit.MINUTES)
+            PeriodicWorkRequestBuilder<DocumentCoroutineWorker>(5, TimeUnit.SECONDS)
                 .build()
 
         WorkManager

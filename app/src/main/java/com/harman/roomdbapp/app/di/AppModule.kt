@@ -53,7 +53,7 @@ val dataModule = module {
 }
 
 val workerModule = module {
-    worker { DocumentCoroutineWorker(get(), get()) }
+    worker { DocumentCoroutineWorker(get(), get(), get()) }
 }
 
 val useCaseModule = module {
