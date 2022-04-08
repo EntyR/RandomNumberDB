@@ -72,13 +72,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         return dialog
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 
     companion object {
 
@@ -90,7 +83,5 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-    }
+
 }

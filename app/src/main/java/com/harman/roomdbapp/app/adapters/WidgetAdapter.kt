@@ -1,9 +1,11 @@
 package com.harman.roomdbapp.app.adapters
 
 import android.content.Context
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.updateMargins
 import androidx.core.widget.TextViewCompat
 import androidx.recyclerview.widget.DiffUtil
@@ -19,7 +21,6 @@ class WidgetAdapter(
     private val callback: (widgetName: String) -> Unit
 ) : ListAdapter<Widget, WidgetAdapter.WidgetViewHolder>(Companion) {
 
-    private var _textSize = 0f
 
     class WidgetViewHolder(val binding: WidgetItemBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -67,24 +68,23 @@ class WidgetAdapter(
         }
         holder.binding.tvWedgetName.apply {
 
-            TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(this, (elemSize / 40).toInt(), (elemSize / 38).toInt(), 1, 1)
+
 
             val margin = this.layoutParams as ViewGroup.MarginLayoutParams
             margin.updateMargins(
-                left = (elemSize / 8).toInt(),
                 top = ((elemSize / 10) / (linesAmount / 2)).toInt(),
-                right = ((elemSize / 10).toInt())
+                bottom = (elemSize / 8).toInt()
             )
 
-            val params = margin as LinearLayout.LayoutParams
-            params.height = (elemSize / 2.5).toInt()
+            val params = margin as ConstraintLayout.LayoutParams
+            params.width = (elemSize / 2.5).toInt()
             setLayoutParams(params)
         }
 
         holder.binding.tvWedgetName.maxLines = linesAmount
 
         holder.binding.ivWidgetImage.apply {
-            val params = this.layoutParams as LinearLayout.LayoutParams
+            val params = this.layoutParams as ConstraintLayout.LayoutParams
             params.width = (elemSize / 2.8).toInt()
             setLayoutParams(params)
 
@@ -110,5 +110,5 @@ class WidgetAdapter(
         holder.binding.tvWedgetName.text = item.text
     }
 
-    // For some reason it crashed if i didn't include this
+
 }
