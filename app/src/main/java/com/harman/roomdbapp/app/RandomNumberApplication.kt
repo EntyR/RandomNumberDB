@@ -31,7 +31,7 @@ class RandomNumberApplication : Application() {
         }
 
         val monitorDataRequest =
-            PeriodicWorkRequestBuilder<DocumentCoroutineWorker>(5, TimeUnit.MINUTES)
+            PeriodicWorkRequestBuilder<DocumentCoroutineWorker>(15, TimeUnit.MINUTES)
                 .build()
 
         WorkManager
