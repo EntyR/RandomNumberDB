@@ -1,9 +1,6 @@
 package com.harman.roomdbapp.app.adapters
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -34,7 +31,7 @@ class WidgetAdapter(
 
         override fun areContentsTheSame(oldItem: Widget, newItem: Widget): Boolean {
             return (oldItem.imageResourceId == newItem.imageResourceId) &&
-                    (oldItem.text == newItem.text)
+                (oldItem.text == newItem.text)
         }
     }
 
@@ -75,18 +72,13 @@ class WidgetAdapter(
             val margin = this.layoutParams as ViewGroup.MarginLayoutParams
             margin.updateMargins(
                 left = (elemSize / 8).toInt(),
-                top = ((elemSize / 10)/(linesAmount/2)).toInt(),
+                top = ((elemSize / 10) / (linesAmount / 2)).toInt(),
                 right = ((elemSize / 10).toInt())
             )
-
-
-
 
             val params = margin as LinearLayout.LayoutParams
             params.height = (elemSize / 2.5).toInt()
             setLayoutParams(params)
-
-
         }
 
         holder.binding.tvWedgetName.maxLines = linesAmount
@@ -119,5 +111,4 @@ class WidgetAdapter(
     }
 
     // For some reason it crashed if i didn't include this
-
 }

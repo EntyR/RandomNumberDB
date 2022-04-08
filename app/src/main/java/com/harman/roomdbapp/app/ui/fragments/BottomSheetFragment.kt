@@ -56,7 +56,11 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
         dialog.setOnShowListener {
-            (it as BottomSheetDialog).behavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+            (it as BottomSheetDialog).behavior.apply {
+                state = BottomSheetBehavior.STATE_HALF_EXPANDED
+                isHideable = true
+                skipCollapsed = true
+            }
 
             val params = (binding.root.layoutParams as FrameLayout.LayoutParams)
             val height = Resources.getSystem().displayMetrics.heightPixels

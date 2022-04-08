@@ -1,7 +1,6 @@
 package com.harman.roomdbapp.app.adapters
 
 import android.content.Context
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -50,6 +49,4 @@ class DocumentsAdapter(
             itemPressedCallback(currentList[position].docName)
         }
     }
-
-
 }

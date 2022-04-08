@@ -74,7 +74,6 @@ class RandomNumbersList : Fragment() {
                         R.drawable.ic_data_storage
                     )
 
-
                 )
             )
         }
