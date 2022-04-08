@@ -72,7 +72,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         return dialog
     }
 
-
     companion object {
 
         fun newInstance(docName: String): BottomSheetFragment =
@@ -82,6 +81,4 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 }
             }
     }
-
-
 }

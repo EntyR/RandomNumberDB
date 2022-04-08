@@ -1,13 +1,10 @@
 package com.harman.roomdbapp.app.adapters
 
 import android.content.Context
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.updateMargins
-import androidx.core.widget.TextViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +17,6 @@ class WidgetAdapter(
     private val recyclerWidth: Int,
     private val callback: (widgetName: String) -> Unit
 ) : ListAdapter<Widget, WidgetAdapter.WidgetViewHolder>(Companion) {
-
 
     class WidgetViewHolder(val binding: WidgetItemBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -68,8 +64,6 @@ class WidgetAdapter(
         }
         holder.binding.tvWedgetName.apply {
 
-
-
             val margin = this.layoutParams as ViewGroup.MarginLayoutParams
             margin.updateMargins(
                 top = ((elemSize / 10) / (linesAmount / 2)).toInt(),
@@ -109,6 +103,4 @@ class WidgetAdapter(
         holder.binding.ivWidgetImage.setImageResource(item.imageResourceId)
         holder.binding.tvWedgetName.text = item.text
     }
-
-
 }
