@@ -59,12 +59,12 @@ class DocumentRepository(private val context: Context) : IDocumentsRepository {
 
     override fun saveLastRecord(newRecord: Long) {
         with(sharedPref.edit()) {
-            putLong(context.resources.getString(R.string.saved_record_key), newRecord)
+            putLong(context.resources.getString(R.string.saved_timestamp_key), newRecord)
             apply()
         }
     }
 
     override fun getLastRecord(): Long {
-        return sharedPref.getLong(context.resources.getString(R.string.saved_record_key), 0)
+        return sharedPref.getLong(context.resources.getString(R.string.saved_timestamp_key), 0)
     }
 }
