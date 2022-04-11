@@ -59,7 +59,7 @@ class DocumentsAdapter(
         }
     }
 
-    fun deleteIem(position: Int) {
+    fun deleteItem(position: Int) {
 
         currentList.removeAt(position)
         notifyItemRemoved(position)

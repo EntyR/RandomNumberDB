@@ -30,7 +30,7 @@ class DataStorageFragment : Fragment() {
 
         val itemTouchHelper = ItemTouchHelper(
             SwipeToDeleteCallback {
-                adapter.deleteIem(it)
+                adapter.deleteItem(it)
 
                 // TODO delete value
             }
