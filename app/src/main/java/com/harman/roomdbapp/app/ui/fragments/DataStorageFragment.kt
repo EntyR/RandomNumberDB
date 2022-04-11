@@ -30,9 +30,8 @@ class DataStorageFragment : Fragment() {
 
         val itemTouchHelper = ItemTouchHelper(
             SwipeToDeleteCallback {
-                val newList = adapter.currentList.toMutableList()
-                newList.removeAt(it)
-                adapter.submitList(newList)
+                adapter.deleteIem(it)
+
                 // TODO delete value
             }
         )
@@ -50,7 +49,14 @@ class DataStorageFragment : Fragment() {
         adapter.submitList(
             listOf(
                 Document("1855513256.csv"),
-                Document("1855211100000000000000000003256.csv")
+                Document("1855211100000000000000000003256.csv"),
+                Document("1855211100000000000000000003256.csv"),
+                Document("185100000000000000000003256.csv"),
+                Document("1855211100000000000000000003256.csv"),
+                Document("18552111000000000000003256.csv"),
+                Document("000000000000000003256.csv"),
+                Document("1855211100000000000000000003256.csv"),
+                Document("211100000000000000003256.csv")
             )
         )
 

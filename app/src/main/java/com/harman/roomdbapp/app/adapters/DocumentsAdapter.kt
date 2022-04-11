@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.databinding.DataStorageItemBinding
@@ -14,7 +13,9 @@ class DocumentsAdapter(
     private val ctx: Context,
     private val itemPressedCallback: (docName: String) -> Unit
 ) :
-    ListAdapter<Document, DocumentsAdapter.DocumentViewHolder>(Companion) {
+    RecyclerView.Adapter<DocumentsAdapter.DocumentViewHolder>() {
+
+    private var currentList = mutableListOf<Document>()
 
     class DocumentViewHolder(val binding: DataStorageItemBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -29,6 +30,10 @@ class DocumentsAdapter(
         }
     }
 
+    override fun getItemCount(): Int {
+        return currentList.size
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DocumentViewHolder {
         return DocumentViewHolder(
             DataStorageItemBinding.inflate(
@@ -37,6 +42,10 @@ class DocumentsAdapter(
                 false
             )
         )
+    }
+
+    fun submitList(list: List<Document>) {
+        currentList = list.toMutableList()
     }
 
     override fun onBindViewHolder(holder: DocumentViewHolder, position: Int) {
@@ -48,5 +57,11 @@ class DocumentsAdapter(
         holder.binding.btItemValue.setOnClickListener {
             itemPressedCallback(currentList[position].docName)
         }
+    }
+
+    fun deleteIem(position: Int) {
+
+        currentList.removeAt(position)
+        notifyItemRemoved(position)
     }
 }

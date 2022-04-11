@@ -20,6 +20,7 @@
         android:textColor="@color/black"
         android:textSize="@dimen/tvNumberValue_text_size"
         android:marqueeRepeatLimit="marquee_forever"
+        android:ellipsize="marquee"
         android:scrollHorizontally="true"
         android:focusable="true"
         tools:text="TextView" />

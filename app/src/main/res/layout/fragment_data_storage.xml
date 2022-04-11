@@ -51,8 +51,6 @@
         android:id="@+id/rvDocList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingTop="@dimen/recycler_padding_Top"
-        android:paddingBottom="@dimen/recycler_padding_bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
