@@ -4,8 +4,6 @@ import android.content.Context
 import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.harman.roomdbapp.data.repository.DocumentRepository.Companion.convertCsvStringToGravityRecord
-import com.harman.roomdbapp.data.repository.DocumentRepository.Companion.convertToCsv
 import com.harman.roomdbapp.domain.model.GravityRecord
 import com.harman.roomdbapp.domain.use_cases.GravityDocumentsUseCase
 import com.harman.roomdbapp.domain.use_cases.GravityFluctuationUseCase
@@ -24,7 +22,7 @@ class DocumentCoroutineWorker(
         if (records.isNullOrEmpty())
             return Result.failure()
 
-        val lastItemCsv = records.last().convertToCsv()
+        val lastItemCsv = records.last().timestamp
 
         val lastRecordCsv = documentUseCase.getLastBackupRecordTimestamp()
 
@@ -32,15 +30,15 @@ class DocumentCoroutineWorker(
             logValue()
             Result.success()
         } else {
-            val newRecordsToSave = records.filter {it.timestamp > lastRecordCsv.convertCsvStringToGravityRecord().timestamp}
-            addNewRecords(newRecordsToSave )
+            val newRecordsToSave = records.filter { it.timestamp > lastRecordCsv }
+            addNewRecords(newRecordsToSave)
             logValue()
             Result.success()
         }
     }
 
     private fun addNewRecords(value: List<GravityRecord>) {
-        documentUseCase.setLastBackupRecordTimestamp(value.last().convertToCsv())
+        documentUseCase.setLastBackupRecordTimestamp(value.last().timestamp)
         documentUseCase.addNewGravityDocument(value)
     }
 

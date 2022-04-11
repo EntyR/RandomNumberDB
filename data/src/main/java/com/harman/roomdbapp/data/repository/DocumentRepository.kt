@@ -26,12 +26,6 @@ class DocumentRepository(private val context: Context) : IDocumentsRepository {
         fun GravityRecord.convertToCsv(): String {
             return "${this.record},${this.timestamp}"
         }
-        fun String.convertCsvStringToGravityRecord(): GravityRecord {
-            this.split(",").let {
-                return GravityRecord(it[0].toFloat(), it[1].toLong())
-            }
-
-        }
     }
 
     override fun addNewCsvFile(filename: String, list: List<GravityRecord>): Boolean {
@@ -63,18 +57,14 @@ class DocumentRepository(private val context: Context) : IDocumentsRepository {
         return resultList
     }
 
-    override fun saveLastRecord(newRecord: String) {
+    override fun saveLastRecord(newRecord: Long) {
         with(sharedPref.edit()) {
-            putString(
-                context.resources.getString(R.string.saved_record_key),
-                newRecord
-            )
+            putLong(context.resources.getString(R.string.saved_record_key), newRecord)
             apply()
         }
     }
 
-    override fun getLastRecord(): String {
-        return sharedPref.getString(context.resources.getString(R.string.saved_record_key), "")
-            ?: ""
+    override fun getLastRecord(): Long {
+        return sharedPref.getLong(context.resources.getString(R.string.saved_record_key), 0)
     }
 }

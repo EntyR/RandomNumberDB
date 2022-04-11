@@ -12,11 +12,11 @@ class GravityDocumentsUseCase(
         repository.addNewCsvFile("${list.last().timestamp}.csv", list)
     }
 
-    fun setLastBackupRecordTimestamp(lastRecord: String) {
+    fun setLastBackupRecordTimestamp(lastRecord: Long) {
         repository.saveLastRecord(lastRecord)
     }
 
-    fun getLastBackupRecordTimestamp(): String = repository.getLastRecord()
+    fun getLastBackupRecordTimestamp() = repository.getLastRecord()
 
     fun getAllGravityRecords(fileName: String) = repository.getGravityRecordsFromDocument(fileName)
 }

@@ -10,7 +10,7 @@ interface IDocumentsRepository {
 
     fun getGravityRecordsFromDocument(filename: String): List<GravityRecord>
 
-    fun saveLastRecord(newRecord: String)
+    fun saveLastRecord(newRecord: Long)
 
-    fun getLastRecord(): String
+    fun getLastRecord(): Long
 }
