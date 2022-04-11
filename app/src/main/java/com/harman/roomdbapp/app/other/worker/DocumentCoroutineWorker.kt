@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import com.harman.roomdbapp.data.repository.DocumentRepository.Companion.convertCsvStringToGravityRecord
 import com.harman.roomdbapp.data.repository.DocumentRepository.Companion.convertToCsv
 import com.harman.roomdbapp.domain.model.GravityRecord
 import com.harman.roomdbapp.domain.use_cases.GravityDocumentsUseCase
@@ -19,42 +20,28 @@ class DocumentCoroutineWorker(
 
     override suspend fun doWork(): Result {
 
-        val value = fluctuationUseCase.getFluctuationRecords().first()
-        if (value.isNullOrEmpty())
+        val records = fluctuationUseCase.getFluctuationRecords().first()
+        if (records.isNullOrEmpty())
             return Result.failure()
 
-        val lastItemCsv = value.last().convertToCsv()
+        val lastItemCsv = records.last().convertToCsv()
 
-        val lastDbEntry = value.find {
-            it.convertToCsv() == documentUseCase.getLastRecord()
-        }
+        val lastRecordCsv = documentUseCase.getLastBackupRecordTimestamp()
 
-        when {
-            lastItemCsv == documentUseCase.getLastRecord() -> {
-                logValue()
-                return Result.success()
-            }
-            lastDbEntry != null -> {
-                val list = value.dropWhile {
-                    it != lastDbEntry
-                }
-                addNewRecords(list)
-                logValue()
-                return Result.success()
-            }
-            else -> {
-                addNewRecords(value)
-                logValue()
-                return Result.success()
-            }
+        return if (lastItemCsv == lastRecordCsv) {
+            logValue()
+            Result.success()
+        } else {
+            val newRecordsToSave = records.filter {it.timestamp > lastRecordCsv.convertCsvStringToGravityRecord().timestamp}
+            addNewRecords(newRecordsToSave )
+            logValue()
+            Result.success()
         }
     }
 
     private fun addNewRecords(value: List<GravityRecord>) {
-        documentUseCase.storeLastRecord(value.last().convertToCsv())
-        documentUseCase.addNewGravityDocument(
-            "${value.last().timestamp}.csv", value
-        )
+        documentUseCase.setLastBackupRecordTimestamp(value.last().convertToCsv())
+        documentUseCase.addNewGravityDocument(value)
     }
 
     // TODO delete all logs when start displaying value in fragment

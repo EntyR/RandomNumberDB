@@ -10,7 +10,10 @@ import java.io.File
 import java.io.FileWriter
 import java.io.IOException
 
-class DocumentRepository(val context: Context) : IDocumentsRepository {
+class DocumentRepository(private val context: Context) : IDocumentsRepository {
+
+    private val sharedPref =
+        context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
 
     override fun getCsvList(): List<String> {
         val files = context.filesDir.listFiles()
@@ -22,6 +25,12 @@ class DocumentRepository(val context: Context) : IDocumentsRepository {
     companion object {
         fun GravityRecord.convertToCsv(): String {
             return "${this.record},${this.timestamp}"
+        }
+        fun String.convertCsvStringToGravityRecord(): GravityRecord {
+            this.split(",").let {
+                return GravityRecord(it[0].toFloat(), it[1].toLong())
+            }
+
         }
     }
 
@@ -55,8 +64,6 @@ class DocumentRepository(val context: Context) : IDocumentsRepository {
     }
 
     override fun saveLastRecord(newRecord: String) {
-        val sharedPref =
-            context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE) ?: return
         with(sharedPref.edit()) {
             putString(
                 context.resources.getString(R.string.saved_record_key),
@@ -67,7 +74,6 @@ class DocumentRepository(val context: Context) : IDocumentsRepository {
     }
 
     override fun getLastRecord(): String {
-        val sharedPref = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
         return sharedPref.getString(context.resources.getString(R.string.saved_record_key), "")
             ?: ""
     }
