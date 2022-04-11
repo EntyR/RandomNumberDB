@@ -3,7 +3,7 @@ package com.harman.roomdbapp.app.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.updateMargins
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -15,7 +15,7 @@ import com.harman.roomdbapp.app.model.Widget
 class WidgetAdapter(
     private val ctx: Context,
     private val recyclerWidth: Int,
-    private val callback: () -> Unit
+    private val callback: (widgetName: String) -> Unit
 ) : ListAdapter<Widget, WidgetAdapter.WidgetViewHolder>(Companion) {
 
     class WidgetViewHolder(val binding: WidgetItemBinding) :
@@ -46,6 +46,8 @@ class WidgetAdapter(
 
         val layoutParams = holder.binding.root.layoutParams as ViewGroup.MarginLayoutParams
 
+        val linesAmount = currentList[position].text.split("\n").size
+
         val baseMargin = ctx.resources.getDimensionPixelOffset(R.dimen.widget_offset)
 
         val elemSize = recyclerWidth / 1.7
@@ -57,20 +59,26 @@ class WidgetAdapter(
             setLayoutParams(params)
 
             setOnClickListener {
-                callback()
+                callback(holder.binding.tvWedgetName.text.toString())
             }
         }
         holder.binding.tvWedgetName.apply {
-            val params = this.layoutParams as LinearLayout.LayoutParams
-            params.width = (elemSize / 2.5).toInt()
-            params.height = (elemSize / 2.5).toInt()
-            setLayoutParams(params)
 
             val margin = this.layoutParams as ViewGroup.MarginLayoutParams
-            margin.updateMargins(left = (elemSize / 8).toInt(), top = (elemSize / 20).toInt())
+            margin.updateMargins(
+                top = ((elemSize / 10) / (linesAmount / 2)).toInt(),
+                bottom = (elemSize / 8).toInt()
+            )
+
+            val params = margin as ConstraintLayout.LayoutParams
+            params.width = (elemSize / 2.5).toInt()
+            setLayoutParams(params)
         }
+
+        holder.binding.tvWedgetName.maxLines = linesAmount
+
         holder.binding.ivWidgetImage.apply {
-            val params = this.layoutParams as LinearLayout.LayoutParams
+            val params = this.layoutParams as ConstraintLayout.LayoutParams
             params.width = (elemSize / 2.8).toInt()
             setLayoutParams(params)
 
@@ -94,15 +102,5 @@ class WidgetAdapter(
 
         holder.binding.ivWidgetImage.setImageResource(item.imageResourceId)
         holder.binding.tvWedgetName.text = item.text
-    }
-
-    // For some reason it crashed if i didn't include this
-
-    override fun getItemCount(): Int {
-        return super.getItemCount()
-    }
-
-    override fun getItem(position: Int): Widget {
-        return super.getItem(position)
     }
 }
