@@ -20,6 +20,5 @@
     <string name="start_recording">Start recording</string>
     <string name="tv_record_gravity_fluctuations">Record Gravity Fluctuations</string>
     <string name="stop_recording">Stop recording</string>
-    <string name="saved_record_key" translatable="false">last_record</string>
 
 </resources>

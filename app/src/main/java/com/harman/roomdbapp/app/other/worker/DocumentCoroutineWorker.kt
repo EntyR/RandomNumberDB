@@ -4,35 +4,33 @@ import android.content.Context
 import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.harman.roomdbapp.app.other.MemoryUtil
-import com.harman.roomdbapp.app.other.MemoryUtil.Companion.convertToCsv
-import com.harman.roomdbapp.data.dao.IFluctuationDao
-import com.harman.roomdbapp.data.enity.FluctuationEntity
-import com.harman.roomdbapp.data.toGravityRecord
+import com.harman.roomdbapp.data.repository.DocumentRepository.Companion.convertToCsv
+import com.harman.roomdbapp.domain.model.GravityRecord
+import com.harman.roomdbapp.domain.use_cases.GravityDocumentsUseCase
+import com.harman.roomdbapp.domain.use_cases.GravityFluctuationUseCase
 import kotlinx.coroutines.flow.first
 
 class DocumentCoroutineWorker(
     val context: Context,
     params: WorkerParameters,
-    private val db: IFluctuationDao
+    private val fluctuationUseCase: GravityFluctuationUseCase,
+    private val documentUseCase: GravityDocumentsUseCase
 ) : CoroutineWorker(context, params) {
-
-    private val memoryUtil = MemoryUtil(context)
 
     override suspend fun doWork(): Result {
 
-        val value = db.getGravityFluctuationsRecord().first()
+        val value = fluctuationUseCase.getFluctuationRecords().first()
         if (value.isNullOrEmpty())
             return Result.failure()
 
-        val lastItemCsv = value.last().toGravityRecord().convertToCsv()
+        val lastItemCsv = value.last().convertToCsv()
 
         val lastDbEntry = value.find {
-            it.toGravityRecord().convertToCsv() == memoryUtil.getLastRecord()
+            it.convertToCsv() == documentUseCase.getLastRecord()
         }
 
         when {
-            lastItemCsv == memoryUtil.getLastRecord() -> {
+            lastItemCsv == documentUseCase.getLastRecord() -> {
                 logValue()
                 return Result.success()
             }
@@ -43,33 +41,27 @@ class DocumentCoroutineWorker(
                 addNewRecords(list)
                 logValue()
                 return Result.success()
-
             }
             else -> {
                 addNewRecords(value)
                 logValue()
                 return Result.success()
-
             }
         }
     }
 
-    private  fun addNewRecords(value: List<FluctuationEntity>) {
-        memoryUtil.saveToSharedPref(value.last().toGravityRecord().convertToCsv())
-        memoryUtil.addNewCsvFile(
-            "${value.last().timestamp}.csv",
-            value.map {
-                it.toGravityRecord()
-            }
+    private fun addNewRecords(value: List<GravityRecord>) {
+        documentUseCase.storeLastRecord(value.last().convertToCsv())
+        documentUseCase.addNewGravityDocument(
+            "${value.last().timestamp}.csv", value
         )
     }
 
     // TODO delete all logs when start displaying value in fragment
     private suspend fun logValue() {
-        memoryUtil.getCsvList().last().let {
+        documentUseCase.getGravityDocumentsName().last().let {
             Log.d("TAG", "Csv document: $it")
-
-            memoryUtil.readCsv(it.fileName).forEach { record ->
+            documentUseCase.getAllGravityRecords(it).forEach { record ->
                 Log.d("TAG", "Csv document record: $record")
             }
         }

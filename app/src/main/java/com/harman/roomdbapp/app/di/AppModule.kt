@@ -11,11 +11,14 @@ import com.harman.roomdbapp.data.dao.IFluctuationDao
 import com.harman.roomdbapp.data.dao.IRandomNumberDao
 import com.harman.roomdbapp.data.datasouce.GravitySensorDataSource
 import com.harman.roomdbapp.data.db.RandomNumberDataBase
+import com.harman.roomdbapp.data.repository.DocumentRepository
 import com.harman.roomdbapp.data.repository.GravityFluctuationsRepository
 import com.harman.roomdbapp.data.repository.RandomNumberRepository
 import com.harman.roomdbapp.domain.datasource.IGravitySensorDataSource
+import com.harman.roomdbapp.domain.repository.IDocumentsRepository
 import com.harman.roomdbapp.domain.repository.IGravityFluctuationsRepository
 import com.harman.roomdbapp.domain.repository.IRandomNumberRepository
+import com.harman.roomdbapp.domain.use_cases.GravityDocumentsUseCase
 import com.harman.roomdbapp.domain.use_cases.GravityFluctuationUseCase
 import com.harman.roomdbapp.domain.use_cases.RandomNumberUseCase
 import kotlinx.coroutines.Dispatchers
@@ -48,17 +51,19 @@ val dataBaseModule = module {
 
 val dataModule = module {
     single<IRandomNumberRepository> { RandomNumberRepository(get()) }
+    single<IDocumentsRepository> { DocumentRepository(androidContext()) }
     single<IGravitySensorDataSource> { GravitySensorDataSource(androidContext()) }
     single<IGravityFluctuationsRepository> { GravityFluctuationsRepository(get(), get()) }
 }
 
 val workerModule = module {
-    worker { DocumentCoroutineWorker(get(), get(), get()) }
+    worker { DocumentCoroutineWorker(get(), get(), get(), get()) }
 }
 
 val useCaseModule = module {
     factory { RandomNumberUseCase(get()) }
     factory { GravityFluctuationUseCase(get()) }
+    factory { GravityDocumentsUseCase(get()) }
 }
 
 val viewModelModule = module {

@@ -1,25 +1,21 @@
-package com.harman.roomdbapp.app.other
+package com.harman.roomdbapp.data.repository
 
 import android.content.Context
-import com.harman.roomdbapp.app.R
-import com.harman.roomdbapp.domain.model.DocumentEntry
+import com.harman.roomdbapp.data.APP_PREFERENCES
+import com.harman.roomdbapp.data.R
 import com.harman.roomdbapp.domain.model.GravityRecord
+import com.harman.roomdbapp.domain.repository.IDocumentsRepository
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
 import java.io.IOException
 
-class MemoryUtil(val context: Context) {
+class DocumentRepository(val context: Context) : IDocumentsRepository {
 
-    suspend fun getCsvList(): List<DocumentEntry> {
-
+    override fun getCsvList(): List<String> {
         val files = context.filesDir.listFiles()
         return files?.filter { it.canRead() && it.isFile && it.name.endsWith(".csv") }?.map {
-            val lines = it.readLines()
-            val lastLine = if (lines.isNotEmpty()) lines.last() else ""
-            val lastLineList = if (lastLine.isNotBlank()) lastLine.split(",") else emptyList()
-            val timeStamp = if (lastLineList.size > 1) lastLineList.last() else ""
-            DocumentEntry(it.name, timeStamp)
+            it.name
         } ?: listOf()
     }
 
@@ -29,7 +25,7 @@ class MemoryUtil(val context: Context) {
         }
     }
 
-    fun addNewCsvFile(filename: String, list: List<GravityRecord>): Boolean {
+    override fun addNewCsvFile(filename: String, list: List<GravityRecord>): Boolean {
         return try {
             val file = File(context.filesDir, filename)
 
@@ -47,7 +43,7 @@ class MemoryUtil(val context: Context) {
         }
     }
 
-    fun readCsv(filename: String): List<GravityRecord> {
+    override fun getGravityRecordsFromDocument(filename: String): List<GravityRecord> {
         val file = File(context.filesDir, filename)
         val resultList = file.readLines().let {
             it.map { line ->
@@ -58,7 +54,7 @@ class MemoryUtil(val context: Context) {
         return resultList
     }
 
-    fun saveToSharedPref(newRecord: String) {
+    override fun saveLastRecord(newRecord: String) {
         val sharedPref =
             context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE) ?: return
         with(sharedPref.edit()) {
@@ -70,7 +66,7 @@ class MemoryUtil(val context: Context) {
         }
     }
 
-    fun getLastRecord(): String {
+    override fun getLastRecord(): String {
         val sharedPref = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
         return sharedPref.getString(context.resources.getString(R.string.saved_record_key), "")
             ?: ""
