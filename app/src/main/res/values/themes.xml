@@ -1,6 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.RoomDb" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -23,6 +25,16 @@
         <item name="windowSplashScreenBackground">@color/pale_yellow</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_baseline_filter_9_plus_24</item>
         <item name="postSplashScreenTheme">@style/Theme.RoomDb</item>
+    </style>
+
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/buttom_sheet_shape</item>
     </style>
 
 </resources>

@@ -23,3 +23,12 @@ fun getMinutesInMillis(millis: Long): Long {
 fun addSeconds(seconds: Long, addTo: Long): Long {
     return TimeUnit.SECONDS.toMillis(seconds) + addTo
 }
+
+@SuppressLint("SimpleDateFormat")
+fun getFormattedDateFromMillis(millis: Long): String {
+    val formatter = SimpleDateFormat("dd/MM/yyyy hh:mm:ss")
+
+    val calendar: Calendar = Calendar.getInstance()
+    calendar.timeInMillis = millis
+    return formatter.format(calendar.time)
+}
