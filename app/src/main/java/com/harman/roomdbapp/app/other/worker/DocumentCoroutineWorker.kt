@@ -38,7 +38,7 @@ class DocumentCoroutineWorker(
     }
 
     private fun addNewRecords(value: List<GravityRecord>) {
-        documentUseCase.setLastBackupRecordTimestamp(value.last().timestamp)
+        documentUseCase.setLastBackupRecordTimestamp(value.sortedBy { it.timestamp }.last().timestamp)
         documentUseCase.addNewGravityDocument(value)
     }
 
