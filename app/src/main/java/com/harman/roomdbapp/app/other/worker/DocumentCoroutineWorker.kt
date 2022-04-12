@@ -26,19 +26,20 @@ class DocumentCoroutineWorker(
 
         val lastRecordCsv = documentUseCase.getLastBackupRecordTimestamp()
 
-        return if (lastItemCsv == lastRecordCsv) {
-            logValue()
-            Result.success()
-        } else {
-            val newRecordsToSave = records.filter { it.timestamp > lastRecordCsv }
-            addNewRecords(newRecordsToSave)
-            logValue()
-            Result.success()
+
+        records.filter { it.timestamp > lastRecordCsv }.let {
+            if(!it.isNullOrEmpty()){
+                addNewRecords(it)
+            }
         }
+        logValue()
+        return Result.success()
+
     }
 
     private fun addNewRecords(value: List<GravityRecord>) {
-        documentUseCase.setLastBackupRecordTimestamp(value.sortedBy { it.timestamp }.last().timestamp)
+        documentUseCase.setLastBackupRecordTimestamp(value.sortedBy { it.timestamp }
+            .last().timestamp)
         documentUseCase.addNewGravityDocument(value)
     }
 
