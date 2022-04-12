@@ -10,11 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.harman.roomdbapp.app.adapters.DocumentsAdapter
 import com.harman.roomdbapp.app.adapters.callbaks.SwipeToDeleteCallback
 import com.harman.roomdbapp.app.databinding.FragmentDataStorageBinding
+import com.harman.roomdbapp.app.ui.viewmodel.DataStorageViewModel
 import com.harman.roomdbapp.domain.model.Document
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DataStorageFragment : Fragment() {
 
     lateinit var binding: FragmentDataStorageBinding
+    private val viewModel: DataStorageViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,9 +33,8 @@ class DataStorageFragment : Fragment() {
 
         val itemTouchHelper = ItemTouchHelper(
             SwipeToDeleteCallback {
+                viewModel.deleteGravityDocument(adapter.getDocName(it))
                 adapter.deleteItem(it)
-
-                // TODO delete value
             }
         )
 
@@ -45,19 +47,11 @@ class DataStorageFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             itemTouchHelper.attachToRecyclerView(this)
         }
-        // TODO inflate with real value
+
         adapter.submitList(
-            listOf(
-                Document("1855513256.csv"),
-                Document("1855211100000000000000000003256.csv"),
-                Document("1855211100000000000000000003256.csv"),
-                Document("185100000000000000000003256.csv"),
-                Document("1855211100000000000000000003256.csv"),
-                Document("18552111000000000000003256.csv"),
-                Document("000000000000000003256.csv"),
-                Document("1855211100000000000000000003256.csv"),
-                Document("211100000000000000003256.csv")
-            )
+            viewModel.getGravityDocumentNameList().map {
+                Document(it)
+            }
         )
 
         return binding.root

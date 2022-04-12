@@ -14,13 +14,16 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.adapters.DocumentsEntryAdapter
 import com.harman.roomdbapp.app.databinding.FragmentBottomSheetListDialogBinding
-import com.harman.roomdbapp.domain.model.GravityRecord
+import com.harman.roomdbapp.app.ui.viewmodel.BottomSheetViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 const val DOC_NAME = "doc_name"
 
 class BottomSheetFragment : BottomSheetDialogFragment() {
 
     lateinit var binding: FragmentBottomSheetListDialogBinding
+
+    private val viewModel: BottomSheetViewModel by viewModel()
 
     private var docName: String? = null
 
@@ -47,8 +50,11 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             layoutManager = LinearLayoutManager(requireContext())
         }
 
-        // TODO get real value
-        adapter.submitList(listOf(GravityRecord(15654F, 1649256581862)))
+        docName?.let {
+            viewModel.getGravityRecordsFromDocuments(it).let { records ->
+                adapter.submitList(records)
+            }
+        }
 
         return binding.root
     }
@@ -57,7 +63,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         val dialog = super.onCreateDialog(savedInstanceState)
         dialog.setOnShowListener {
             (it as BottomSheetDialog).behavior.apply {
-                state = BottomSheetBehavior.STATE_HALF_EXPANDED
+                state = BottomSheetBehavior.STATE_EXPANDED
                 isHideable = true
                 skipCollapsed = true
             }

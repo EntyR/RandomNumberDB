@@ -44,6 +44,10 @@ class DocumentsAdapter(
         )
     }
 
+    fun getDocName(index: Int): String {
+        return currentList[index].docName
+    }
+
     fun submitList(list: List<Document>) {
         currentList = list.toMutableList()
     }

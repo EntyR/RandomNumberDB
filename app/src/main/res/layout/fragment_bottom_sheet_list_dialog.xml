@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/lnBottomSheet"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lnBottomSheet"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <TextView
@@ -15,14 +15,14 @@
         android:layout_marginTop="@dimen/title_description_margins"
         android:layout_marginRight="@dimen/title_description_margins"
         android:layout_marginBottom="30dp"
+        android:ellipsize="marquee"
+        android:focusable="true"
         android:fontFamily="@font/roboto_bold"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
         android:singleLine="true"
         android:textColor="@color/black"
         android:textSize="@dimen/tvNumberValue_text_size"
-        android:marqueeRepeatLimit="marquee_forever"
-        android:ellipsize="marquee"
-        android:scrollHorizontally="true"
-        android:focusable="true"
         tools:text="TextView" />
 
     <View
@@ -36,7 +36,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/divider_margin"
         android:layout_marginEnd="@dimen/divider_margin"
         android:clipToPadding="false"

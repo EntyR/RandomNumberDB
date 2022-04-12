@@ -48,7 +48,7 @@ class DocumentsEntryAdapter :
     override fun submitList(list: List<GravityRecord?>?) {
 
         val newList = list?.toMutableList() ?: mutableListOf()
-        if (newList.size < 4) newList.addAll(Collections.nCopies(4 - currentList.size, null))
+        if (newList.size < 4) newList.addAll(Collections.nCopies(4 - newList.size, null))
         super.submitList(newList.toList())
     }
 }
