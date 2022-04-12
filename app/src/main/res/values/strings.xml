@@ -6,7 +6,7 @@
     <string name="number_not_even">Number is odd</string>
     <string name="no_numbers">no numbers</string>
     <string name="number">Number %1$d</string>
-    <string name="document">data - %1$s</string>
+    <string name="document">data: %1$s</string>
     <string name="return_back_button" translatable="false">return back button</string>
     <string name="add_random">Add Random</string>
     <string name="add_number">Add Number</string>

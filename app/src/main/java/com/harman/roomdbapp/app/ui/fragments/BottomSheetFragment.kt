@@ -60,19 +60,21 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val height = Resources.getSystem().displayMetrics.heightPixels
+
         val dialog = super.onCreateDialog(savedInstanceState)
         dialog.setOnShowListener {
             (it as BottomSheetDialog).behavior.apply {
-                state = BottomSheetBehavior.STATE_EXPANDED
+                state = BottomSheetBehavior.STATE_SETTLING
                 isHideable = true
+                isFitToContents = false
+                maxHeight = height
+                peekHeight = (height / 1.2).toInt()
                 skipCollapsed = true
             }
 
             val params = (binding.root.layoutParams as FrameLayout.LayoutParams)
-            val height = Resources.getSystem().displayMetrics.heightPixels
-            val resultHeight = height / 1.2
-            params.height = resultHeight.toInt()
-
+            params.height = height
             binding.root.layoutParams = params
         }
         return dialog
