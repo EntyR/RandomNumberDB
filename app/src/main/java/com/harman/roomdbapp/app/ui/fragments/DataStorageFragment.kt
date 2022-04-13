@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.ItemTouchHelper.*
+import androidx.recyclerview.widget.ItemTouchHelper.ACTION_STATE_SWIPE
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.harman.roomdbapp.app.adapters.DocumentsAdapter
@@ -26,30 +26,21 @@ class DataStorageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDataStorageBinding.inflate(inflater, container, false)
-
         val adapter = DocumentsAdapter(requireContext()) {
             val btnSheet = BottomSheetFragment.newInstance(it)
             btnSheet.show(parentFragmentManager, "Modal Bottom Sheet")
         }
 
         val itemTouchHelper = ItemTouchHelper(
-            object : ItemTouchHelper.Callback() {
-                override fun getMovementFlags(
-                    recyclerView: RecyclerView,
-                    viewHolder: RecyclerView.ViewHolder
-                ): Int {
-                    return makeFlag(ACTION_STATE_IDLE, RIGHT) or makeFlag(
-                        ACTION_STATE_SWIPE,
-                        LEFT or RIGHT
-                    )
-                }
+            object :
+                ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
 
                 override fun onMove(
                     recyclerView: RecyclerView,
                     viewHolder: RecyclerView.ViewHolder,
                     target: RecyclerView.ViewHolder
                 ): Boolean {
-                    adapter.switchEnabled()
+                    adapter.switchEnabled(false)
                     return true
                 }
 
@@ -57,10 +48,18 @@ class DataStorageFragment : Fragment() {
                     val pos = viewHolder.adapterPosition
                     viewModel.deleteGravityDocument(adapter.getDocName(pos))
                     adapter.deleteItem(pos)
-                    adapter.switchEnabled()
+                    adapter.switchEnabled(true)
 
                 }
 
+                override fun onSelectedChanged(
+                    viewHolder: RecyclerView.ViewHolder?,
+                    actionState: Int
+                ) {
+                    super.onSelectedChanged(viewHolder, actionState)
+                    if (actionState == ACTION_STATE_SWIPE)
+                        adapter.switchEnabled(true)
+                }
             }
         )
 

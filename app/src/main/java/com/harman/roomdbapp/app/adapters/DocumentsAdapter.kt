@@ -56,11 +56,12 @@ class DocumentsAdapter(
         }
     }
 
-    fun switchEnabled() {
-        isClickEnabled = !isClickEnabled
+    fun switchEnabled(value: Boolean) {
+        isClickEnabled = value
     }
 
     fun deleteItem(position: Int) {
+        notifyItemRangeChanged(position, currentList.size)
         currentList.removeAt(position)
         notifyItemRemoved(position)
     }
