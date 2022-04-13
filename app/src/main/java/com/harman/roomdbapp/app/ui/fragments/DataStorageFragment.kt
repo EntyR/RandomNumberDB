@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.ItemTouchHelper.*
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.harman.roomdbapp.app.adapters.DocumentsAdapter
-import com.harman.roomdbapp.app.adapters.callbaks.SwipeToDeleteCallback
 import com.harman.roomdbapp.app.databinding.FragmentDataStorageBinding
 import com.harman.roomdbapp.app.ui.viewmodel.DataStorageViewModel
 import com.harman.roomdbapp.domain.model.Document
@@ -32,9 +33,34 @@ class DataStorageFragment : Fragment() {
         }
 
         val itemTouchHelper = ItemTouchHelper(
-            SwipeToDeleteCallback {
-                viewModel.deleteGravityDocument(adapter.getDocName(it))
-                adapter.deleteItem(it)
+            object : ItemTouchHelper.Callback() {
+                override fun getMovementFlags(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder
+                ): Int {
+                    return makeFlag(ACTION_STATE_IDLE, RIGHT) or makeFlag(
+                        ACTION_STATE_SWIPE,
+                        LEFT or RIGHT
+                    )
+                }
+
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+                ): Boolean {
+                    adapter.switchEnabled()
+                    return true
+                }
+
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    val pos = viewHolder.adapterPosition
+                    viewModel.deleteGravityDocument(adapter.getDocName(pos))
+                    adapter.deleteItem(pos)
+                    adapter.switchEnabled()
+
+                }
+
             }
         )
 
