@@ -18,7 +18,7 @@
     <string name="stop_recording">Остановить запись</string>
     <string name="data_storage_widget">Хранилище \nзаписей \nколебания \nгравитации</string>
 
-    <string name="document">данные - %1$s</string>
+    <string name="document">данные: %1$s</string>
 
 
 </resources>

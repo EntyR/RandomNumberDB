@@ -3,7 +3,6 @@ package com.harman.roomdbapp.app.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.databinding.DataStorageItemBinding
@@ -15,20 +14,13 @@ class DocumentsAdapter(
 ) :
     RecyclerView.Adapter<DocumentsAdapter.DocumentViewHolder>() {
 
+    private var isClickEnabled = true
+
     private var currentList = mutableListOf<Document>()
 
     class DocumentViewHolder(val binding: DataStorageItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    companion object : DiffUtil.ItemCallback<Document>() {
-        override fun areItemsTheSame(oldItem: Document, newItem: Document): Boolean {
-            return oldItem == newItem
-        }
-
-        override fun areContentsTheSame(oldItem: Document, newItem: Document): Boolean {
-            return oldItem.docName == newItem.docName
-        }
-    }
 
     override fun getItemCount(): Int {
         return currentList.size
@@ -44,6 +36,10 @@ class DocumentsAdapter(
         )
     }
 
+    fun getDocName(index: Int): String {
+        return currentList[index].docName
+    }
+
     fun submitList(list: List<Document>) {
         currentList = list.toMutableList()
     }
@@ -55,12 +51,17 @@ class DocumentsAdapter(
         holder.binding.tvValue.isSelected = true
 
         holder.binding.btItemValue.setOnClickListener {
-            itemPressedCallback(currentList[position].docName)
+            if (isClickEnabled)
+                itemPressedCallback(currentList[position].docName)
         }
     }
 
-    fun deleteItem(position: Int) {
+    fun switchEnabled(value: Boolean) {
+        isClickEnabled = value
+    }
 
+    fun deleteItem(position: Int) {
+        notifyItemRangeChanged(position, currentList.size)
         currentList.removeAt(position)
         notifyItemRemoved(position)
     }

@@ -13,4 +13,6 @@ interface IDocumentsRepository {
     fun saveLastRecord(newRecord: Long)
 
     fun getLastRecord(): Long
+
+    fun deleteCsvFile(filename: String)
 }

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.harman.roomdbapp.app.databinding.FragmentBottomSheetListDialogItemBinding
 import com.harman.roomdbapp.app.other.getFormattedDateFromMillis
 import com.harman.roomdbapp.domain.model.GravityRecord
+import java.text.DecimalFormat
 import java.util.Collections
 
 class DocumentsEntryAdapter :
@@ -37,18 +38,20 @@ class DocumentsEntryAdapter :
     }
 
     override fun onBindViewHolder(holder: DocumentEntryViewHolder, position: Int) {
-        val value = currentList[position]?.record?.toInt() ?: ""
+        val value = currentList[position]?.record
+        val df = DecimalFormat("0.00")
+        val formattedValue = if (value != null) df.format(value) else ""
         val date =
             if (currentList[position] != null) getFormattedDateFromMillis(currentList[position]!!.timestamp)
             else ""
-        holder.binding.tvValue.text = value.toString()
+        holder.binding.tvValue.text = formattedValue
         holder.binding.tvDate.text = date
     }
 
     override fun submitList(list: List<GravityRecord?>?) {
 
         val newList = list?.toMutableList() ?: mutableListOf()
-        if (newList.size < 4) newList.addAll(Collections.nCopies(4 - currentList.size, null))
+        if (newList.size < 4) newList.addAll(Collections.nCopies(4 - newList.size, null))
         super.submitList(newList.toList())
     }
 }

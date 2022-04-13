@@ -22,24 +22,21 @@ class DocumentCoroutineWorker(
         if (records.isNullOrEmpty())
             return Result.failure()
 
-        val lastItemCsv = records.last().timestamp
-
         val lastRecordCsv = documentUseCase.getLastBackupRecordTimestamp()
 
-
         records.filter { it.timestamp > lastRecordCsv }.let {
-            if(!it.isNullOrEmpty()){
+            if (!it.isNullOrEmpty()) {
                 addNewRecords(it)
             }
         }
-        logValue()
         return Result.success()
-
     }
 
     private fun addNewRecords(value: List<GravityRecord>) {
-        documentUseCase.setLastBackupRecordTimestamp(value.sortedBy { it.timestamp }
-            .last().timestamp)
+        documentUseCase.setLastBackupRecordTimestamp(
+            value.sortedBy { it.timestamp }
+                .last().timestamp
+        )
         documentUseCase.addNewGravityDocument(value)
     }
 

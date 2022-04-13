@@ -19,4 +19,8 @@ class GravityDocumentsUseCase(
     fun getLastBackupRecordTimestamp() = repository.getLastRecord()
 
     fun getAllGravityRecords(fileName: String) = repository.getGravityRecordsFromDocument(fileName)
+
+    fun deleteGravityDocument(fileName: String) {
+        repository.deleteCsvFile(fileName)
+    }
 }

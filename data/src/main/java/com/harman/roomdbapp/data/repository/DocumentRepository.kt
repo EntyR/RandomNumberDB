@@ -67,4 +67,9 @@ class DocumentRepository(private val context: Context) : IDocumentsRepository {
     override fun getLastRecord(): Long {
         return sharedPref.getLong(context.resources.getString(R.string.saved_timestamp_key), 0)
     }
+
+    override fun deleteCsvFile(filename: String) {
+        val file = File(context.filesDir, filename)
+        file.delete()
+    }
 }
