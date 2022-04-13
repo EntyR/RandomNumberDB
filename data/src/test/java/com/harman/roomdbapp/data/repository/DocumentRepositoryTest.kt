@@ -3,10 +3,17 @@ package com.harman.roomdbapp.data.repository
 import android.content.Context
 import com.google.common.truth.Truth
 import com.harman.roomdbapp.domain.model.GravityRecord
-import io.mockk.*
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.mockkConstructor
+import io.mockk.unmockkConstructor
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.mockito.Mockito
+import org.mockito.Mockito.`when`
+import org.mockito.Mockito.times
+import org.mockito.kotlin.verify
 import java.io.File
 
 internal class DocumentRepositoryTest {
@@ -16,6 +23,7 @@ internal class DocumentRepositoryTest {
     fun setUp() {
         context = mockk(relaxed = true) {
             every { filesDir } returns mockk(relaxed = true)
+            every { getSharedPreferences(any(), any()) } returns mockk(relaxed = true)
         }
     }
 
@@ -62,13 +70,16 @@ internal class DocumentRepositoryTest {
 
     @Test
     fun `verify document deleted`() {
-        mockkConstructor(File::class)
-        every { constructedWith<File>().delete() } returns mockk(relaxed = true)
+
+        var result = false
+        Mockito.mockConstruction(File::class.java) { file, _ ->
+            `when`(file.delete()).then { true.also { result = it } }
+        }
         val initName = "1234.csv"
 
-
-        val repository = spyk(DocumentRepository(context))
+        val repository = DocumentRepository(context)
         repository.deleteCsvFile(initName)
-        verify { anyConstructed<File>().delete() }
+        Truth.assertThat(result).isTrue()
+
     }
 }
