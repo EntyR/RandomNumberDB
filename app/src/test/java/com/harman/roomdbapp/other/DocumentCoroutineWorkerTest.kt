@@ -1,9 +1,10 @@
-package com.harman.roomdbapp.app.other.worker
+package com.harman.roomdbapp.other
 
 import android.content.Context
-import androidx.work.ListenableWorker.Result
+import androidx.work.ListenableWorker
 import androidx.work.WorkerParameters
 import com.google.common.truth.Truth
+import com.harman.roomdbapp.app.other.worker.DocumentCoroutineWorker
 import com.harman.roomdbapp.domain.model.GravityRecord
 import com.harman.roomdbapp.domain.use_cases.GravityDocumentsUseCase
 import com.harman.roomdbapp.domain.use_cases.GravityFluctuationUseCase
@@ -48,7 +49,7 @@ internal class DocumentCoroutineWorkerTest {
                 DocumentCoroutineWorker(context, params, fluctuationUseCase, documentUseCase)
             val result = worker.doWork()
             Truth.assertThat(result)
-                .isEqualTo(Result.success())
+                .isEqualTo(ListenableWorker.Result.success())
             verify(exactly = 0) { documentUseCase.setLastBackupRecordTimestamp(any()) }
             verify(exactly = 0) { documentUseCase.addNewGravityDocument(any()) }
         }
@@ -73,7 +74,7 @@ internal class DocumentCoroutineWorkerTest {
                 DocumentCoroutineWorker(context, params, fluctuationUseCase, documentUseCase)
             val result = worker.doWork()
             Truth.assertThat(result)
-                .isEqualTo(Result.success())
+                .isEqualTo(ListenableWorker.Result.success())
             verify(exactly = 1) { documentUseCase.setLastBackupRecordTimestamp(expected.timestamp) }
             verify(exactly = 1) { documentUseCase.addNewGravityDocument(listOf(expected)) }
         }

@@ -21,12 +21,12 @@ internal class BottomSheetViewModelTest {
     fun `Verify gravity document entry's are received`() {
 
         val fileName = "123456.csv"
-        val init = listOf(GravityRecord(1f, 1L))
+        val initial = listOf(GravityRecord(1f, 1L))
 
-        coEvery { useCase.getAllGravityRecords(fileName) } returns init
+        coEvery { useCase.getAllGravityRecords(fileName) } returns initial
         val viewModel = BottomSheetViewModel(useCase)
         val received = viewModel.getGravityRecordsFromDocuments(fileName)
 
-        Truth.assertThat(received).isEqualTo(init)
+        Truth.assertThat(received).isEqualTo(initial)
     }
 }

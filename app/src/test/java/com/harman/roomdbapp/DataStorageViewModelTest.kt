@@ -32,14 +32,14 @@ internal class DataStorageViewModelTest {
     @Test
     fun `Verify gravity document is deleted`() {
         val fileName = "123456.csv"
-        val init = mutableListOf(fileName)
+        val initial = mutableListOf(fileName)
 
         coEvery { useCase.deleteGravityDocument(fileName) } answers {
-            init.remove(fileName)
+            initial.remove(fileName)
         }
         val viewModel = DataStorageViewModel(useCase)
         viewModel.deleteGravityDocument(fileName)
 
-        Truth.assertThat(init).doesNotContain(fileName)
+        Truth.assertThat(initial).doesNotContain(fileName)
     }
 }
