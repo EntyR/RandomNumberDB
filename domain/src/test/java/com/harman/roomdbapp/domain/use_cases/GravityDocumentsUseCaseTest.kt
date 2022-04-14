@@ -50,23 +50,23 @@ internal class GravityDocumentsUseCaseTest {
     @Test
     fun `Verify last record is saved`() {
 
-        val init = 16L
+        val initial = 16L
         var result = 0L
 
-        coEvery { repository.saveLastRecord(init) } answers {
-            result = init
+        coEvery { repository.saveLastRecord(initial) } answers {
+            result = initial
         }
         val useCase = GravityDocumentsUseCase(repository)
-        useCase.setLastBackupRecordTimestamp(init)
+        useCase.setLastBackupRecordTimestamp(initial)
         Truth.assertThat(result).isEqualTo(result)
     }
     @Test
     fun `Verify last record is received`() {
 
-        val init = 16L
-        coEvery { repository.getLastRecord() } returns init
+        val initial = 16L
+        coEvery { repository.getLastRecord() } returns initial
         val useCase = GravityDocumentsUseCase(repository)
-        Truth.assertThat(useCase.getLastBackupRecordTimestamp()).isEqualTo(init)
+        Truth.assertThat(useCase.getLastBackupRecordTimestamp()).isEqualTo(initial)
     }
 
     @Test

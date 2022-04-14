@@ -109,16 +109,16 @@ internal class DocumentRepositoryTest {
 
     @Test
     fun `verify last is received`() {
-        val init = 1234L
-        every { context.getSharedPreferences(any(), any()).getLong(any(), any()) } returns init
+        val initial = 1234L
+        every { context.getSharedPreferences(any(), any()).getLong(any(), any()) } returns initial
         val repository = DocumentRepository(context)
-        Truth.assertThat(repository.getLastRecord()).isEqualTo(init)
+        Truth.assertThat(repository.getLastRecord()).isEqualTo(initial)
     }
 
     @Test
     fun `verify convert is right`() {
-        val init = GravityRecord(1f, 1)
+        val initial = GravityRecord(1f, 1)
         val result = "1.0,1"
-        Truth.assertThat(init.convertToCsv()).isEqualTo(result)
+        Truth.assertThat(initial.convertToCsv()).isEqualTo(result)
     }
 }
