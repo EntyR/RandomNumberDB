@@ -36,19 +36,19 @@ internal class DocumentRepositoryTest {
     @Test
     fun `verify documents name are returned`() {
 
-        val initName = "1234.csv"
+        val initialName = "1234.csv"
 
         val file = mockk<File>(relaxed = true) {
             every { canRead() } returns true
             every { isFile } returns true
-            every { name } returns initName
+            every { name } returns initialName
         }
 
         every { context.filesDir.listFiles() } returns listOf(file).toTypedArray()
 
         val repository = DocumentRepository(context)
         Truth.assertThat(repository.getCsvList())
-            .contains(initName)
+            .contains(initialName)
     }
 
     // mock constructor for File throws stackoverflow, used mockito library instead
@@ -58,8 +58,8 @@ internal class DocumentRepositoryTest {
 
         val initName = "1234.csv"
         val list = mutableListOf<String>()
-        val initValue = GravityRecord(1f, 1L)
-        val records = listOf(initValue)
+        val initialValue = GravityRecord(1f, 1L)
+        val records = listOf(initialValue)
 
         Mockito.mockConstruction(File::class.java) { file, _ ->
             `when`(file.absoluteFile).thenReturn(Mockito.mock(File::class.java))
@@ -68,13 +68,13 @@ internal class DocumentRepositoryTest {
         Mockito.mockConstruction(FileWriter::class.java)
 
         Mockito.mockConstruction(BufferedWriter::class.java) { writer, _ ->
-            `when`(writer.write(initValue.convertToCsv())).thenAnswer { list.add(initValue.convertToCsv()) }
+            `when`(writer.write(initialValue.convertToCsv())).thenAnswer { list.add(initialValue.convertToCsv()) }
             `when`(writer.newLine()).thenAnswer { }
         }
 
         val repository = DocumentRepository(context)
         repository.addNewCsvFile(initName, records)
-        Truth.assertThat(list).containsExactly(initValue.convertToCsv())
+        Truth.assertThat(list).containsExactly(initialValue.convertToCsv())
     }
 
     // mock constructor for File throws stackoverflow, used mockito library instead
@@ -86,25 +86,25 @@ internal class DocumentRepositoryTest {
         Mockito.mockConstruction(File::class.java) { file, _ ->
             `when`(file.delete()).then { true.also { result = it } }
         }
-        val initName = "1234.csv"
+        val initialName = "1234.csv"
         val repository = DocumentRepository(context)
-        repository.deleteCsvFile(initName)
+        repository.deleteCsvFile(initialName)
         Truth.assertThat(result).isTrue()
     }
 
     @Test
     fun `verify last record are saved`() {
 
-        val init = 1234L
+        val initial = 1234L
         every {
-            context.getSharedPreferences(any(), any()).edit().putLong(any(), init)
+            context.getSharedPreferences(any(), any()).edit().putLong(any(), initial)
         } returns mockk(relaxed = true)
         every {
             context.getSharedPreferences(any(), any()).edit().apply()
         } returns mockk(relaxed = true)
         val repository = DocumentRepository(context)
-        repository.saveLastRecord(init)
-        io.mockk.verify { context.getSharedPreferences(any(), any()).edit().putLong(any(), init) }
+        repository.saveLastRecord(initial)
+        io.mockk.verify { context.getSharedPreferences(any(), any()).edit().putLong(any(), initial) }
     }
 
     @Test

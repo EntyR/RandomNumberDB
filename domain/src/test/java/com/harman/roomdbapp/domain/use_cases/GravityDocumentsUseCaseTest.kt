@@ -23,16 +23,16 @@ internal class GravityDocumentsUseCaseTest {
     fun `Verify gravity document are adding to repository`() {
 
         val fileName = "1234.csv"
-        val init = listOf(GravityRecord(1f, 1234))
+        val initial = listOf(GravityRecord(1f, 1234))
         val list: MutableList<GravityRecord> = mutableListOf()
 
-        coEvery { repository.addNewCsvFile(fileName, init) } answers {
-            list.addAll(init)
+        coEvery { repository.addNewCsvFile(fileName, initial) } answers {
+            list.addAll(initial)
         }
         val useCase = GravityDocumentsUseCase(repository)
-        useCase.addNewGravityDocument(init)
+        useCase.addNewGravityDocument(initial)
 
-        Truth.assertThat(list.containsAll(init)).isTrue()
+        Truth.assertThat(list.containsAll(initial)).isTrue()
     }
 
     @Test

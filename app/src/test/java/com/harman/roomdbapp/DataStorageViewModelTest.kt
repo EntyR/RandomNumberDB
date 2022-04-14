@@ -20,13 +20,13 @@ internal class DataStorageViewModelTest {
     @Test
     fun `Verify gravity document list is received`() {
 
-        val init = listOf("initValue")
+        val initial = listOf("initValue")
 
-        coEvery { useCase.getGravityDocumentsName() } returns init
+        coEvery { useCase.getGravityDocumentsName() } returns initial
         val viewModel = DataStorageViewModel(useCase)
         val received = viewModel.getGravityDocumentNameList()
 
-        Truth.assertThat(received).isEqualTo(init)
+        Truth.assertThat(received).isEqualTo(initial)
     }
 
     @Test
