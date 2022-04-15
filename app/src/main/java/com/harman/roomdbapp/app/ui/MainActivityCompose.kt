@@ -26,7 +26,7 @@ class MainActivityCompose : AppCompatActivity() {
                         composable(
                             route = Screen.RandomNumberList.route
                         ) {
-                            RandomNumberList(navController)
+                            RandomNumberList()
                         }
                     }
                 }

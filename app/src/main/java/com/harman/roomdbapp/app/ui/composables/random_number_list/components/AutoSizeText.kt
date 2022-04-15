@@ -15,6 +15,7 @@ import com.harman.roomdbapp.app.R
 
 @Composable
 fun AutoSizeText(
+    modifier: Modifier,
     text: String,
     minTextSize: TextUnit,
     maxTextSize: TextUnit,
@@ -44,7 +45,7 @@ fun AutoSizeText(
                 }
             } else readyToDraw = true
         },
-        modifier = Modifier
+        modifier = modifier
             .drawWithContent { if (readyToDraw) drawContent() }
             .fillMaxSize()
     )
