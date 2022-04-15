@@ -110,7 +110,7 @@ dependencies {
     implementation project(":data")
     implementation project(":domain")
 
-    testImplementation 'org.mockito:mockito-core:2.24.5'
+    testImplementation 'org.mockito:mockito-core:4.2.0'
     androidTestImplementation 'org.mockito:mockito-android:2.24.5'
 
     implementation "androidx.lifecycle:lifecycle-service:2.4.1"

@@ -49,7 +49,6 @@ class DataStorageFragment : Fragment() {
                     viewModel.deleteGravityDocument(adapter.getDocName(pos))
                     adapter.deleteItem(pos)
                     adapter.switchEnabled(true)
-
                 }
 
                 override fun onSelectedChanged(

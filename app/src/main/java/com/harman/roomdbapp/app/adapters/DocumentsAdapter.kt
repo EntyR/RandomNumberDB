@@ -21,7 +21,6 @@ class DocumentsAdapter(
     class DocumentViewHolder(val binding: DataStorageItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-
     override fun getItemCount(): Int {
         return currentList.size
     }
