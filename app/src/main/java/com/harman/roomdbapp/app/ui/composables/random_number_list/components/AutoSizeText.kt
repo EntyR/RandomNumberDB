@@ -20,10 +20,11 @@ fun AutoSizeText(
     minTextSize: TextUnit,
     maxTextSize: TextUnit,
     step: TextUnit = 1.sp,
-    maxLines: Int
+    maxLines: Int,
+    fontSizeValue: Float,
+    changeTextCallBack: (value: Float) -> Unit
 ) {
 
-    var fontSizeValue by remember { mutableStateOf(maxTextSize.value) }
     var readyToDraw by remember { mutableStateOf(false) }
 
     Text(
@@ -39,9 +40,9 @@ fun AutoSizeText(
                 val newFontSize = fontSizeValue - step.value
                 if (newFontSize <= minTextSize.value) {
                     readyToDraw = true
-                    fontSizeValue = newFontSize
+                    changeTextCallBack(newFontSize)
                 } else {
-                    fontSizeValue = newFontSize
+                    changeTextCallBack(newFontSize)
                 }
             } else readyToDraw = true
         },
