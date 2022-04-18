@@ -18,7 +18,7 @@ suspend fun enableSnapHelper(listState: LazyListState, extraOffset: (index: Int)
         paddingOffset = (listState.layoutInfo.viewportEndOffset / 4.7).toInt()
         val padding = extraOffset(it.index)
         val offset =
-            if (it.offset > offsetCenter) it.offset + (it.size - padding) / 2 else it.offset - it.size
+            if (it.offset > offsetCenter) it.offset + it.size - padding else it.offset - it.size
         listState.layoutInfo.viewportEndOffset / 2 + abs(offset)
     }?.index
     index?.let {
