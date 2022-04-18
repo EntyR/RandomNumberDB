@@ -58,8 +58,7 @@ fun WidgetListItem(
                         start = (elemSize / 8).dp,
                         top = (elemSize / 13).dp
                     )
-                )
-                {
+                ) {
                     val painter: Painter = painterResource(id = drawable)
                     Image(
                         modifier = Modifier
@@ -73,8 +72,7 @@ fun WidgetListItem(
                             bottom = (elemSize / 8).dp
                         ),
                         text = text,
-                        20.sp,
-                        50.sp,
+                        minTextSize = 20.sp,
                         maxLines = maxLines,
                         fontSizeValue = fontSizeValue,
                         changeTextCallBack = { changeTextCallback(it) }
@@ -83,19 +81,5 @@ fun WidgetListItem(
             }
         }
     }
-
-
 }
 
-
-//@Preview
-//@Composable
-//fun Preview() {
-//    WidgetListItem(
-//        R.drawable.grav_widget,
-//        500,
-//        Modifier,
-//        3,
-//        "Gravity \nFluctuation \nRecord"
-//    )
-//}
