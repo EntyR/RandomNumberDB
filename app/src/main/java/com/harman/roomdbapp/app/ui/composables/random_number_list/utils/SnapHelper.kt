@@ -8,18 +8,18 @@ import kotlin.math.abs
  *
  * Use extraOffset to set additional offset for specific element
  */
-suspend fun enableSnapHelper(listState: LazyListState, extraOffset: (index: Int) -> Int) {
+suspend fun enableSnapHelper(listState: LazyListState, extraOffset: () -> Int) {
 
     val visibleItems = listState.layoutInfo.visibleItemsInfo
 
     val index = visibleItems.minByOrNull {
         val offsetCenter = listState.layoutInfo.viewportEndOffset / 2
-        val padding = extraOffset(it.index)
+        val padding = extraOffset()
         val offset =
             if (it.offset > offsetCenter) it.offset + it.size - padding else it.offset - it.size
         listState.layoutInfo.viewportEndOffset / 2 + abs(offset)
-    }?.index
+    }
     index?.let {
-        listState.animateScrollToItem(it, -(extraOffset(it)*3))
+        listState.animateScrollToItem(it.index, -((listState.layoutInfo.viewportEndOffset - it.size)/2))
     }
 }
