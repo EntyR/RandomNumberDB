@@ -7,17 +7,17 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import com.harman.roomdbapp.app.model.Widget
-import com.harman.roomdbapp.app.ui.composables.random_number_list.components.WidgetListItem
+import com.harman.roomdbapp.app.ui.composables.random_number_list.components.WidgetRowItem
 import com.harman.roomdbapp.app.ui.composables.random_number_list.utils.enableSnapHelper
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -39,6 +39,8 @@ fun WidgetRow(widgetList: List<Widget>) {
     var fontSize by remember {
         mutableStateOf(50f)
     }
+    val itemSize = localConfiguration.screenWidthDp / 1.7
+    val offset = ((localConfiguration.screenWidthDp - itemSize) / 2).toInt()
 
     LazyRow(
         state = listState,
@@ -50,20 +52,18 @@ fun WidgetRow(widgetList: List<Widget>) {
 
             if (!listState.isScrollInProgress && isFlingStarted.value) {
 
-                val paddingOffset = (listState.layoutInfo.viewportEndOffset / 4.7).toInt()
-
                 coroutine.launch {
                     delay(100)
                     enableSnapHelper(listState) {
                         if (it == 0 || it == widgetList.size - 1)
-                            paddingOffset
+                            offset
                         else 0
                     }
                 }
                 isFlingStarted.value = false
             }
 
-            center = this.center.x
+            center = this.center.x - offset / 2
             drawContent()
         }
     ) {
@@ -72,47 +72,39 @@ fun WidgetRow(widgetList: List<Widget>) {
             it.id
         }) { widget ->
 
-            var startPadding = 0
-            var endPadding = 0
-
             var scale by remember { mutableStateOf<Float>(1f) }
 
-            // TODO calculate padding another way, because it differ on another devices
             listState.layoutInfo.visibleItemsInfo.forEach { item ->
 
                 if (item.key == widget.id) {
-                    val itemOffset: Int
-                    when (item.key) {
+                    val itemOffset: Int = when (item.key) {
                         0 -> {
-                            startPadding = (listState.layoutInfo.viewportEndOffset / 12)
-                            itemOffset = item.offset + (item.size - startPadding) / 2
+                            item.offset + (item.size - offset) / 2
                         }
                         widgetList.size - 1 -> {
-                            endPadding = (listState.layoutInfo.viewportEndOffset / 12)
-                            itemOffset = item.offset + (item.size - endPadding) / 2
+                            item.offset + (item.size - offset) / 2
                         }
                         else -> {
-                            itemOffset = item.offset + item.size / 2
+                            item.offset + item.size / 2
                         }
                     }
-                    val distance = min(center * 0.9f, abs(center - itemOffset))
-                    scale = 1f - 0.3f * (distance / center * 0.9f)
+                    val distance = min(center * 0.8f, abs(center - itemOffset))
+                    scale = 1f - 0.3f * (distance / center)
                 }
             }
-            Spacer(modifier = Modifier.width(startPadding.dp))
+            Spacer(modifier = Modifier.width(if (widget.id == 0) offset.dp else 0.dp))
             val maxLines = widget.text.split("\n").size
-            WidgetListItem(
+            WidgetRowItem(
                 scale = scale,
                 drawable = widget.imageResourceId,
-                screenWidth = localConfiguration.screenWidthDp,
+                elemSize = itemSize,
                 maxLines = maxLines,
                 text = widget.text,
-                fontSizeValue = fontSize,
-                changeTextCallback = {
-                    fontSize = it
-                }
-            )
-            Spacer(modifier = Modifier.width(endPadding.dp))
+                fontSizeValue = fontSize
+            ) {
+                fontSize = it
+            }
+            Spacer(modifier = Modifier.width(if (widget.id == widgetList.size - 1) offset.dp else 0.dp))
         }
     }
 }

@@ -26,7 +26,6 @@ import androidx.compose.ui.unit.sp
 import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.ui.composables.TransparentGray
 
-
 @Composable
 fun RandomNumbersListItem() {
 
@@ -57,13 +56,12 @@ fun RandomNumbersListItem() {
                     .padding(bottom = 5.dp),
                 shape = RoundedCornerShape(50),
                 onClick = {
-
                 }
             ) {
 
                 Text(
                     modifier = Modifier
-                        .padding(20.dp),
+                        .padding(12.dp),
                     textAlign = TextAlign.Center,
                     fontFamily = FontFamily(Font(R.font.roboto_medium)),
                     fontSize = 18.sp,

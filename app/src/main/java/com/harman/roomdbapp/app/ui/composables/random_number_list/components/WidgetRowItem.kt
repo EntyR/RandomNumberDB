@@ -2,7 +2,12 @@ package com.harman.roomdbapp.app.ui.composables.random_number_list.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
@@ -17,9 +22,9 @@ import androidx.compose.ui.unit.sp
 import com.harman.roomdbapp.app.ui.composables.TransparentGray
 
 @Composable
-fun WidgetListItem(
+fun WidgetRowItem(
     drawable: Int,
-    screenWidth: Int,
+    elemSize: Double,
     modifier: Modifier = Modifier,
     maxLines: Int,
     text: String,
@@ -27,8 +32,6 @@ fun WidgetListItem(
     fontSizeValue: Float,
     changeTextCallback: (value: Float) -> Unit
 ) {
-
-    val elemSize = screenWidth / 1.7
 
     Box(modifier = modifier) {
         Box(
@@ -82,4 +85,3 @@ fun WidgetListItem(
         }
     }
 }
-

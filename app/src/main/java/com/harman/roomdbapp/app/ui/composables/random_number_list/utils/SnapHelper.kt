@@ -10,20 +10,17 @@ import kotlin.math.abs
  */
 suspend fun enableSnapHelper(listState: LazyListState, extraOffset: (index: Int) -> Int) {
 
-    var paddingOffset = 0
     val visibleItems = listState.layoutInfo.visibleItemsInfo
 
     val index = visibleItems.minByOrNull {
         val offsetCenter = listState.layoutInfo.viewportEndOffset / 2
-        paddingOffset = (listState.layoutInfo.viewportEndOffset / 4.7).toInt()
         val padding = extraOffset(it.index)
         val offset =
             if (it.offset > offsetCenter) it.offset + it.size - padding else it.offset - it.size
         listState.layoutInfo.viewportEndOffset / 2 + abs(offset)
     }?.index
     index?.let {
-        val offset = if (it != 0)extraOffset(it) else 0
-
+        val offset = if (it != 0) extraOffset(it) else 0
         listState.animateScrollToItem(it, -offset)
     }
 }
