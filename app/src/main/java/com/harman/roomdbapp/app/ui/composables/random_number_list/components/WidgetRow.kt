@@ -1,11 +1,13 @@
 package com.harman.roomdbapp.app.ui.composables.random_number_list
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -15,8 +17,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.harman.roomdbapp.app.model.Widget
+import com.harman.roomdbapp.app.ui.MainActivity
 import com.harman.roomdbapp.app.ui.composables.random_number_list.components.WidgetRowItem
 import com.harman.roomdbapp.app.ui.composables.random_number_list.utils.enableSnapHelper
 import kotlinx.coroutines.delay
@@ -33,6 +37,8 @@ fun WidgetRow(widgetList: List<Widget>) {
 
     val localConfiguration = LocalConfiguration.current
     val listState = rememberLazyListState()
+
+    val context = LocalContext.current
 
     var center by remember { mutableStateOf<Float>(1f) }
 
@@ -100,10 +106,16 @@ fun WidgetRow(widgetList: List<Widget>) {
                 elemSize = itemSize,
                 maxLines = maxLines,
                 text = widget.text,
-                fontSizeValue = fontSize
-            ) {
-                fontSize = it
-            }
+                fontSizeValue = fontSize,
+                onItemClickCallback = {
+                    when (widget.id) {
+                        2 -> {
+                            context.startActivity(Intent(context, MainActivity::class.java))
+                        }
+                    }
+                },
+                changeTextCallback = { fontSize = it }
+            )
             Spacer(modifier = Modifier.width(if (widget.id == widgetList.size - 1) offset.dp else 0.dp))
         }
     }

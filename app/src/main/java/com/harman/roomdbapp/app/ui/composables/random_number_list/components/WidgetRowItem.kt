@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -21,6 +22,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.harman.roomdbapp.app.ui.composables.TransparentGray
 
+
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun WidgetRowItem(
     drawable: Int,
@@ -30,7 +33,8 @@ fun WidgetRowItem(
     text: String,
     scale: Float = 1F,
     fontSizeValue: Float,
-    changeTextCallback: (value: Float) -> Unit
+    changeTextCallback: (value: Float) -> Unit,
+    onItemClickCallback: () -> Unit
 ) {
 
     Box(modifier = modifier) {
@@ -51,6 +55,9 @@ fun WidgetRowItem(
 
         ) {
             Card(
+                onClick = {
+                    onItemClickCallback()
+                },
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(bottom = 5.dp),
