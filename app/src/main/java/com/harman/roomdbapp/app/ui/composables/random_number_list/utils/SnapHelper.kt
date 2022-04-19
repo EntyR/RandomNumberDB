@@ -20,7 +20,6 @@ suspend fun enableSnapHelper(listState: LazyListState, extraOffset: (index: Int)
         listState.layoutInfo.viewportEndOffset / 2 + abs(offset)
     }?.index
     index?.let {
-        val offset = if (it != 0) extraOffset(it) else 0
-        listState.animateScrollToItem(it, -offset)
+        listState.animateScrollToItem(it, -(extraOffset(it)*3))
     }
 }

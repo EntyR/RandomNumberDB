@@ -2,11 +2,11 @@ package com.harman.roomdbapp.app.ui.composables.random_number_list.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -17,11 +17,11 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.harman.roomdbapp.app.ui.composables.TransparentGray
-
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -31,8 +31,10 @@ fun WidgetRowItem(
     modifier: Modifier = Modifier,
     maxLines: Int,
     text: String,
+    shouldDraw: Boolean,
     scale: Float = 1F,
     fontSizeValue: Float,
+    onMeasureCompleted: () -> Unit,
     changeTextCallback: (value: Float) -> Unit,
     onItemClickCallback: () -> Unit
 ) {
@@ -50,7 +52,7 @@ fun WidgetRowItem(
                             TransparentGray
                         )
                     ),
-                    shape = RoundedCornerShape(10)
+                    shape = RoundedCornerShape(20)
                 )
 
         ) {
@@ -61,7 +63,7 @@ fun WidgetRowItem(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(bottom = 5.dp),
-                shape = RoundedCornerShape(10),
+                shape = RoundedCornerShape(20),
             ) {
                 Column(
                     modifier = Modifier.padding(
@@ -70,11 +72,14 @@ fun WidgetRowItem(
                     )
                 ) {
                     val painter: Painter = painterResource(id = drawable)
+
                     Image(
                         modifier = Modifier
-                            .width((elemSize / 2.8).dp),
+                            .height((elemSize / 2.7).dp),
                         painter = painter,
-                        contentDescription = ""
+                        contentDescription = "",
+                        contentScale = ContentScale.FillHeight,
+
                     )
                     AutoSizeText(
                         Modifier.padding(
@@ -84,8 +89,12 @@ fun WidgetRowItem(
                         text = text,
                         minTextSize = 20.sp,
                         maxLines = maxLines,
+                        onMeasureTextCallBack = {
+                            onMeasureCompleted()
+                        },
                         fontSizeValue = fontSizeValue,
-                        changeTextCallBack = { changeTextCallback(it) }
+                        changeTextCallBack = { changeTextCallback(it) },
+                        readyToDraw = shouldDraw
                     )
                 }
             }

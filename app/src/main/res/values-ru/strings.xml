@@ -20,6 +20,7 @@
 
     <string name="document">данные: %1$s</string>
     <string name="switch_to_compose">Поменять \nна compose</string>
+    <string name="switch_to_xml">Поменять \nна xml</string>
 
 
 </resources>

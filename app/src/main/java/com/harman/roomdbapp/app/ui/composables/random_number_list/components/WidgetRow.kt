@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -30,7 +29,7 @@ import kotlin.math.min
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
-fun WidgetRow(widgetList: List<Widget>) {
+fun WidgetRow(widgetList: List<Widget>, onCalculationCompleted: () -> Unit) {
     val isFlingStarted = mutableStateOf(false)
 
     val coroutine = rememberCoroutineScope()
@@ -41,6 +40,7 @@ fun WidgetRow(widgetList: List<Widget>) {
     val context = LocalContext.current
 
     var center by remember { mutableStateOf<Float>(1f) }
+    var shouldDraw by remember { mutableStateOf(false) }
 
     var fontSize by remember {
         mutableStateOf(50f)
@@ -61,9 +61,7 @@ fun WidgetRow(widgetList: List<Widget>) {
                 coroutine.launch {
                     delay(100)
                     enableSnapHelper(listState) {
-                        if (it == 0 || it == widgetList.size - 1)
-                            offset
-                        else 0
+                        offset
                     }
                 }
                 isFlingStarted.value = false
@@ -100,6 +98,9 @@ fun WidgetRow(widgetList: List<Widget>) {
             }
             Spacer(modifier = Modifier.width(if (widget.id == 0) offset.dp else 0.dp))
             val maxLines = widget.text.split("\n").size
+            var measuredItems by remember {
+                mutableStateOf(0)
+            }
             WidgetRowItem(
                 scale = scale,
                 drawable = widget.imageResourceId,
@@ -112,9 +113,18 @@ fun WidgetRow(widgetList: List<Widget>) {
                         2 -> {
                             context.startActivity(Intent(context, MainActivity::class.java))
                         }
+                        else -> Unit
                     }
                 },
-                changeTextCallback = { fontSize = it }
+                changeTextCallback = { fontSize = it },
+                onMeasureCompleted = {
+                    measuredItems += 1
+                    if (measuredItems == widgetList.size) {
+                        shouldDraw = true
+                        onCalculationCompleted()
+                    }
+                },
+                shouldDraw = shouldDraw
             )
             Spacer(modifier = Modifier.width(if (widget.id == widgetList.size - 1) offset.dp else 0.dp))
         }

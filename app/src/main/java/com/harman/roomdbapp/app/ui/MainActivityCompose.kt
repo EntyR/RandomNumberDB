@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.other.compose.Screen
+import com.harman.roomdbapp.app.ui.composables.random_number_list.RandomNumberDetailScreen
 import com.harman.roomdbapp.app.ui.composables.random_number_list.RandomNumberList
 
 class MainActivityCompose : AppCompatActivity() {
@@ -25,7 +26,12 @@ class MainActivityCompose : AppCompatActivity() {
                     composable(
                         route = Screen.RandomNumberList.route
                     ) {
-                        RandomNumberList()
+                        RandomNumberList(navController)
+                    }
+                    composable(
+                        Screen.RandomNumberDescription.route
+                    ) {
+                        RandomNumberDetailScreen()
                     }
                 }
             }

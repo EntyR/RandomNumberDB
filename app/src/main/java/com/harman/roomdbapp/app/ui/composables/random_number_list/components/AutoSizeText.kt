@@ -5,8 +5,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
@@ -25,10 +23,10 @@ fun AutoSizeText(
     step: TextUnit = 1.sp,
     maxLines: Int,
     fontSizeValue: Float,
+    readyToDraw: Boolean,
+    onMeasureTextCallBack: () -> Unit,
     changeTextCallBack: (value: Float) -> Unit
 ) {
-
-    var readyToDraw by remember { mutableStateOf(false) }
 
     Text(
         text = text,
@@ -42,12 +40,12 @@ fun AutoSizeText(
                 Log.e("TAG", "AutoSizeText: ${it.lineCount}")
                 val newFontSize = fontSizeValue - step.value
                 if (newFontSize <= minTextSize.value) {
-                    readyToDraw = true
+                    onMeasureTextCallBack()
                     changeTextCallBack(newFontSize)
                 } else {
                     changeTextCallBack(newFontSize)
                 }
-            } else readyToDraw = true
+            } else onMeasureTextCallBack()
         },
         modifier = modifier
             .drawWithContent { if (readyToDraw) drawContent() }

@@ -23,5 +23,6 @@
     <string name="stop_recording">Stop recording</string>
     <string name="data_storage_widget">Gravity Data \nFiles Storage</string>
     <string name="switch_to_compose">Switch \nto compose</string>
+    <string name="switch_to_xml">Switch \nto xml</string>
 
 </resources>

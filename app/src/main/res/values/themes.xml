@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.RoomDb" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-
+        <item name="android:windowBackground">@color/pale_yellow</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
@@ -21,9 +21,14 @@
 
     </style>
 
+    <style name="ComposeTheme" parent="Theme.RoomDb">
+        <item name="android:windowBackground">@drawable/compose_transaction</item>
+    </style>
+
     <style name="Theme.RoomDb.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/pale_yellow</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_baseline_filter_9_plus_24</item>
+        <item name="windowSplashScreenAnimationDuration">800</item>
         <item name="postSplashScreenTheme">@style/Theme.RoomDb</item>
     </style>
 
