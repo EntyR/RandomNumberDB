@@ -1,11 +1,8 @@
 package com.harman.roomdbapp.app.ui.composables.random_number_list.components
 
-import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.text.font.Font
@@ -14,6 +11,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.harman.roomdbapp.app.R
+import com.harman.roomdbapp.app.ui.composables.random_number_list.utils.AutoSizeElementsHandler
+import com.harman.roomdbapp.app.ui.composables.random_number_list.utils.CalculationState
 
 @Composable
 fun AutoSizeText(
@@ -22,10 +21,8 @@ fun AutoSizeText(
     minTextSize: TextUnit,
     step: TextUnit = 1.sp,
     maxLines: Int,
-    fontSizeValue: Float,
-    readyToDraw: Boolean,
-    onMeasureTextCallBack: () -> Unit,
-    changeTextCallBack: (value: Float) -> Unit
+    textSizeHandler: AutoSizeElementsHandler<Float>,
+
 ) {
 
     Text(
@@ -33,22 +30,23 @@ fun AutoSizeText(
         fontFamily = FontFamily(Font(R.font.roboto_medium)),
         maxLines = maxLines,
         overflow = TextOverflow.Visible,
-        fontSize = fontSizeValue.sp,
+        fontSize = textSizeHandler.getOverallElementSizeState().sp,
         onTextLayout = {
-            if ((it.didOverflowHeight || it.didOverflowWidth) && !readyToDraw) {
-
-                Log.e("TAG", "AutoSizeText: ${it.lineCount}")
-                val newFontSize = fontSizeValue - step.value
+            if (
+                (it.didOverflowHeight || it.didOverflowWidth) &&
+                textSizeHandler.getCalculatedState() == CalculationState.CalculationInProcess
+            ) {
+                val newFontSize = textSizeHandler.getOverallElementSizeState() - step.value
                 if (newFontSize <= minTextSize.value) {
-                    onMeasureTextCallBack()
-                    changeTextCallBack(newFontSize)
+                    textSizeHandler.emitNewValue(newFontSize)
+                    textSizeHandler.emitCalculationComplete()
                 } else {
-                    changeTextCallBack(newFontSize)
+                    textSizeHandler.emitNewValue(newFontSize)
                 }
-            } else onMeasureTextCallBack()
+            } else textSizeHandler.emitCalculationComplete()
         },
         modifier = modifier
-            .drawWithContent { if (readyToDraw) drawContent() }
+            .drawWithContent { if (textSizeHandler.getCalculatedState() == CalculationState.CalculationComplete) drawContent() }
             .fillMaxSize()
     )
 }

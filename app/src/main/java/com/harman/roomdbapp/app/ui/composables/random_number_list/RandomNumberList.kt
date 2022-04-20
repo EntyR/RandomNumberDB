@@ -1,17 +1,18 @@
 package com.harman.roomdbapp.app.ui.composables.random_number_list
 
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,69 +22,42 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import com.harman.roomdbapp.app.R
-import com.harman.roomdbapp.app.model.Widget
 import com.harman.roomdbapp.app.ui.composables.random_number_list.components.RandomNumbersListItem
+import com.harman.roomdbapp.app.ui.composables.random_number_list.utils.AutoSizeElementsHandler
+import com.harman.roomdbapp.app.ui.composables.random_number_list.utils.CalculationState
 import com.harman.roomdbapp.app.ui.viewmodel.NumberListViewModel
 import org.koin.androidx.compose.getViewModel
 
-// TODO populate list from view model ,
-//  add navigation,
-//  add on click listeners
 @Composable
 fun RandomNumberList(
     navController: NavController,
     viewModel: NumberListViewModel = getViewModel()
 ) {
-
+    val widgetList = getWidgetList()
+    val autoSizeTextElementHandler = AutoSizeElementsHandler(50f, widgetList.size)
     val numbers by viewModel.getNumbers().observeAsState(emptyList())
-
-    var isReadyToBeDrawn by remember {
-        mutableStateOf(false)
-    }
 
     Box(
         Modifier
             .fillMaxSize()
             .drawWithContent {
-
-                if (isReadyToBeDrawn)
+                // Will draw element only if size of children calculated
+                if (autoSizeTextElementHandler.getCalculatedState()
+                    == CalculationState.CalculationComplete
+                )
                     drawContent()
             }
     ) {
-
         Column(
             Modifier.fillMaxSize()
         ) {
             WidgetRow(
-                listOf<Widget>(
-                    Widget(
-                        stringResource(R.string.record_gravity_fluctuation),
-                        R.drawable.grav_widget,
-                        id = 0
-                    ),
-                    Widget(
-                        stringResource(R.string.data_storage_widget),
-                        R.drawable.ic_data_storage,
-                        id = 1
-                    ),
-                    Widget(
-                        stringResource(R.string.switch_to_xml),
-                        R.drawable.switch_to_icon,
-                        id = 2
-                    )
-                ),
-                onCalculationCompleted = {
-                    isReadyToBeDrawn = true
-                }
+                widgetList,
+                autoSizeTextElementHandler = autoSizeTextElementHandler,
             )
-
-            Spacer(
-                modifier = Modifier
-                    .height(25.dp)
-            )
+            Spacer(modifier = Modifier.height(25.dp))
 
             LazyColumn(
                 Modifier
@@ -92,10 +66,7 @@ fun RandomNumberList(
             ) {
 
                 items(numbers) { item ->
-                    RandomNumbersListItem(item.number.toString()) {
-                        val bundle = bundleOf(ARGS_KEY to item.number)
-                        // TODO Navigate to description screen
-                    }
+                    RandomNumbersListItem(item.number.toString())
                 }
             }
         }
@@ -104,15 +75,13 @@ fun RandomNumberList(
                 .align(Alignment.BottomEnd)
                 .padding(bottom = 82.dp, end = 32.dp),
         ) {
-
             FloatingActionButton(
-                onClick = { /*TODO navigate to newFragment*/ },
+                onClick = {},
                 backgroundColor = colorResource(id = R.color.blue),
                 contentColor = Color.White,
                 modifier = Modifier
                     .width(70.dp)
                     .height(70.dp),
-
             ) {
                 val painter = painterResource(id = R.drawable.ic_plus)
                 Icon(

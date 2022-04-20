@@ -22,6 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.harman.roomdbapp.app.ui.composables.TransparentGray
+import com.harman.roomdbapp.app.ui.composables.random_number_list.utils.AutoSizeElementsHandler
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -31,12 +32,9 @@ fun WidgetRowItem(
     modifier: Modifier = Modifier,
     maxLines: Int,
     text: String,
-    shouldDraw: Boolean,
     scale: Float = 1F,
-    fontSizeValue: Float,
-    onMeasureCompleted: () -> Unit,
-    changeTextCallback: (value: Float) -> Unit,
-    onItemClickCallback: () -> Unit
+    onItemClickCallback: () -> Unit,
+    autoSizeTextHandler: AutoSizeElementsHandler<Float>
 ) {
 
     Box(modifier = modifier) {
@@ -89,12 +87,7 @@ fun WidgetRowItem(
                         text = text,
                         minTextSize = 20.sp,
                         maxLines = maxLines,
-                        onMeasureTextCallBack = {
-                            onMeasureCompleted()
-                        },
-                        fontSizeValue = fontSizeValue,
-                        changeTextCallBack = { changeTextCallback(it) },
-                        readyToDraw = shouldDraw
+                        textSizeHandler = autoSizeTextHandler,
                     )
                 }
             }

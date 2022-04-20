@@ -3,10 +3,10 @@ package com.harman.roomdbapp.app.ui.composables.random_number_list.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
@@ -31,7 +31,6 @@ import com.harman.roomdbapp.app.ui.composables.TransparentGray
 @Composable
 fun RandomNumbersListItem(
     text: String,
-    onClickCallBack: () -> Unit
 ) {
 
     val interactionSource = remember {
@@ -61,9 +60,7 @@ fun RandomNumbersListItem(
                     .fillMaxSize()
                     .padding(bottom = 3.dp),
                 shape = RoundedCornerShape(50),
-                onClick = {
-                    onClickCallBack()
-                }
+                onClick = {}
             ) {
 
                 Text(

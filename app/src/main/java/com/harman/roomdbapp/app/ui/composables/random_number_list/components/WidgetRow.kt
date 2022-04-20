@@ -21,93 +21,60 @@ import androidx.compose.ui.unit.dp
 import com.harman.roomdbapp.app.model.Widget
 import com.harman.roomdbapp.app.ui.MainActivity
 import com.harman.roomdbapp.app.ui.composables.random_number_list.components.WidgetRowItem
-import com.harman.roomdbapp.app.ui.composables.random_number_list.utils.enableSnapHelper
+import com.harman.roomdbapp.app.ui.composables.random_number_list.utils.AutoSizeElementsHandler
+import com.harman.roomdbapp.app.ui.composables.random_number_list.utils.ScrollingStateHandler
+import com.harman.roomdbapp.app.ui.composables.random_number_list.utils.calculateWidgetElementScale
+import com.harman.roomdbapp.app.ui.composables.random_number_list.utils.enableCenterSnapHelper
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlin.math.abs
-import kotlin.math.min
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
-fun WidgetRow(widgetList: List<Widget>, onCalculationCompleted: () -> Unit) {
+fun WidgetRow(
+    widgetList: List<Widget>,
+    autoSizeTextElementHandler: AutoSizeElementsHandler<Float>
+) {
     val isFlingStarted = mutableStateOf(false)
-
     val coroutine = rememberCoroutineScope()
-
     val localConfiguration = LocalConfiguration.current
     val listState = rememberLazyListState()
-
     val context = LocalContext.current
-
     var center by remember { mutableStateOf<Float>(1f) }
-    var shouldDraw by remember { mutableStateOf(false) }
-
-    var fontSize by remember {
-        mutableStateOf(50f)
-    }
     val itemSize = localConfiguration.screenWidthDp / 1.7
     val offset = ((localConfiguration.screenWidthDp - itemSize) / 2).toInt()
-
+    val scrollingStateHandler = ScrollingStateHandler(listState) {
+        coroutine.launch {
+            delay(100)
+            enableCenterSnapHelper(listState)
+        }
+    }
     LazyRow(
         state = listState,
         modifier = Modifier.drawWithContent {
-
-            if (listState.isScrollInProgress && !isFlingStarted.value) {
-                isFlingStarted.value = true
-            }
-
-            if (!listState.isScrollInProgress && isFlingStarted.value) {
-
-                coroutine.launch {
-                    delay(100)
-                    enableSnapHelper(listState) {
-                        offset
-                    }
-                }
-                isFlingStarted.value = false
-            }
-
+            scrollingStateHandler.startScrollObserving()
             center = this.center.x - offset / 2
             drawContent()
         }
     ) {
 
-        items(widgetList, key = {
-            it.id
-        }) { widget ->
+        items(
+            widgetList,
+            key = { it.id }
+        ) { widget ->
 
-            var scale by remember { mutableStateOf<Float>(1f) }
-
-            listState.layoutInfo.visibleItemsInfo.forEach { item ->
-
-                if (item.key == widget.id) {
-                    val itemOffset: Int = when (item.key) {
-                        0 -> {
-                            item.offset + (item.size - offset) / 2
-                        }
-                        widgetList.size - 1 -> {
-                            item.offset + (item.size - offset) / 2
-                        }
-                        else -> {
-                            item.offset + item.size / 2
-                        }
-                    }
-                    val distance = min(center * 0.8f, abs(center - itemOffset))
-                    scale = 1f - 0.3f * (distance / center)
-                }
+            var scale by remember {
+                mutableStateOf(1f)
             }
+            scale = calculateWidgetElementScale(
+                listState, widget, widgetList.size, center, offset
+            )
             Spacer(modifier = Modifier.width(if (widget.id == 0) offset.dp else 0.dp))
-            val maxLines = widget.text.split("\n").size
-            var measuredItems by remember {
-                mutableStateOf(0)
-            }
             WidgetRowItem(
                 scale = scale,
                 drawable = widget.imageResourceId,
                 elemSize = itemSize,
-                maxLines = maxLines,
+                maxLines = widget.text.split("\n").size,
                 text = widget.text,
-                fontSizeValue = fontSize,
                 onItemClickCallback = {
                     when (widget.id) {
                         2 -> {
@@ -116,15 +83,7 @@ fun WidgetRow(widgetList: List<Widget>, onCalculationCompleted: () -> Unit) {
                         else -> Unit
                     }
                 },
-                changeTextCallback = { fontSize = it },
-                onMeasureCompleted = {
-                    measuredItems += 1
-                    if (measuredItems == widgetList.size) {
-                        shouldDraw = true
-                        onCalculationCompleted()
-                    }
-                },
-                shouldDraw = shouldDraw
+                autoSizeTextHandler = autoSizeTextElementHandler
             )
             Spacer(modifier = Modifier.width(if (widget.id == widgetList.size - 1) offset.dp else 0.dp))
         }
