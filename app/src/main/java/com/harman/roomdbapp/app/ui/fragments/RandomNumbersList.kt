@@ -1,5 +1,6 @@
 package com.harman.roomdbapp.app.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.harman.roomdbapp.app.adapters.WidgetAdapter
 import com.harman.roomdbapp.app.adapters.layout_managers.CenterZoomLayoutManager
 import com.harman.roomdbapp.app.databinding.FragmentRandomNumbersListBinding
 import com.harman.roomdbapp.app.model.Widget
+import com.harman.roomdbapp.app.ui.MainActivityCompose
 import com.harman.roomdbapp.app.ui.viewmodel.NumberListViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -56,6 +58,9 @@ class RandomNumbersList : Fragment() {
                         val fragment = GravityChart.newInstance()
                         navigateTo(fragment, "navigate_to_grav_chart")
                     }
+                    getString(R.string.switch_to_compose) ->{
+                        startActivity(Intent(requireContext(), MainActivityCompose::class.java))
+                    }
                 }
             }
             binding.rvWidgetList.apply {
@@ -67,11 +72,15 @@ class RandomNumbersList : Fragment() {
                 listOf(
                     Widget(
                         getString(R.string.record_gravity_fluctuation),
-                        R.drawable.grav_widget
+                        R.drawable.grav_widget,
                     ),
                     Widget(
                         getString(R.string.data_storage_widget),
                         R.drawable.ic_data_storage
+                    ),
+                    Widget(
+                        getString(R.string.switch_to_compose),
+                        R.drawable.switch_to_icon
                     )
 
                 )
