@@ -3,6 +3,8 @@ package com.harman.roomdbapp.app.ui
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Surface
 import androidx.compose.ui.res.colorResource
 import androidx.navigation.compose.NavHost
@@ -10,8 +12,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.other.compose.Screen
+import com.harman.roomdbapp.app.ui.composables.document_list.DocumentList
 import com.harman.roomdbapp.app.ui.composables.random_number_list.RandomNumberList
 
+@ExperimentalFoundationApi
 class MainActivityCompose : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +30,11 @@ class MainActivityCompose : AppCompatActivity() {
                         route = Screen.RandomNumberList.route
                     ) {
                         RandomNumberList(navController)
+                    }
+                    composable(
+                        route = Screen.DocumentWidgetRoute.route
+                    ) {
+                        DocumentList(navController)
                     }
                 }
             }
