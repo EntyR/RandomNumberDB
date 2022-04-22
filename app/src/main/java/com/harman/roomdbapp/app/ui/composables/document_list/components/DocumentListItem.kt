@@ -16,12 +16,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.harman.roomdbapp.app.R
-import com.harman.roomdbapp.app.ui.composables.TransparentGray
+import com.harman.roomdbapp.app.ui.composables.style.TransparentGray
+import com.harman.roomdbapp.app.ui.composables.style.RobocoFontFamily
 
 @Composable
 fun DocumentListItem(
@@ -62,7 +62,8 @@ fun DocumentListItem(
                     modifier = Modifier.padding(top = 7.dp, bottom = 7.dp, start = 18.dp),
                     text = text,
                     fontSize = 20.sp,
-                    fontFamily = FontFamily(Font(R.font.roboto_bold))
+                    fontFamily = RobocoFontFamily,
+                    fontWeight = FontWeight.Bold
                 )
             }
         }

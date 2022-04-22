@@ -1,4 +1,4 @@
-package com.harman.roomdbapp.app.ui.composables
+package com.harman.roomdbapp.app.ui.composables.style
 
 import androidx.compose.ui.graphics.Color
 

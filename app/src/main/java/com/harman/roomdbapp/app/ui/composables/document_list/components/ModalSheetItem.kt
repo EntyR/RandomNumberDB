@@ -7,12 +7,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.harman.roomdbapp.app.R
+import com.harman.roomdbapp.app.ui.composables.style.RobocoFontFamily
 
 @Composable
 fun ModalSheetItem(
@@ -28,13 +27,15 @@ fun ModalSheetItem(
             .fillMaxSize()
     ) {
         Text(
-            fontFamily = FontFamily(Font(R.font.roboto_medium)),
+            fontFamily = RobocoFontFamily,
+            fontWeight = FontWeight.Medium,
             fontSize = textSize,
             text = value,
             modifier = modifier.align(Alignment.CenterStart)
         )
         Text(
-            fontFamily = FontFamily(Font(R.font.roboto_medium)),
+            fontFamily = RobocoFontFamily,
+            fontWeight = FontWeight.Medium,
             fontSize = textSize,
             text = date,
             modifier = modifier.align(Alignment.CenterEnd)

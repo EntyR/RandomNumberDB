@@ -5,14 +5,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
-import com.harman.roomdbapp.app.R
 import com.harman.roomdbapp.app.ui.composables.random_number_list.utils.AutoSizeElementsHandler
 import com.harman.roomdbapp.app.ui.composables.random_number_list.utils.CalculationState
+import com.harman.roomdbapp.app.ui.composables.style.RobocoFontFamily
 
 @Composable
 fun AutoSizeText(
@@ -23,11 +22,12 @@ fun AutoSizeText(
     maxLines: Int,
     textSizeHandler: AutoSizeElementsHandler<Float>,
 
-) {
+    ) {
 
     Text(
         text = text,
-        fontFamily = FontFamily(Font(R.font.roboto_medium)),
+        fontFamily = RobocoFontFamily,
+        fontWeight = FontWeight.Medium,
         maxLines = maxLines,
         overflow = TextOverflow.Visible,
         fontSize = textSizeHandler.getOverallElementSizeState().sp,

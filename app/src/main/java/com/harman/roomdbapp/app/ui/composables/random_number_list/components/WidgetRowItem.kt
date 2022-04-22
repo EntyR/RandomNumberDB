@@ -21,7 +21,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.harman.roomdbapp.app.ui.composables.TransparentGray
+import com.harman.roomdbapp.app.ui.composables.style.TransparentGray
 import com.harman.roomdbapp.app.ui.composables.random_number_list.utils.AutoSizeElementsHandler
 
 @OptIn(ExperimentalMaterialApi::class)

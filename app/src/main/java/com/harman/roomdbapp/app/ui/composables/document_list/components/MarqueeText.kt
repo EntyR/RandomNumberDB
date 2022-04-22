@@ -3,12 +3,7 @@ package com.harman.roomdbapp.app.ui.composables.document_list.components
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.Text
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
@@ -16,12 +11,12 @@ import androidx.compose.ui.layout.Placeable
 import androidx.compose.ui.layout.SubcomposeLayout
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
-import com.harman.roomdbapp.app.R
+import com.harman.roomdbapp.app.ui.composables.style.RobocoFontFamily
 
 @Composable
 fun MarqueeText(
@@ -30,13 +25,14 @@ fun MarqueeText(
     textModifier: Modifier = Modifier,
     color: Color = Color.Unspecified,
     fontSize: TextUnit = TextUnit.Unspecified,
-    fontFamily: FontFamily? = FontFamily(Font(R.font.roboto_medium)),
+    fontFamily: FontFamily? = RobocoFontFamily,
     letterSpacing: TextUnit = TextUnit.Unspecified,
     textAlign: TextAlign? = null,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
     onTextLayout: (TextLayoutResult) -> Unit = {},
     style: TextStyle = LocalTextStyle.current,
+    fontWeight: FontWeight
 ) {
     val createText = @Composable { localModifier: Modifier ->
         Text(
@@ -52,6 +48,7 @@ fun MarqueeText(
             maxLines = 1,
             onTextLayout = onTextLayout,
             style = style,
+            fontWeight = fontWeight
         )
     }
     var offset by remember { mutableStateOf(0) }

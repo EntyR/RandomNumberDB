@@ -17,7 +17,6 @@ fun SpinningTextOffsetAnimator(textLayoutInfo: TextLayoutInfo, onNewValue: (valu
         if (textLayoutInfo.textWidth <= textLayoutInfo.containerWidth) return@LaunchedEffect
         val duration = 7500 * textLayoutInfo.textWidth / textLayoutInfo.containerWidth
         val delay = 1000L
-
         do {
             val animation = TargetBasedAnimation(
                 animationSpec = infiniteRepeatable(
