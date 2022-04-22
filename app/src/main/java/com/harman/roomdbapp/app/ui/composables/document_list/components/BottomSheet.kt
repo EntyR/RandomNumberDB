@@ -1,5 +1,6 @@
 package com.harman.roomdbapp.app.ui.composables.document_list.components
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -9,6 +10,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,26 +21,30 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.harman.roomdbapp.app.R
+import com.harman.roomdbapp.app.other.getFormattedDateFromMillis
 import com.harman.roomdbapp.app.ui.composables.style.RobocoFontFamily
 import com.harman.roomdbapp.app.ui.viewmodel.BottomSheetViewModel
 import com.harman.roomdbapp.domain.model.GravityRecord
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.getViewModel
 import java.util.*
 
+@SuppressLint("CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ButtonSheet(
     viewModel: BottomSheetViewModel = getViewModel(),
     bottomSheetState: ModalBottomSheetState,
     document: String,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
 
+    val coroutine = rememberCoroutineScope()
     if (
         bottomSheetState.progress.from == ModalBottomSheetValue.Expanded &&
         bottomSheetState.progress.to == ModalBottomSheetValue.HalfExpanded
     )
-        LaunchedEffect(Unit) {
+        coroutine.launch {
             bottomSheetState.hide()
         }
     ModalBottomSheetLayout(
@@ -49,7 +55,7 @@ fun ButtonSheet(
             val config = LocalConfiguration.current
 
             Column(
-                modifier = androidx.compose.ui.Modifier.height((config.screenHeightDp / 1.15).dp)
+                modifier = Modifier.height((config.screenHeightDp / 1.15).dp)
             ) {
                 if (bottomSheetState.isVisible && document.isNotEmpty()) {
                     MarqueeText(
@@ -84,7 +90,7 @@ fun ButtonSheet(
                         ) { entry ->
                             val record = if (entry.record == 0f) "" else entry.timestamp.toString()
                             val timeStamp =
-                                if (entry.timestamp == 0L) "" else entry.timestamp.toString()
+                                if (entry.timestamp == 0L) "" else getFormattedDateFromMillis(entry.timestamp)
 
                             if (list[0] == entry)
                                 Divider(Modifier.height(1.dp), color = Color.Black)

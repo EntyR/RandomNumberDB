@@ -120,8 +120,10 @@ fun DocumentList(
                                 modifier = Modifier,
                                 onClick = {
                                     coroutine.launch {
-                                        clickedDocumentName = document
-                                        bottomSheetState.animateTo(ModalBottomSheetValue.Expanded)
+                                        if (!bottomSheetState.isVisible) {
+                                            clickedDocumentName = document
+                                            bottomSheetState.animateTo(ModalBottomSheetValue.Expanded)
+                                        }
                                     }
                                 }
                             )
