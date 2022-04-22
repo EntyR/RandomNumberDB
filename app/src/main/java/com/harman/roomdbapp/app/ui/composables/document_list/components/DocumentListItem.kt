@@ -27,6 +27,7 @@ import com.harman.roomdbapp.app.ui.composables.TransparentGray
 fun DocumentListItem(
     modifier: Modifier,
     text: String,
+    onClick: () -> Unit
 ) {
 
     val interactionSource = remember {
@@ -49,13 +50,13 @@ fun DocumentListItem(
                 )
         ) {
             Button(
+                onClick = { onClick() },
                 interactionSource = interactionSource,
                 colors = buttonColors(backgroundColor = color),
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(bottom = 3.dp),
                 shape = RoundedCornerShape(50),
-                onClick = {}
             ) {
                 MarqueeText(
                     modifier = Modifier.padding(top = 7.dp, bottom = 7.dp, start = 18.dp),
@@ -66,5 +67,4 @@ fun DocumentListItem(
             }
         }
     }
-
 }

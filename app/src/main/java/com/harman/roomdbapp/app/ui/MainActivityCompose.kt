@@ -15,8 +15,8 @@ import com.harman.roomdbapp.app.other.compose.Screen
 import com.harman.roomdbapp.app.ui.composables.document_list.DocumentList
 import com.harman.roomdbapp.app.ui.composables.random_number_list.RandomNumberList
 
-@ExperimentalFoundationApi
 class MainActivityCompose : AppCompatActivity() {
+    @OptIn(ExperimentalMaterialApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

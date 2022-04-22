@@ -1,7 +1,6 @@
 package com.harman.roomdbapp.app.ui.composables.random_number_list.utils
 
 import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.runtime.Composable
 
 /**
  * Observe for scroll events and fire onScrollStoppedCallback when scroll is stopped
