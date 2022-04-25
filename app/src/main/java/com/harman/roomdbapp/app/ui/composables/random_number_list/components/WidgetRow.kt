@@ -18,7 +18,9 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.harman.roomdbapp.app.model.Widget
+import com.harman.roomdbapp.app.other.compose.Screen
 import com.harman.roomdbapp.app.ui.MainActivity
 import com.harman.roomdbapp.app.ui.composables.random_number_list.components.WidgetRowItem
 import com.harman.roomdbapp.app.ui.composables.random_number_list.utils.AutoSizeElementsHandler
@@ -32,9 +34,9 @@ import kotlinx.coroutines.launch
 @Composable
 fun WidgetRow(
     widgetList: List<Widget>,
-    autoSizeTextElementHandler: AutoSizeElementsHandler<Float>
+    autoSizeTextElementHandler: AutoSizeElementsHandler<Float>,
+    navController: NavController
 ) {
-    val isFlingStarted = mutableStateOf(false)
     val coroutine = rememberCoroutineScope()
     val localConfiguration = LocalConfiguration.current
     val listState = rememberLazyListState()
@@ -42,10 +44,12 @@ fun WidgetRow(
     var center by remember { mutableStateOf<Float>(1f) }
     val itemSize = localConfiguration.screenWidthDp / 1.7
     val offset = ((localConfiguration.screenWidthDp - itemSize) / 2).toInt()
-    val scrollingStateHandler = ScrollingStateHandler(listState) {
-        coroutine.launch {
-            delay(100)
-            enableCenterSnapHelper(listState)
+    val scrollingStateHandler = remember {
+        ScrollingStateHandler(listState) {
+            coroutine.launch {
+                delay(100)
+                enableCenterSnapHelper(listState)
+            }
         }
     }
     LazyRow(
@@ -77,6 +81,7 @@ fun WidgetRow(
                 text = widget.text,
                 onItemClickCallback = {
                     when (widget.id) {
+                        1 -> navController.navigate(Screen.DocumentWidgetRoute.route)
                         2 -> {
                             context.startActivity(Intent(context, MainActivity::class.java))
                         }

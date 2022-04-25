@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.LazyListState
  *
  * @param listState ListState of current Row Element
  */
+
 class ScrollingStateHandler(
     private val listState: LazyListState,
     private val onScrollStoppedCallback: () -> Unit

@@ -58,7 +58,7 @@ class RandomNumbersList : Fragment() {
                         val fragment = GravityChart.newInstance()
                         navigateTo(fragment, "navigate_to_grav_chart")
                     }
-                    getString(R.string.switch_to_compose) ->{
+                    getString(R.string.switch_to_compose) -> {
                         startActivity(Intent(requireContext(), MainActivityCompose::class.java))
                     }
                 }
